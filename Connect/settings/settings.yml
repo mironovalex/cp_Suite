@@ -1,0 +1,81 @@
+#Sources
+:sources:
+  TsdInventlocation:
+    :poll_interval: 0
+  TsdUserinfo:
+    :poll_interval: 0
+  TsdInventtable:
+    :poll_interval: 0
+    :sync_type: bulk_sync_only
+  TsdInventprice:
+    :poll_interval: 0
+    :sync_type: bulk_sync_only
+  TsdInventsum:
+    :poll_interval: 0
+    :sync_type: bulk_sync_only
+  TsdItembarcode:
+    :poll_interval: 0
+    :sync_type: bulk_sync_only
+  TsdLog:
+    :poll_interval: 0
+  AWSBaskettmp:
+    :poll_interval: 0
+    :sync_type: bulk_sync_only
+  TsdReceiptjourtmp:
+    :poll_interval: 0
+    :sync_type: bulk_sync_only
+  TsdReceiptlinetmp:
+    :poll_interval: 0
+    :sync_type: bulk_sync_only
+  TsdReceiptjourselect:
+    :poll_interval: 0
+    :sync_type: bulk_sync_only
+  TsdReceiptjourdelete:
+    :poll_interval: 0
+    :sync_type: bulk_sync_only
+  TsdReceiptlineselect:
+    :poll_interval: 0
+    :sync_type: bulk_sync_only
+  TsdInventcountjourtmp:
+    :poll_interval: 0
+    :sync_type: bulk_sync_only
+  TsdInventcountlinetmp:
+    :poll_interval: 0
+    :sync_type: bulk_sync_only
+  TsdInventcountjourselect:
+    :poll_interval: 0
+    :sync_type: bulk_sync_only
+  TsdInventcountlineselect:
+    :poll_interval: 0
+    :sync_type: bulk_sync_only
+  AWSBasketselect:
+    :poll_interval: 0
+    :sync_type: bulk_sync_only
+  TsdInventtabletmp:
+    :poll_interval: 0
+    :sync_type: bulk_sync_only
+  TsdItembarcodetemp:
+    :poll_interval: 0
+    :sync_type: bulk_sync_only
+  TsdInventsumtmp:
+    :poll_interval: 0
+    :sync_type: bulk_sync_only   
+  TsdInventpricetmp:
+    :poll_interval: 0
+    :sync_type: bulk_sync_only
+
+:development:
+  :licensefile: settings/license.key
+  :redis: localhost:6379
+  :syncserver: http://localhost:9292/api/application/
+  :push_server: http://appname:secret@localhost:8675/
+:test:
+  :licensefile: settings/license.key
+  :redis: localhost:6379
+  :syncserver: http://localhost:9292/api/application/
+  :push_server: http://appname:secret@localhost:8675/
+:production:
+  :licensefile: settings/license.key
+  :redis: localhost:6379
+  :syncserver: http://localhost:9292/api/application/
+  :push_server: http://appname:secret@localhost:8675/
