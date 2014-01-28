@@ -1,0 +1,50 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>New <%= @tsd_receiptline.title %></h1>
+    <a href="<%= url_for :action => :index %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :create %>">
+      <input type="hidden" name="id" value="<%= @tsd_receiptline.object %>"/>
+
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_receiptline[JourId]" class="fieldLabel">Jourid</label>
+            <input type="text" id="tsd_receiptline[JourId]" name="tsd_receiptline[JourId]" <%= placeholder("Jourid") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_receiptline[ItemId]" class="fieldLabel">Itemid</label>
+            <input type="text" id="tsd_receiptline[ItemId]" name="tsd_receiptline[ItemId]" <%= placeholder("Itemid") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_receiptline[InventSizeId]" class="fieldLabel">Inventsizeid</label>
+            <input type="text" id="tsd_receiptline[InventSizeId]" name="tsd_receiptline[InventSizeId]" <%= placeholder("Inventsizeid") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_receiptline[OrderPrice]" class="fieldLabel">Orderprice</label>
+            <input type="text" id="tsd_receiptline[OrderPrice]" name="tsd_receiptline[OrderPrice]" <%= placeholder("Orderprice") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_receiptline[OrderedQty]" class="fieldLabel">Orderedqty</label>
+            <input type="text" id="tsd_receiptline[OrderedQty]" name="tsd_receiptline[OrderedQty]" <%= placeholder("Orderedqty") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_receiptline[ReceivedQty]" class="fieldLabel">Receivedqty</label>
+            <input type="text" id="tsd_receiptline[ReceivedQty]" name="tsd_receiptline[ReceivedQty]" <%= placeholder("Receivedqty") %> />
+          </div>
+      
+
+      <input type="submit" value="Create"/>
+    </form>
+  </div>
+
+</div>

@@ -1,0 +1,45 @@
+<div data-role="page" data-add-back-btn="true">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "Back", :action => :index %>
+    <h1><%= @tsdinventsumtmp.InventLocationId %></h1>
+    <%= link_to "Edit", :action => :edit, :id => @tsdinventsumtmp.object %>
+  </div>
+
+  <div data-role="content">
+    <table>
+      
+      <tr>
+    	<td class="itemLabel">InventLocationId</td>
+        <td class="itemValue"><%= @tsdinventsumtmp.InventLocationId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">ItemId</td>
+        <td class="itemValue"><%= @tsdinventsumtmp.ItemId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">InventSizeId</td>
+        <td class="itemValue"><%= @tsdinventsumtmp.InventSizeId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">VendCode</td>
+        <td class="itemValue"><%= @tsdinventsumtmp.VendCode%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">AvailableQty</td>
+        <td class="itemValue"><%= @tsdinventsumtmp.AvailableQty%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">OrderedQty</td>
+        <td class="itemValue"><%= @tsdinventsumtmp.OrderedQty%></td>
+      </tr>
+      
+    </table>
+  </div>
+
+</div>

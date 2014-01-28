@@ -1,0 +1,59 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "Back", :action => :show, :id => @awsbaskettmp.object %>
+    <h1>Edit <%= @awsbaskettmp.InventLocationId%></h1>
+    <%= link_to "Delete", :action => :delete, :id => @awsbaskettmp.object %>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @awsbaskettmp.object %>"/>
+      <table>
+          
+          <tr>
+              <td class="itemLabel">Inventlocationid: </td>
+              <td class="itemValue"><input type="text" name="awsbaskettmp[InventLocationId]" value="<%= @awsbaskettmp.InventLocationId %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Userid: </td>
+              <td class="itemValue"><input type="text" name="awsbaskettmp[UserId]" value="<%= @awsbaskettmp.UserId %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Itembarcode: </td>
+              <td class="itemValue"><input type="text" name="awsbaskettmp[ItemBarCode]" value="<%= @awsbaskettmp.ItemBarCode %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Itemid: </td>
+              <td class="itemValue"><input type="text" name="awsbaskettmp[ItemId]" value="<%= @awsbaskettmp.ItemId %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Inventsizeid: </td>
+              <td class="itemValue"><input type="text" name="awsbaskettmp[InventSizeId]" value="<%= @awsbaskettmp.InventSizeId %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Printcopies: </td>
+              <td class="itemValue"><input type="text" name="awsbaskettmp[PrintCopies]" value="<%= @awsbaskettmp.PrintCopies %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Linenum: </td>
+              <td class="itemValue"><input type="text" name="awsbaskettmp[LineNum]" value="<%= @awsbaskettmp.LineNum %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Yellowlabel: </td>
+              <td class="itemValue"><input type="text" name="awsbaskettmp[YellowLabel]" value="<%= @awsbaskettmp.YellowLabel %>"/></td>
+          </tr>
+          
+      </table>
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>

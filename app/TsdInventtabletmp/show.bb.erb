@@ -1,0 +1,35 @@
+<div data-role="page" data-add-back-btn="true">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "Back", :action => :index %>
+    <h1><%= @tsdinventtabletmp.ItemId %></h1>
+    <%= link_to "Edit", :action => :edit, :id => @tsdinventtabletmp.object %>
+  </div>
+
+  <div data-role="content">
+    <table>
+      
+      <tr>
+    	<td class="itemLabel">ItemId</td>
+        <td class="itemValue"><%= @tsdinventtabletmp.ItemId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">ItemName</td>
+        <td class="itemValue"><%= @tsdinventtabletmp.ItemName%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">VendId</td>
+        <td class="itemValue"><%= @tsdinventtabletmp.VendId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">VendName</td>
+        <td class="itemValue"><%= @tsdinventtabletmp.VendName%></td>
+      </tr>
+      
+    </table>
+  </div>
+
+</div>

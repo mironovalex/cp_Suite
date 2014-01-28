@@ -1,0 +1,259 @@
+<div data-role="page" id="page" data-url="<%= Rho::RhoConfig.start_path %>/">
+
+  <div data-role="header" data-position="inline">
+    <h1>Дата журналов</h1>    
+    <a href="" onclick = "
+var e = document.getElementById('D');
+if (/^[0-3][0-9]$|^[0-9]$/.test(e.value)) {       
+  var e = document.getElementById('M');
+  if (/^[0-1][0-9]$|^[0-9]$/.test(e.value)) {
+    var e = document.getElementById('Y');
+    if (/^[0-9][0-9]$|^[0-9]$/.test(e.value)) {
+      msgr('');
+      clk();
+    }  
+    else
+    {
+      alarm();
+      msgr('Неверно задан месяц!');
+      var element = document.getElementById('Y');
+      element.select();
+      element.focus(); 
+    } 
+  }  
+  else
+  {
+    alarm();
+    msgr('Неверно задан месяц!');
+    var element = document.getElementById('M');
+    element.select();
+    element.focus(); 
+  }             
+}  
+else
+{
+  alarm();
+  msgr('Неверно задан день!');
+  var element = document.getElementById('D');
+  element.select();
+  element.focus(); 
+}
+    " class="ui-btn-right" >Далее</a>     
+  </div>  
+  
+      <script type="text/javascript">      
+      
+      $('[data-role=page]').live('pageshow', function (event) {
+        setTimeout(function() {   
+          $('input:not(:hidden):first').focus();
+          $('input:not(:hidden):first').select();
+         }, 1);   
+      });
+           
+        function clk() {
+          var element1 = document.getElementById('D');     
+          var element2 = document.getElementById('M');  
+          var element3 = document.getElementById('Y');  
+               
+          if (element1.value.length == 1) {
+            element1.value = '0' + element1.value;
+          }
+    
+          if (element2.value.length == 1) {
+           element2.value = '0' + element2.value;
+          }            
+    
+          if (element3.value.length == 1) {
+           element3.value = '0' + element3.value;
+          }        
+                 
+          $.ajax({
+            type: "GET",                               
+            url: "<%= url_for :action => :invent_menu_  %>",
+            data: {D : element1.value, M : element2.value, Y : element3.value}
+            } );
+          }; 
+    
+    $('#D').keyup(function(event) {
+    if(event.keyCode==13){    
+      var e = document.getElementById('D');
+      if (/^[0-3][0-9]$|^[0-9]$/.test(e.value)) {
+        msgr('');
+        var element = document.getElementById('M');
+        element.select();
+        element.focus(); 
+      }  
+      else
+      {
+        alarm();
+        msgr('Неверно задан день!');
+        var element = document.getElementById('D');
+        element.select();
+        element.focus(); 
+      }
+     
+    }
+    
+    if(event.keyCode==27){  //alert('jo 3');                           
+      $.ajax({        
+      type: "GET",                               
+      url: "<%= url_for :action => :main_menu_2 %>",
+      data: {}
+      } );               
+    }         
+    });       
+              
+      $('#M').keyup(function(event) {
+      if(event.keyCode==13){    
+        var e = document.getElementById('M');
+        if (/^[0-1][0-9]$|^[0-9]$/.test(e.value)) {
+          msgr('');
+          var element = document.getElementById('Y');
+          element.select();
+          element.focus(); 
+        }  
+        else
+        {
+          alarm();
+          msgr('Неверно задан месяц!');
+          var element = document.getElementById('M');
+          element.select();
+          element.focus(); 
+        }
+      }
+      
+      if(event.keyCode==27){  //alert('jo 3');                           
+        $.ajax({        
+        type: "GET",                               
+        url: "<%= url_for :action => :main_menu_2 %>",
+        data: {}
+        } );               
+      }         
+    });         
+          
+        $('#Y').keyup(function(event) {
+        if(event.keyCode==13){        
+          var e = document.getElementById('D');
+          if (/^[0-3][0-9]$|^[0-9]$/.test(e.value)) {       
+            var e = document.getElementById('M');
+            if (/^[0-1][0-9]$|^[0-9]$/.test(e.value)) {
+              var e = document.getElementById('Y');
+              if (/^[0-9][0-9]$|^[0-9]$/.test(e.value)) {
+                msgr('');
+                clk();
+              }  
+              else
+              {
+                alarm();
+                msgr('Неверно задан месяц!');
+                var element = document.getElementById('Y');
+                element.select();
+                element.focus(); 
+              } 
+            }  
+            else
+            {
+              alarm();
+              msgr('Неверно задан месяц!');
+              var element = document.getElementById('M');
+              element.select();
+              element.focus(); 
+            }             
+          }  
+          else
+          {
+            alarm();
+            msgr('Неверно задан день!');
+            var element = document.getElementById('D');
+            element.select();
+            element.focus(); 
+          }                     
+          }
+          
+          if(event.keyCode==27){  //alert('jo 3');                           
+            $.ajax({        
+            type: "GET",                               
+            url: "<%= url_for :action => :main_menu_2 %>",
+            data: {}
+            } );               
+          }         
+        });                    
+        
+         //function ch_date() {
+         //$.get('/app/Receipt/DatePick', {});       
+         //}      
+    
+          function alarm(){var snd = new Audio("/public/Error.wav");   snd.play();};   
+      
+            function msgr(val) {   
+              val = utf8(val);
+              
+              var element = document.getElementById('MSGR');  
+              element.innerHTML = val;                                        
+            };    
+              
+         function set_time(val) {
+            var element = document.getElementById('datepicker');
+            element.value = val;
+          };            
+    
+          function utf8(utftext) {
+              var string = "";
+              var i = 0;
+              var c = c1 = c2 = 0;
+              while ( i < utftext.length ) {
+                  c = utftext.charCodeAt(i);
+                  if (c < 128) {
+                      string += String.fromCharCode(c);
+                      i++;
+                  }
+                  else if((c > 191) && (c < 224)) {
+                      c2 = utftext.charCodeAt(i+1);
+                      string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+                      i += 2;
+                  }
+                  else {
+                      c2 = utftext.charCodeAt(i+1);
+                      c3 = utftext.charCodeAt(i+2);
+                      string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+                      i += 3;
+                  }
+              }
+              return string;
+          }; 
+           
+    </script>    
+  
+<div data-role="content">
+    <div data-role="fieldcontain"> 
+        
+                <table border="0">
+                <tr>
+                <td>
+                <div class="itemValue" id="MSGR" style="color: #FF4500;  font-size: 20px; text-align: center;"></div>
+                </td>
+                </tr> 
+                </table>    
+                   
+                  <table border="0" height = "40px">
+                  <tr>
+                  <td width = "100px" height = "40px" style="min-width:100px; max-width:100px">Дата поставки:</td>               
+                  <td width = "50px" height = "40px" style="min-width:50px; max-width:50px"><input type="text" id="D" name="D" value=<%= Time.now.strftime("%d") %>
+                    class = "ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow ui-input-text ui-body-c ui-corner-all ui-shadow-insert ui-btn-hover-undefined"  
+                    style="line-height:0px; height:20pt; font-size: 14pt; width:50px; background: #FFFFFF; color: #000000; margin-left:0px; padding:0px; margin:0px;"></td>
+                  <td width = "50px" height = "40px" style="min-width:50px; max-width:50px"><input type="text" id="M" name="M" value=<%= Time.now.strftime("%m") %>
+                      class = "ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow ui-input-text ui-body-c ui-corner-all ui-shadow-insert ui-btn-hover-undefined"
+                      style="line-height:0px; height:20pt; font-size: 14pt; width:50px; background: #FFFFFF; color: #000000; margin-left:0px; padding:0px; margin:0px;"></td>
+                  <td width = "15px" height = "40px" style="min-width:15px; max-width:15px">20</td>               
+                  <td width = "50px" height = "40px" style="min-width:50px; max-width:50px"><input type="text" id="Y" name="Y" value=<%= Time.now.strftime("%y") %>
+                      class = "ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow ui-input-text ui-body-c ui-corner-all ui-shadow-insert ui-btn-hover-undefined"
+                      style="line-height:0px; height:20pt; font-size: 14pt; width:50px; background: #FFFFFF; color: #000000; margin-left:0px; padding:0px; margin:0px;"></td>
+                  </tr>
+                  </table>          
+      
+    </div>
+
+            
+</div>
+
+</div>

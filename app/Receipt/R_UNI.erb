@@ -1,0 +1,563 @@
+<div data-role="page" id = "R-UNI" data-url="<%= Rho::RhoConfig.start_path %>/">
+
+  <div data-role="header" data-position="inline">
+    <h1 id = "H">
+    <%  if ($mstatus == 'R_I')  
+          @title = "Введите товар" 
+        end
+       if ($mstatus == 'R_S')  
+         @title = "Введите размер" 
+      end  
+      if ($mstatus == 'R_IS')  
+        @title = "Позиция" 
+      end%>             
+  <%= @title%>
+</h1>     
+    <a href="" id = "MRM" onclick = "minus();" class="ui-btn-left" >-</a>  
+    <a href="<%=url_for :action => :back_to_detail %>" id = "MRB" class="ui-btn-right">Меню</a>    
+        
+    <a href="<%=url_for :action => :back_to_detail %>" id = "MI" style="visibility: hidden;" class="ui-btn-right">Меню</a>   
+  </div>  
+
+  <script type="text/javascript">
+  
+      function null_shval() {
+         var elem = document.getElementById('SH');        
+         elem.focus();   
+         elem.select();                                                          
+      } 
+      
+      function TO_I_()
+      {
+        TO_I();
+        
+        $.ajax({
+          type: "GET",                               
+          url: "<%= url_for :action => :R_UNI_ %>",
+          data: {}
+          } );               
+      };
+  
+      function minus()
+      {
+        var QTY  = document.getElementById('QTY');     
+        if (QTY.value.substr(0,1) == "-")
+          {QTY.value = QTY.value.substr(1);}
+        else    
+          {QTY.value = "-" + QTY.value}  
+        QTY.focus();
+        //QTY.select();                
+      };
+    
+      function set_r_qty(val) {   
+        var element = document.getElementById('R_QTY');  
+        element.innerHTML = val;   
+        
+        var elem = document.getElementById('QTY');        
+        elem.value = "";
+        elem.focus();                          
+       }; 
+       
+      function nulling() {
+         var elem = document.getElementById('QTY');        
+         elem.value = "";
+         elem.focus();                          
+      };        
+       
+      function change_rejim() {   
+        var rez = 0;
+        var el      = document.getElementById('SH');  
+        var element = document.getElementById('PO_CH');  
+        var QTY     = document.getElementById('QTY');        
+        if (element.value == 'on')
+          {                
+          rez = 1;
+          }                
+
+        
+        if (QTY.type == 'hidden')
+          {      
+            QTY.type = 'text';  
+            el.select();
+            el.focus();  
+          }
+        else     
+          {
+            QTY.type = 'hidden';
+            el.select();
+            el.focus();  
+          }         
+          
+        $.ajax({
+          type: "GET",                               
+          url: "<%= url_for :action => :change_rejim %>",
+          data: {val : rez}
+          } );                              
+       };    
+       
+             
+     function button_click() {      
+       var element = document.getElementById('QTY');       
+       $.ajax({
+         type: "GET",                               
+         url: "<%= url_for :action => :rec_button %>",
+         data: {val : element.value}
+         } );       
+       };           
+      
+      
+    //////////////////////////////////////////////////////////////////////////
+  
+    function alarm(){var snd = new Audio("/public/Error.wav");   snd.play();};   
+
+      function msg(val) {   
+        val = utf8(val);
+        
+        var element = document.getElementById('MSG');  
+        element.innerHTML = val;                                        
+      };
+
+      function msgr(val) {   
+        val = utf8(val);
+        
+        var element = document.getElementById('MSGR');  
+        element.innerHTML = val;                                        
+      };      
+          
+      function utf8(utftext) {
+          var string = "";
+          var i = 0;
+          var c = c1 = c2 = 0;
+          while ( i < utftext.length ) {
+              c = utftext.charCodeAt(i);
+              if (c < 128) {
+                  string += String.fromCharCode(c);
+                  i++;
+              }
+              else if((c > 191) && (c < 224)) {
+                  c2 = utftext.charCodeAt(i+1);
+                  string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+                  i += 2;
+              }
+              else {
+                  c2 = utftext.charCodeAt(i+1);
+                  c3 = utftext.charCodeAt(i+2);
+                  string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+                  i += 3;
+              }
+          }
+          return string;
+      };    
+    
+  function TO_S() {
+    null_val();
+  
+    var element00 = document.getElementById('H');
+    element00.innerHTML = "Введите размер";  
+          
+    var element0 = document.getElementById('I');
+    element0.style.visibility = 'hidden';
+    element0.style.display = 'none';   
+    
+    var element = document.getElementById('R');
+    element.style.visibility = 'hidden';
+    element.style.display = 'none';     
+    
+    var element1 = document.getElementById('S');
+    element1.style.visibility = '';
+    element1.style.display = 'inline';  
+        
+    var element2 = document.getElementById('SIZE');
+    element2.select();
+    element2.focus(); 
+    
+    element = document.getElementById('MRM');
+    element.style.visibility = 'hidden';
+    element = document.getElementById('MRB');
+    element.style.visibility = 'hidden';
+    element = document.getElementById('MI');
+    element.style.visibility = '';     
+  };
+   
+  function TO_R() {  
+        null_val();
+            
+        var element00 = document.getElementById('H');
+        element00.innerHTML = "Позиция";  
+    
+        var element0 = document.getElementById('I');
+        element0.style.visibility = 'hidden';
+        element0.style.display = 'none';   
+        
+        var element = document.getElementById('S');
+        element.style.visibility = 'hidden';
+        element.style.display = 'none';     
+        
+        var element1 = document.getElementById('R');
+        element1.style.visibility = '';
+        element1.style.display = 'inline';    
+        
+        nulling(); 
+        
+        element = document.getElementById('MRM');
+        element.style.visibility = '';
+        element = document.getElementById('MRB');
+        element.style.visibility = '';
+        element = document.getElementById('MI');
+        element.style.visibility = 'hidden';   
+        
+        var element4 = document.getElementById('MSGR');
+        element4.innerHTML = '';           
+  };  
+
+      function TO_I() {              
+            var element00 = document.getElementById('H');
+            element00.innerHTML = "Введите товар";          
+      
+            var element01 = document.getElementById('R');
+            element01.style.visibility = 'hidden';
+            element01.style.display = 'none'; 
+                    
+            var element0 = document.getElementById('S');
+            element0.style.visibility = 'hidden';
+            element0.style.display = 'none';                 
+            
+            var element1 = document.getElementById('I');
+            element1.style.visibility = '';
+            element1.style.display = 'inline';  
+                
+            var element2 = document.getElementById('SH');
+            element2.select();
+            element2.focus();   
+            
+            element = document.getElementById('MRM');
+            element.style.visibility = 'hidden';
+            element = document.getElementById('MRB');
+            element.style.visibility = 'hidden';
+            element = document.getElementById('MI');
+            element.style.visibility = ''; 
+            
+            var element4 = document.getElementById('MSG');
+            element4.innerHTML = '';             
+      };   
+     
+        
+  function form_focus() {
+    var element = document.getElementById('SH');
+    element.select();
+    element.focus();
+  }        
+
+  function null_val() {
+    var element1 = document.getElementById('SH');
+    element1.value = '';
+    var element2 = document.getElementById('CODE');
+    element2.value = '';
+    var element3 = document.getElementById('SIZE');
+    element3.value = '';  
+    var element4 = document.getElementById('MSG');
+    element4.innerHTML = '';    
+  }   
+        
+     
+  function inpitem() { 
+    var element1 = document.getElementById('SH');
+    var element2 = document.getElementById('CODE');  
+    var element3 = document.getElementById('SIZE');  
+      
+    $.ajax({
+      type: "GET",                               
+      url: "<%= url_for :action => :line_edit %>",
+      data: {SH : element1.value, CODE : element2.value, SIZE : element3.value}
+      } );   
+     
+  }  
+  
+        function set_sh_code(var1, var2) { 
+          var element1 = document.getElementById('SH');
+          var element2 = document.getElementById('CODE');   
+         
+          element1.value = var1;        
+          element2.value = var2;                   
+        } 
+
+  function inpsize() { 
+          var element = document.getElementById('SIZE');
+        
+          $.ajax({
+            type: "GET",                               
+            url: "<%= url_for :action => :input_size %>",
+            data: {SIZE : element.value}
+            } );   
+           
+  }  
+
+function inpcount() { 
+  var element = document.getElementById('COUNT');
+
+  $.ajax({
+    type: "GET",                               
+    url: "<%= url_for :action => :basketadd %>",
+    data: {COUNT : element.value}
+    } );   
+   
+}         
+ 
+         
+   $('[data-role=page]').live('pageshow', function (event) {
+     setTimeout(function() {   
+       $('input:not(:hidden):first').focus();
+       $('input:not(:hidden):first').select();
+      }, 1);   
+   });
+    
+        function ItemName(val) {
+          var element = document.getElementById('ItemName');
+          element.innerHTML = "<NOBR>" + utf8(val) + "</NOBR>";
+        }
+
+        function ItemId(val) {
+          var element = document.getElementById('ItemId');
+          element.innerHTML = utf8(val);
+          //var element = document.getElementById('CODE');
+          //element.value = utf8(val);
+       }        
+
+       function SH(val) {
+          var element = document.getElementById('SH');
+          element.value = utf8(val);
+          element.focus();
+          element.select();
+          element = document.getElementById('CODE');
+          element.value = '';  
+          element = document.getElementById('SIZE');
+          element.value = '';                     
+        }           
+             
+       function InventSizeId(val) {
+          var element = document.getElementById('InventSizeId');
+          element.innerHTML = utf8(val);
+         //var element = document.getElementById('SIZE');
+         //element.value = utf8(val);
+       }
+       
+       function VendCode(val) {
+          var element = document.getElementById('VendCode');
+          element.style.overflow = "hidden";
+          element.innerHTML = "<NOBR>" + utf8(val) + "</NOBR>";
+       }       
+         
+        function OrderPrice(val) {
+          var element = document.getElementById('OrderPrice');
+          element.innerHTML = utf8(val);
+        }
+       
+        function OrderedQty(val) {
+          var element = document.getElementById('OrderedQty');
+          element.innerHTML = utf8(val);
+        }
+       
+        function R_QTY(val) {
+          var element = document.getElementById('R_QTY');
+          element.innerHTML = utf8(val);
+        }       
+
+        function QTY(val) {
+          var element = document.getElementById('QTY');
+          element.value = '';
+          element.select();
+          element.focus();          
+        }         
+        
+        function ENT_PR(val) {
+          var element4 = document.getElementById('MSGR');
+          element4.innerHTML = '';     
+       
+          var elem    = document.getElementById('PO_CH');
+          var element = document.getElementById('SH');
+          var el      = document.getElementById('QTY');          
+          
+          if (elem.value == 'on') 
+            { 
+              $.ajax({
+                type: "GET",                               
+                url: "<%= url_for :action => :decode_line_2 %>",
+                data: {data : element.value}
+                } ); 
+                
+              element.focus();
+              element.select();
+            } 
+          else 
+            {                
+              el.focus();
+              el.select();                
+            };  
+          
+        }         
+       
+         
+      $(document).keyup(function(event) { 
+        if(event.keyCode==13){           
+          //var element = document.getElementById('I');        
+          //if (element.style.visibility == '') {inpitem(); return false;};    
+          //element = document.getElementById('S');                        
+          //if (element.style.visibility == '') {inpsize(); return false;};  
+          //element = document.getElementById('R');                        
+          //if (element.style.visibility == '') {            
+            var elem = document.getElementById('PO_CH'); 
+            var el   = document.getElementById('QTY'); 
+            if (elem.value == 'on') 
+              {inpitem();
+               //button_click();
+              } 
+            else 
+              {
+                if (el.value == '')
+                  {inpitem();}
+                else             
+                  {button_click();};
+              };                                    
+            return false;
+          //};
+          
+        };
+        
+        if(event.keyCode==27){                         
+          $.ajax({        
+          type: "GET",                               
+          url: "<%= url_for :action => :back_to_detail_2 %>",
+          data: {}
+          } );               
+          };
+              
+       });          
+                       
+                   
+</script>    
+
+
+<!-- Форма выбора товара -->  
+
+       
+ <!-- Форма выбора размера -->  
+
+ 
+ <!-- Приемка -->  
+ 
+ <div id = "R" data-role="content">
+             <table border="0">
+             <tr>
+             <td>
+             <div class="itemValue" id="MSGR" style="color: #FF4500;  font-size: 20px; text-align: center;"></div>
+             </td>
+             </tr> 
+             </table>
+                   
+
+           <table border="0" height = "40px">
+           <tr>
+           <td  width = "250px" style="min-width:250px; max-width:250px">     
+              
+             <table border="0"  height = "20px">
+             <tr height = "20px">   
+               <td width = "70px" height = "20px" style="min-width:80px; max-width:80px">Штрих-код:</td>
+               <td width = "170px" height = "20px" style="min-width:170px; max-width:170px"><input type="text" id="SH" name="SH" 
+                 class = "ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow ui-input-text ui-body-c ui-corner-all ui-shadow-insert ui-btn-hover-undefined" 
+                 style="line-height:0px; height:10pt; font-size: 9pt; width:165px; background: #FFFFFF; color: #000000; margin-left:0px; padding:0px; margin:0px;"></td>              
+             </tr> 
+             </table>
+                              
+             <table border="0"  height = "20px">
+             <tr height = "20px">
+               <td width = "70px" height = "20px" style="min-width:80px; max-width:80px">Артикул(Р):</td>               
+               <td width = "120px" height = "20px" style="min-width:120px; max-width:120px"><input type="text" id="CODE" name="CODE" 
+                 class = "ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow ui-input-text ui-body-c ui-corner-all ui-shadow-insert ui-btn-hover-undefined" 
+                 style="line-height:0px; height:10pt; font-size: 9pt; width:120px; background: #FFFFFF; color: #000000; margin-left:0px; padding:0px; margin:0px;"></td>
+               <td width = "50px" height = "20px" style="min-width:50px; max-width:50px"><input type="text" id="SIZE" name="SIZE" 
+                 class = "ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow ui-input-text ui-body-c ui-corner-all ui-shadow-insert ui-btn-hover-undefined" 
+                 style="line-height:0px; height:10pt; font-size: 9pt; width:40px; background: #FFFFFF; color: #000000; margin-left:0px; padding:0px; margin:0px;"></td>                                                                 
+             </tr> 
+             </table>    
+            </td>
+            <td width = "50px" height = "20px" style="min-width:50px; max-width:50px">
+             <input type="button" onclick="inpitem()"value=">"/> 
+            </td>
+            </tr> 
+            </table>                                      
+                         
+             
+             <table border="0">
+             <tr>
+             <td width = "70px" style="min-width:70px; max-width:70px">Код:
+               <td id = "ItemId" style="color: #FFCC00;min-width:90px; max-width:90px"  width = "90px"><%= @ItemId%></td>
+             </td>
+             <td width = "70px" style="min-width:70px; max-width:70px">Размер:
+               <td id = "InventSizeId" style="color: #FFCC00;min-width:90px; max-width:90px"  width = "90px"><%= @InventSizeId%></td>
+             </td>
+             </tr>             
+             </table>
+           
+             <table border="0">
+             <tr>
+             <td width = "70px" style="min-width:70px; max-width:70px">Наим-ие:
+               <td id = "ItemName" style="color: #FFCC00;min-width:230px; max-width:230px"  width = "230px"><%= @ItemName%></td>
+             </td>
+             </tr>
+             </table>  
+             
+             <table border="0">
+             <tr>
+             <td width = "90px" style="min-width:90px; max-width:90px">Арт. пост-ка:
+               <td id = "VendCode" style="color: #FFCC00;min-width:70px; max-width:70px"  width = "70px"><%= @VendCode%></td>
+             </td>
+               <td width = "90px" style="min-width:90px; max-width:90px">Цена заказа:
+                <td id = "OrderPrice" style="color: #FFCC00;min-width:70px; max-width:70px"  width = "70px"><%= @OrderPrice%></td>
+             </td>             
+             </tr>
+            </table>
+           
+             <table border="0">
+             <tr>
+               <td width = "90px" style="min-width:90px; max-width:90px">Получено:</td>
+               <td><div class="itemValue" style="color: #FFCC00;min-width:70px; max-width:70px"  width = "70px" id="R_QTY"><%= @ReceivedQty%></div></td>
+               <td width = "90px" style="min-width:90px; max-width:90px">Заказано:
+                     <td id = "OrderedQty" style="color: #FFCC00;min-width:90px; max-width:90px"  width = "90px"><%= @OrderedQty%></td>
+               </td>                
+             </tr>
+             </table> 
+               
+             <table border="0"> 
+             <tr>
+             <td width = "70px" style="min-width:70px; max-width:70px">Принять:</td>
+             <td width = "90px" style="min-width:90px; max-width:90px">
+               <input id="QTY" name="QTY" style="line-height:0px; height:10pt; font-size: 9pt; width:60px; background: #FFFFFF; color: #000000; margin-left:0px; padding:0px; margin:0px"  
+               class = "ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow ui-input-text ui-body-c ui-corner-all ui-shadow-insert ui-btn-hover-undefined"                              
+               value = "" <% 
+               @val = '' 
+               if ($po_cycle_check == '1') 
+                 @val = 'type = "hidden"' 
+               else
+                 @val = 'type = "text"'   
+               end%>
+               <%= @val %>          
+               />
+             </td>
+             <td>Цикл.</td>
+             <td>                
+                 <input type="checkbox" id="PO_CH"  style="height:20px; width:20px"  name="PO_CH" onclick = "change_rejim();" <% 
+                 @val = '' 
+                 if ($po_cycle_check == '1') 
+                   @val = 'checked' 
+                 end%>
+                 <%= @val %> 
+                  />
+             </td>
+             </tr>      
+             </table>       
+                       
+             <input type="button" value="Принять" onclick = "button_click();"/>           
+   </div>
+   
+
+</div>

@@ -1,0 +1,85 @@
+<div data-role="page" id = "SI">
+
+  <div data-role="header" data-position="inline">
+    <h1>Ж-лы <%=$DateOrder%></h1>
+      <a href="<%= url_for :action => :main_menu_%>" class="ui-btn-right">Назад</a>
+      <a href="<%= url_for :action => :load_Items_0 %>" class="ui-btn-left">Обновить</a>         
+        
+        <div>
+        
+            <table border="0">
+            <tr>
+            <td><label id = "msg1" style="color: green;  font-size: 20px;"><%=$msg1%></label> </td>
+            </tr>
+           </table>
+            <table border="0">
+            <tr>
+            <td><label id = "msg2" style="color: red;  font-size: 20x;"><%=$msg2%></label> </td>
+            </tr>
+           </table>             
+           
+        </div>   
+  </div>
+  
+        <script type="text/javascript">             
+                                
+                 function nulling() {              
+                   var element1 = document.getElementById('msg1');  
+  
+                   element1.innerHTML = "";                                   
+                   var element2 = document.getElementById('msg2');  
+  
+                   element2.innerHTML = "";                                   
+                 };   
+          
+        $("#SI").keyup(function(event) {      
+          if(event.keyCode==27){  //alert('jo 4');                           
+            $.ajax({        
+            type: "GET",                               
+            url: "<%= url_for :action => :main_menu_2 %>",
+            data: {}
+            } );               
+          }                  
+          });                  
+          
+          $('[data-role=page]').live('pageshow', function (event) {
+            setTimeout(function() {   
+              $("#SI").focus();
+             }, 1);   
+          }); 
+                                                        
+        </script>  
+
+        <div data-role="content">
+          <ul data-role="listview">
+            <%               
+              $msg = ""
+              $msg1 = ""
+              $msg2 = ""
+              
+              @TsdInventcountjours = TsdInventcountjour.find(:all,
+                :conditions => { 
+                  {
+                    :name => "InventLocationId", 
+                    :op => "IN" 
+                  } => $chk_loc,
+                  {
+                    :name => "JourDate", 
+                    :op => "IN" 
+                  } => $DateOrder                                      
+              })         
+              
+              @TsdInventcountjours.each do |invent|          
+            %>
+             
+                <li>
+                  <a href="<%= url_for :action => :show_detail, :id => invent.object %>">
+                    <%= invent.JourId %>
+                  </a>
+                </li>
+            
+            <% end %>
+          </ul>
+        </div>
+
+</div>

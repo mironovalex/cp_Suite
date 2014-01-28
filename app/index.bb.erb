@@ -1,0 +1,24 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>cp Suite</h1>
+#    <% if SyncEngine::logged_in > 0 %>
+#        <%= link_to "Sync", :controller => :Settings, :action => :do_sync %>
+#        <%= link_to "Logout", :controller => :Settings, :action => :logout %>
+#    <% else %>
+#        <%= link_to "Login", :controller => :Settings, :action => :login %>
+#    <% end %>
+    
+#    <% if SyncEngine::logged_in > 0 %> <a href="<%= url_for :controller => :Settings, :action => :do_sync %>" class="ui-btn-left" data-icon="refresh">Sync</a> <a href="<%= url_for :controller => :Settings, :action => :logout %>" class="ui-btn-right" data-icon="star">Logout/a> <% else %> <a href="<%= url_for :controller => :Settings, :action => :login %>" class="ui-btn-right" data-icon="star">Login</a> <% end %>     
+    
+  </div>
+
+  <div data-role="content">
+    <table>
+      <tr>
+        <td class="recordLabel">Add links here...</td>
+      </tr>
+    </table>
+  </div>
+
+</div>

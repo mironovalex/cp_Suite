@@ -1,0 +1,59 @@
+<div data-role="page" data-add-back-btn="false">
+
+  <div data-role="header" data-position="inline">
+    <h1><%= @awsbasket.InventLocationId %></h1>
+    <a href="<%= url_for :action => :index %>" class="ui-btn-left" data-icon="arrow-l" data-direction="reverse">
+      Back
+    </a>
+    <a href="<%= url_for :action => :edit, :id => @awsbasket.object %>" class="ui-btn-right" data-icon="star">
+      Edit
+    </a>
+  </div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      
+          <li>
+            <div class="itemLabel">InventLocationId</div>
+            <div class="itemValue"><%= @awsbasket.InventLocationId %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">UserId</div>
+            <div class="itemValue"><%= @awsbasket.UserId %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">ItemBarCode</div>
+            <div class="itemValue"><%= @awsbasket.ItemBarCode %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">ItemId</div>
+            <div class="itemValue"><%= @awsbasket.ItemId %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">InventSizeId</div>
+            <div class="itemValue"><%= @awsbasket.InventSizeId %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">PrintCopies</div>
+            <div class="itemValue"><%= @awsbasket.PrintCopies %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">LineNum</div>
+            <div class="itemValue"><%= @awsbasket.LineNum %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">YellowLabel</div>
+            <div class="itemValue"><%= @awsbasket.YellowLabel %></div>
+          </li>
+      
+    </ul>
+  </div>
+
+</div>

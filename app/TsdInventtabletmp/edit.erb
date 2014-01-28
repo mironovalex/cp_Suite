@@ -1,0 +1,41 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>Edit <%= @tsdinventtabletmp.ItemId %></h1>
+    <a href="<%= url_for :action => :show, :id => @tsdinventtabletmp.object %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+    <a href="<%= url_for :action => :delete, :id => @tsdinventtabletmp.object %>" class="ui-btn-right" data-icon="delete" data-direction="reverse">
+      Delete
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @tsdinventtabletmp.object %>"/>
+      
+          <div data-role="fieldcontain">
+            <label for="tsdinventtabletmp[ItemId]" class="fieldLabel">Itemid</label>
+            <input type="text" id="tsdinventtabletmp[ItemId]" name="tsdinventtabletmp[ItemId]" value="<%= @tsdinventtabletmp.ItemId %>" <%= placeholder( "Itemid" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsdinventtabletmp[ItemName]" class="fieldLabel">Itemname</label>
+            <input type="text" id="tsdinventtabletmp[ItemName]" name="tsdinventtabletmp[ItemName]" value="<%= @tsdinventtabletmp.ItemName %>" <%= placeholder( "Itemname" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsdinventtabletmp[VendId]" class="fieldLabel">Vendid</label>
+            <input type="text" id="tsdinventtabletmp[VendId]" name="tsdinventtabletmp[VendId]" value="<%= @tsdinventtabletmp.VendId %>" <%= placeholder( "Vendid" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsdinventtabletmp[VendName]" class="fieldLabel">Vendname</label>
+            <input type="text" id="tsdinventtabletmp[VendName]" name="tsdinventtabletmp[VendName]" value="<%= @tsdinventtabletmp.VendName %>" <%= placeholder( "Vendname" ) %> />
+          </div>
+      
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>

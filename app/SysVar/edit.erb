@@ -1,0 +1,31 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>Edit <%= @sys_var.Var %></h1>
+    <a href="<%= url_for :action => :show, :id => @sys_var.object %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+    <a href="<%= url_for :action => :delete, :id => @sys_var.object %>" class="ui-btn-right" data-icon="delete" data-direction="reverse">
+      Delete
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @sys_var.object %>"/>
+      
+          <div data-role="fieldcontain">
+            <label for="sys_var[Var]" class="fieldLabel">Var</label>
+            <input type="text" id="sys_var[Var]" name="sys_var[Var]" value="<%= @sys_var.Var %>" <%= placeholder( "Var" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="sys_var[Val]" class="fieldLabel">Val</label>
+            <input type="text" id="sys_var[Val]" name="sys_var[Val]" value="<%= @sys_var.Val %>" <%= placeholder( "Val" ) %> />
+          </div>
+      
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>

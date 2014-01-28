@@ -1,0 +1,34 @@
+<div data-role="page" data-url="<%= Rho::RhoConfig.start_path %>/">
+
+  <div data-role="header" data-position="inline">
+    <h1>В корзину</h1>   
+  </div>  
+
+<script type="text/javascript">    
+        
+     $('[data-role=page]').live('pageshow', function (event) {
+       $('input:not(:hidden):first').focus(); 
+       var element = document.getElementById('COUNT');
+       element.value = '1';
+     });
+     
+     function cancel() {  
+       $.get('/app/ChkItem/cancel', {});        
+     }
+        
+</script>    
+  
+<div data-role="content">
+  <form method="GET" action="<%= url_for :action => :basketadd %>">
+    <div data-role="fieldcontain">
+    
+      <label for="COUNT" class="itemLabel">Кол-во:</label>
+      <input type="text" id="COUNT" name="COUNT" value = "1" class="itemValue"/>      
+      
+    </div>
+    <input type="submit" value="Ввод"/>
+    <input type="button" value="Отмена" onclick="cancel()"/>
+  </form>
+</div>
+
+</div>

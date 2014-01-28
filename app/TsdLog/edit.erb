@@ -1,0 +1,56 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>Edit <%= @tsd_log.UserId %></h1>
+    <a href="<%= url_for :action => :show, :id => @tsd_log.object %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+    <a href="<%= url_for :action => :delete, :id => @tsd_log.object %>" class="ui-btn-right" data-icon="delete" data-direction="reverse">
+      Delete
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @tsd_log.object %>"/>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_log[UserId]" class="fieldLabel">Userid</label>
+            <input type="text" id="tsd_log[UserId]" name="tsd_log[UserId]" value="<%= @tsd_log.UserId %>" <%= placeholder( "Userid" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_log[InventLocationId]" class="fieldLabel">Inventlocationid</label>
+            <input type="text" id="tsd_log[InventLocationId]" name="tsd_log[InventLocationId]" value="<%= @tsd_log.InventLocationId %>" <%= placeholder( "Inventlocationid" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_log[DeviceID]" class="fieldLabel">Deviceid</label>
+            <input type="text" id="tsd_log[DeviceID]" name="tsd_log[DeviceID]" value="<%= @tsd_log.DeviceID %>" <%= placeholder( "Deviceid" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_log[Date]" class="fieldLabel">Date</label>
+            <input type="text" id="tsd_log[Date]" name="tsd_log[Date]" value="<%= @tsd_log.Date %>" <%= placeholder( "Date" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_log[Time]" class="fieldLabel">Time</label>
+            <input type="text" id="tsd_log[Time]" name="tsd_log[Time]" value="<%= @tsd_log.Time %>" <%= placeholder( "Time" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_log[Operation]" class="fieldLabel">Operation</label>
+            <input type="text" id="tsd_log[Operation]" name="tsd_log[Operation]" value="<%= @tsd_log.Operation %>" <%= placeholder( "Operation" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_log[Comment]" class="fieldLabel">Comment</label>
+            <input type="text" id="tsd_log[Comment]" name="tsd_log[Comment]" value="<%= @tsd_log.Comment %>" <%= placeholder( "Comment" ) %> />
+          </div>
+      
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>

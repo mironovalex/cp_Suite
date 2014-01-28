@@ -1,0 +1,45 @@
+<div data-role="page" data-add-back-btn="true">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "Back", :action => :index %>
+    <h1><%= @tsd_inventcountjourtmp.JourId %></h1>
+    <%= link_to "Edit", :action => :edit, :id => @tsd_inventcountjourtmp.object %>
+  </div>
+
+  <div data-role="content">
+    <table>
+      
+      <tr>
+    	<td class="itemLabel">JourId</td>
+        <td class="itemValue"><%= @tsd_inventcountjourtmp.JourId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">InventLocationId</td>
+        <td class="itemValue"><%= @tsd_inventcountjourtmp.InventLocationId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">JourDescription</td>
+        <td class="itemValue"><%= @tsd_inventcountjourtmp.JourDescription%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">JourDate</td>
+        <td class="itemValue"><%= @tsd_inventcountjourtmp.JourDate%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Deleted</td>
+        <td class="itemValue"><%= @tsd_inventcountjourtmp.Deleted%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Imported</td>
+        <td class="itemValue"><%= @tsd_inventcountjourtmp.Imported%></td>
+      </tr>
+      
+    </table>
+  </div>
+
+</div>

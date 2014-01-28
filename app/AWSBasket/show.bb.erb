@@ -1,0 +1,55 @@
+<div data-role="page" data-add-back-btn="true">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "Back", :action => :index %>
+    <h1><%= @awsbasket.InventLocationId %></h1>
+    <%= link_to "Edit", :action => :edit, :id => @awsbasket.object %>
+  </div>
+
+  <div data-role="content">
+    <table>
+      
+      <tr>
+    	<td class="itemLabel">InventLocationId</td>
+        <td class="itemValue"><%= @awsbasket.InventLocationId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">UserId</td>
+        <td class="itemValue"><%= @awsbasket.UserId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">ItemBarCode</td>
+        <td class="itemValue"><%= @awsbasket.ItemBarCode%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">ItemId</td>
+        <td class="itemValue"><%= @awsbasket.ItemId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">InventSizeId</td>
+        <td class="itemValue"><%= @awsbasket.InventSizeId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">PrintCopies</td>
+        <td class="itemValue"><%= @awsbasket.PrintCopies%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">LineNum</td>
+        <td class="itemValue"><%= @awsbasket.LineNum%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">YellowLabel</td>
+        <td class="itemValue"><%= @awsbasket.YellowLabel%></td>
+      </tr>
+      
+    </table>
+  </div>
+
+</div>

@@ -1,0 +1,54 @@
+<div data-role="page" data-add-back-btn="false">
+
+  <div data-role="header" data-position="inline">
+    <h1><%= @tsd_inventprice.InventLocationId %></h1>
+    <a href="<%= url_for :action => :index %>" class="ui-btn-left" data-icon="arrow-l" data-direction="reverse">
+      Back
+    </a>
+    <a href="<%= url_for :action => :edit, :id => @tsd_inventprice.object %>" class="ui-btn-right" data-icon="star">
+      Edit
+    </a>
+  </div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      
+          <li>
+            <div class="itemLabel">InventLocationId</div>
+            <div class="itemValue"><%= @tsd_inventprice.InventLocationId %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">ItemId</div>
+            <div class="itemValue"><%= @tsd_inventprice.ItemId %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">InventSizeId</div>
+            <div class="itemValue"><%= @tsd_inventprice.InventSizeId %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">RetailPrice</div>
+            <div class="itemValue"><%= @tsd_inventprice.RetailPrice %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">SalesPrice</div>
+            <div class="itemValue"><%= @tsd_inventprice.SalesPrice %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">SalesDiscount</div>
+            <div class="itemValue"><%= @tsd_inventprice.SalesDiscount %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">YellowLabel</div>
+            <div class="itemValue"><%= @tsd_inventprice.YellowLabel %></div>
+          </li>
+      
+    </ul>
+  </div>
+
+</div>

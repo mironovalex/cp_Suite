@@ -1,0 +1,122 @@
+<div data-role="page" id = "SDI" data-url="<%= Rho::RhoConfig.start_path %>/">
+
+  <div data-role="header" data-position="inline">
+    <h1>Журнал :<%= @JourId %></h1> 
+    <a href="<%= url_for :action => :show_invent_ %>" class="ui-btn-right">Назад</a>     
+  </div>   
+  
+<script type="text/javascript">   
+
+      function nulling() {              
+        var element1 = document.getElementById('msg1');  
+
+        element1.innerHTML = "";                                   
+        var element2 = document.getElementById('msg2');  
+
+        element2.innerHTML = "";                                   
+      }; 
+
+      $("#SDI").keyup(function(event) {      
+        if(event.keyCode==27){  //alert('jo 2');                           
+          $.ajax({        
+          type: "GET",                               
+          url: "<%= url_for :action => :show_invent_2 %>",
+          data: {}
+          } );               
+        }                  
+        }); 
+      
+        $('[data-role=page]').live('pageshow', function (event) {
+          setTimeout(function() {   
+            $("#SDI").focus();
+           }, 1);   
+        });   
+        
+      function msg1(val) {        
+        var element = document.getElementById('msg1');  
+        element.innerHTML = val;                                                                    
+      };       
+
+      function msg2(val) {              
+        var element = document.getElementById('msg2');  
+        element.innerHTML = val;                                                                    
+      };  
+      
+      function null_invent() {
+      $.get('/app/Invent/null_invent', {});       
+      };                
+
+      function upload_invent() {        
+      $.get('/app/Invent/upload_invent', {});       
+      };        
+
+      function begin_invent() {
+      $.get('/app/Invent/begin_invent', {});       
+      };          
+                
+</script>   
+  
+<div data-role="content">
+
+      <table border="0">
+      <tr>
+      <td><label id = "msg1" style="color: green;  font-size: 20px;"><%=$msg1%></label> </td>
+      </tr>
+     </table>
+      <table border="0">
+      <tr>
+      <td><label id = "msg2" style="color: red;  font-size: 20x;"><%=$msg2%></label> </td>
+      </tr>
+     </table> 
+     
+      <table border="0">
+      <tr>
+      <td width = "90px" style="min-width:90px; max-width:90px">Номер ж-ла:
+        <td style="color: #FFCC00;min-width:230px; max-width:23px; overflow:hidden;" width = "230px"><%= @JourId%></td>
+      </td>
+      </tr>
+      </table>
+      
+      <table border="0">            
+      <tr>
+      <td width = "70px" style="min-width:70px; max-width:70px">Описание:
+        <td style="color: #FFCC00;min-width:230px; max-width:230px; overflow:hidden;" width = "230px"><NOBR><%= @JourDescription.gsub(/["']/,"").to_s%></NOBR></td>
+      </td>
+      </tr>      
+      </table>
+      
+      <table border="0">            
+      <tr>
+      <td width = "70px" style="min-width:70px; max-width:70px">Дата:
+        <td style="color: #FFCC00;min-width:80px; max-width:80px; overflow:hidden;" width = "80px"><%= @JourDate%></td>
+      </td>
+      <td width = "90px" style="min-width:90px; max-width:90px">Подсч. кол-во:
+        <td style="color: #FFCC00;min-width:60px; max-width:60px; overflow:hidden;" width = "60px"><%= @InventQty%></td>
+      </td>
+      </tr>
+      <tr>
+      <td width = "90px" style="min-width:90px; max-width:90px">Жур. принят:
+        <td style="color: #FFCC00;min-width:60px; max-width:60px; overflow:hidden;" width = "60px"><%= @IsInvented%></td>
+      </td>
+      <td width = "100px" style="min-width:100px; max-width:100px">Жур. выгружен:
+        <td style="color: #FFCC00;min-width:50px; max-width:50px; overflow:hidden;" width = "50px"><%= @Imported%></td></td>
+      </tr>
+      </table>
+
+      <table border="0">
+      <tr>
+      <td width = "150px" style="min-width:150px; max-width:150px"> <input type="submit" onclick = "null_invent();" value="Обнулить"/> </td>
+      <td width = "150px" style="min-width:150px; max-width:150px"> <input type="submit" onclick = "upload_invent();" value="Выгрузить"/> </td>
+      </tr>
+      </table>        
+
+      <table border="0">
+      <tr>
+      <td width = "300px" style="min-width:300px; max-width:300px"> <input type="submit" onclick = "begin_invent();" value="Принять"/> </td>
+      </tr>    
+      </table>       
+      
+      
+</div>
+
+</div>

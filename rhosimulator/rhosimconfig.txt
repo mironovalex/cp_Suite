@@ -1,0 +1,8 @@
+rhodes_path='C:/MotorolaRhoMobileSuite2.1.1.7/ruby/lib/ruby/gems/1.9.1/gems/rhodes-3.4.2'
+app_version='1.0'
+app_name='cp_Suite'
+reload_app_changes=1
+debug_port=
+debug_host='127.0.0.1'
+platform='wm'
+ext_path=C:/MotorolaRhoMobileSuite2.1.1.7/ruby/lib/ruby/gems/1.9.1/gems/rhodes-3.4.2/lib/extensions/json;C:/MotorolaRhoMobileSuite2.1.1.7/ruby/lib/ruby/gems/1.9.1/gems/rhoelements-2.1.1.7.0/libs/rhoelementsext;C:/MotorolaRhoMobileSuite2.1.1.7/ruby/lib/ruby/gems/1.9.1/gems/rhoelements-2.1.1.7.0/libs/motoapi;C:/MotorolaRhoMobileSuite2.1.1.7/ruby/lib/ruby/gems/1.9.1/gems/rhoelements-2.1.1.7.0/libs/rhoelements;

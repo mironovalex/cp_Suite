@@ -1,0 +1,49 @@
+<div data-role="page" data-add-back-btn="false">
+
+  <div data-role="header" data-position="inline">
+    <h1><%= @tsd_inventcountjourtmp.JourId %></h1>
+    <a href="<%= url_for :action => :index %>" class="ui-btn-left" data-icon="arrow-l" data-direction="reverse">
+      Back
+    </a>
+    <a href="<%= url_for :action => :edit, :id => @tsd_inventcountjourtmp.object %>" class="ui-btn-right" data-icon="star">
+      Edit
+    </a>
+  </div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      
+          <li>
+            <div class="itemLabel">JourId</div>
+            <div class="itemValue"><%= @tsd_inventcountjourtmp.JourId %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">InventLocationId</div>
+            <div class="itemValue"><%= @tsd_inventcountjourtmp.InventLocationId %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">JourDescription</div>
+            <div class="itemValue"><%= @tsd_inventcountjourtmp.JourDescription %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">JourDate</div>
+            <div class="itemValue"><%= @tsd_inventcountjourtmp.JourDate %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">Deleted</div>
+            <div class="itemValue"><%= @tsd_inventcountjourtmp.Deleted %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">Imported</div>
+            <div class="itemValue"><%= @tsd_inventcountjourtmp.Imported %></div>
+          </li>
+      
+    </ul>
+  </div>
+
+</div>

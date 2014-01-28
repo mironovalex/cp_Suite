@@ -1,0 +1,48 @@
+<div data-role="page" data-rho-wait-page="true">
+
+  <div data-role="header" data-position="inline">
+    <h1>Подождите...</h1>
+  </div>
+
+<script type="text/javascript">      
+
+    function utf8(utftext) {
+    var string = "";
+    var i = 0;
+    var c = c1 = c2 = 0;
+    while ( i < utftext.length ) {
+        c = utftext.charCodeAt(i);
+        if (c < 128) {
+            string += String.fromCharCode(c);
+            i++;
+        }
+        else if((c > 191) && (c < 224)) {
+            c2 = utftext.charCodeAt(i+1);
+            string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+            i += 2;
+        }
+        else {
+            c2 = utftext.charCodeAt(i+1);
+            c3 = utftext.charCodeAt(i+2);
+            string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+            i += 3;
+        }
+    }
+    return string;
+    };
+
+        function sync_msg(val) {          
+          val = utf8(val)
+          
+          var element = document.getElementById('SYNC_MSG');           
+          element.innerHTML = val;                                        
+        }           
+                      
+</script> 
+  
+  <div data-role="content">
+      <label id="SYNC_MSG" style="color: white;  font-size: 20px;"><%=$sync_msg.to_s%></label>
+      <img src="/public/images/loading.gif" width="50" height="40" hspace="127" vspace="80">
+  </div>
+
+</div>

@@ -1,0 +1,68 @@
+<div data-role="page" data-url="<%= Rho::RhoConfig.start_path %>/">
+
+  <div data-role="header" data-position="inline">
+    <h1>Номенклатура</h1>     
+  </div>   
+  
+<script type="text/javascript">    
+        
+     $('[data-role=page]').live('pageshow', function (event) {
+       $('input:not(:hidden):first').focus();
+     });
+     
+     function inbasket() {
+     $.get('/app/ChkItem/addbasket', {});       
+     } 
+    
+</script>   
+  
+<div data-role="content">
+  <form method="GET" action="<%= url_for :action => :ItemChkInp %>">  
+
+<table border="0">
+<tr>
+<td>Наим. :<%= @ItemName%></td>
+</tr> 
+</table> 
+
+<table border="0">
+<tr>
+<td>Наим. пост. :<%= @VendName%></td>
+<td>Цена по пр.:<%= @RetailPrice%></td>
+</tr>
+</table> 
+  
+<table border="0">
+<tr>
+<td>Артикул пост. :<%= @VendCode%></td>
+<td>Код :<%= @ItemId%></td>
+</tr>
+</table> 
+  
+<table border="0">
+<tr>
+<td>Размер :<%= @InventSizeId%></td>
+<td>Код пост. :<%= @VendId%></td>
+</tr>
+<tr>
+<td>Цена со ск. :<%= @SalesPrice%></td>
+<td>Размер скидки :<%= @SalesDiscount%></td>
+</tr>
+<tr>
+<td>Остаток :<%= @AvailableQty%></td>
+<td>Заказано :<%= @OrderedQty%></td>
+</tr>
+</table>   
+
+<table border="0">
+<tr>
+<td> <input type="submit" value="Далее"/></td>
+<td><input type="button" value="В корзину" onclick="inbasket()"/></td>
+</tr>
+</table>      
+
+  </form>
+</div>
+
+
+</div>

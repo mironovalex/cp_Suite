@@ -1,0 +1,59 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "Back", :action => :show, :id => @awsbasket.object %>
+    <h1>Edit <%= @awsbasket.InventLocationId%></h1>
+    <%= link_to "Delete", :action => :delete, :id => @awsbasket.object %>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @awsbasket.object %>"/>
+      <table>
+          
+          <tr>
+              <td class="itemLabel">Inventlocationid: </td>
+              <td class="itemValue"><input type="text" name="awsbasket[InventLocationId]" value="<%= @awsbasket.InventLocationId %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Userid: </td>
+              <td class="itemValue"><input type="text" name="awsbasket[UserId]" value="<%= @awsbasket.UserId %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Itembarcode: </td>
+              <td class="itemValue"><input type="text" name="awsbasket[ItemBarCode]" value="<%= @awsbasket.ItemBarCode %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Itemid: </td>
+              <td class="itemValue"><input type="text" name="awsbasket[ItemId]" value="<%= @awsbasket.ItemId %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Inventsizeid: </td>
+              <td class="itemValue"><input type="text" name="awsbasket[InventSizeId]" value="<%= @awsbasket.InventSizeId %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Printcopies: </td>
+              <td class="itemValue"><input type="text" name="awsbasket[PrintCopies]" value="<%= @awsbasket.PrintCopies %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Linenum: </td>
+              <td class="itemValue"><input type="text" name="awsbasket[LineNum]" value="<%= @awsbasket.LineNum %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Yellowlabel: </td>
+              <td class="itemValue"><input type="text" name="awsbasket[YellowLabel]" value="<%= @awsbasket.YellowLabel %>"/></td>
+          </tr>
+          
+      </table>
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>

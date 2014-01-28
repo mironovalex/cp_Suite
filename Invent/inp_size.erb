@@ -1,0 +1,38 @@
+<div data-role="page" data-url="<%= Rho::RhoConfig.start_path %>/">
+
+  <div data-role="header" data-position="inline">
+    <h1>Введите размер</h1> 
+      <a href="<%= url_for :action => :inp_item %>" class="ui-btn-right" data-icon="back">Назад</a>      
+  </div>  
+
+<script type="text/javascript">
+
+  function alarm(){var snd = new Audio("/public/Error.wav");   snd.play();}  
+        
+  function form_focus() {
+    var element = document.getElementById('SIZE');
+    element.select();
+    element.focus();
+  }         
+        
+     $('[data-role=page]').live('pageshow', function (event) {
+       $('input:not(:hidden):first').focus();
+     });
+    
+</script>    
+  
+<body onload="form_focus();">
+<div data-role="content">
+  <form method="GET" action="<%= url_for :action => :input_size %>">
+    <div data-role="fieldcontain">
+    
+      <label for="SIZE" class="itemLabel">Размер:</label>
+      <input type="text" id="SIZE" name="SIZE" class="itemValue"/>      
+      
+    </div>
+    <input type="submit" value="Ввод"/>
+  </form>
+</div>
+</body>
+
+</div>

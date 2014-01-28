@@ -1,0 +1,123 @@
+<div data-role="page" id = "IL" data-url="<%= Rho::RhoConfig.start_path %>/">
+
+  <div data-role="header" data-position="inline">
+    <h1>Магазин</h1> 
+    <a href="<%= url_for :controller => :Settings ,:action => :exit %>" class="ui-btn-right" data-icon="star">Выход</a>   
+  </div>  
+  
+  
+<script type="text/javascript">
+
+   function alarm(){var snd = new Audio("/public/Error.wav");   snd.play();}   
+
+  function utf8(utftext) {
+      var string = "";
+      var i = 0;
+      var c = c1 = c2 = 0;
+      while ( i < utftext.length ) {
+          c = utftext.charCodeAt(i);
+          if (c < 128) {
+              string += String.fromCharCode(c);
+              i++;
+          }
+          else if((c > 191) && (c < 224)) {
+              c2 = utftext.charCodeAt(i+1);
+              string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+              i += 2;
+          }
+          else {
+              c2 = utftext.charCodeAt(i+1);
+              c3 = utftext.charCodeAt(i+2);
+              string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+              i += 3;
+          }
+      }
+      return string;
+  };
+
+      //$('#IL').keyup(function(event) {
+      //  if(event.keyCode==13){     
+      //    $.ajax({        
+      //    type: "GET",                               
+      //    url: "<%= url_for :action => :loc_check_ %>",
+      //    data: {}
+      //    } );               
+      //  }                  
+      //  });  
+
+        $('[data-role=page]').live('pageshow', function (event) {
+          setTimeout(function() {   
+            $('input:not(:hidden):first').focus();
+            $('input:not(:hidden):first').select();
+           }, 1);   
+        });        
+        
+      //$('[data-role=page]').live('pageshow', function (event) {
+      //  
+      //  var element = document.getElementById('LOCID');
+      //  element.select();        
+      //  element.focus();        
+      //  
+      //  $('#LOCID').focus();
+      //}); 
+
+       //$('[data-role=page]').live('pageshow', function (event) {
+       //  $('input:not(:hidden):first').focus();
+       //});      
+      
+  function get_chk_val() {
+    var element = document.getElementById('LOC');
+    $.get('/app/Auto/chech_location', {chk_val: element.value});       
+  }         
+
+      function get_chk_val() {
+        var element = document.getElementById('LOCID');
+        $.get('/app/Auto/chech_location', {chk_val_id: element.value});       
+      }   
+       
+function tst(){ 
+         $.ajax({
+         type: "GET",                               
+         url: "<%= url_for :controller => :Auto, :action => :tst %>",
+         data: {}
+         } );         
+  };       
+      
+function msg(val) { 
+  val = utf8(val);
+  //alert(val);
+  var element = document.getElementById('MSG');           
+  element.innerHTML = val;                                        
+}   
+     
+</script>    
+  
+<div data-role="content">
+  <form method="GET"  action="<%= url_for :action => :loc_check %>">
+  
+    <label style="color: #FF4500;  font-size: 20px; text-align: center;"><%=$msg%></label> 
+    <div data-role="fieldcontain">
+       
+      <label for="LOCID" class="itemLabel">Код магазина:</label>
+      <input type="text" id="LOCID" name="LOCID" class="itemValue" value = ""/>    
+    
+    
+      <label for="LOC" class="itemValue">Магазин:</label>
+        <select  size="1" name="LOC" id="LOC">   
+           
+        <%  @TsdInventlocations = TsdInventlocation.find(:all, :order => ['InventLoationName'], :orderdir => ['ASC'])  
+            @TsdInventlocations.each do |location| %>
+        
+            <option value="<%= location.InventLocationId %>" style="background: #FF4500;" <%if (location.InventLocationId == @last_loc)%><%= 'selected' %><%end%>><%= location.InventLoationName %></option>
+        
+        <%end%>
+          
+        </select>
+    </div>
+    <input type="submit" id = "BTN" value="Ввод"/>
+    
+    
+  </form>
+</div>
+
+</div>

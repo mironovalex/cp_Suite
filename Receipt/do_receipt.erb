@@ -1,0 +1,221 @@
+<div data-role="page" data-url="<%= Rho::RhoConfig.start_path %>/">
+
+  <div data-role="header" data-position="inline">
+    <h1>Позиция</h1> 
+    <a href="" onclick = "minus();" class="ui-btn-left" >-</a>    
+    <a href="<%= url_for :action => :before_inp_item %>" class="ui-btn-right" data-icon="back">Назад</a>     
+  </div>   
+  
+<script type="text/javascript">  
+       
+      function minus()
+      {
+        var QTY  = document.getElementById('QTY');     
+        if (QTY.value.substr(0,1) == "-")
+          {QTY.value = QTY.value.substr(1);}
+        else    
+          {QTY.value = "-" + QTY.value}
+                
+      };
+
+      function alarm(){var snd = new Audio("/public/Error.wav");   snd.play();}  
+
+      function utf8(utftext) {
+          var string = "";
+          var i = 0;
+          var c = c1 = c2 = 0;
+          while ( i < utftext.length ) {
+              c = utftext.charCodeAt(i);
+              if (c < 128) {
+                  string += String.fromCharCode(c);
+                  i++;
+              }
+              else if((c > 191) && (c < 224)) {
+                  c2 = utftext.charCodeAt(i+1);
+                  string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+                  i += 2;
+              }
+              else {
+                  c2 = utftext.charCodeAt(i+1);
+                  c3 = utftext.charCodeAt(i+2);
+                  string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+                  i += 3;
+              }
+          }
+          return string;
+      };
+
+      $(document).ready(function() {                 
+      $("#QTY").keyup(function(event) {
+      if(event.keyCode==13) {button_click();}
+        });
+        });     
+
+//      $('[data-role=page]').live('pageshow', function (event) {        
+//      });
+
+ //     function set_focus() {   
+ //       var QTY = document.getElementById('QTY');        
+ //       QTY.focus();                                                               
+ //     }      
+      
+ //     function read_po_checker() {   
+ //       var rez = 0;
+ //       var element = document.getElementById('PO_CH');        
+ //       if (element.value == 'on')
+ //         {                
+ //         rez = 1;
+ //         }                                                        
+      
+ //       $.ajax({
+ //         type: "GET",                               
+ //         url: "<%= url_for :action => :get_po_checker %>",
+ //         data: {aj_po_ch : rez}
+ //         } );                  
+ //      }       
+
+        function msg(val) {   
+          //alert(val)
+          val = utf8(val);
+          
+          var element = document.getElementById('MSG');           
+          element.innerHTML = val;                                        
+        }
+ 
+        function set_r_qty(val) {   
+          var element = document.getElementById('R_QTY');  
+          element.innerHTML = val;   
+          
+          var elem = document.getElementById('QTY');        
+          elem.value = "";
+          elem.focus();                          
+         } 
+         
+         function nulling() {
+            var elem = document.getElementById('QTY');        
+            elem.value = "";
+            elem.focus();                          
+         }   
+             
+ //       function get_po_checker() {   
+ //         var rez = 0;
+ //         var element = document.getElementById('PO_CH');        
+ //         if (element.value == 'on')
+ //           {                
+ //           rez = 1;
+ //           }                                                        
+        
+ //         $.ajax({
+ //           type: "GET",                               
+ //           url: "<%= url_for :action => :listern_po_checker %>",
+ //           data: {aj_po_ch : rez}
+ //           } );                  
+ //        } 
+                 
+      function change_rejim() {   
+        var rez = 0;
+        var element = document.getElementById('PO_CH');  
+        var QTY     = document.getElementById('QTY');        
+        if (element.value == 'on')
+          {                
+          rez = 1;
+          }                
+
+        
+        if (QTY.type == 'hidden')
+          {      
+            QTY.type = 'text';  
+            QTY.focus();  
+          }
+        else     
+          {
+            QTY.type = 'hidden';
+          }         
+          
+        $.ajax({
+          type: "GET",                               
+          url: "<%= url_for :action => :change_rejim %>",
+          data: {val : rez}
+          } );                              
+       }    
+       
+             
+     function button_click() {         
+       var element = document.getElementById('QTY');       
+       $.ajax({
+         type: "GET",                               
+         url: "<%= url_for :action => :rec_button %>",
+         data: {val : element.value}
+         } );       
+       }           
+                      
+</script>   
+  
+<div data-role="content">
+  <table border="0">
+  <tr>
+  <td>
+  <div class="itemValue" id="MSG" style="color: #FF4500;  font-size: 20px; text-align: center;"></div>
+  </td>
+  </tr> 
+  </table>
+        
+  <table border="0">
+  <tr>
+  <td>Наименование :<%= @ItemName%></td>
+  </tr>
+  </table>  
+  
+  <table border="0">
+  <tr>
+  <td>Код ном. :<%= @ItemId%></td>
+  <td>Размер :<%= @InventSizeId%></td>
+  </tr>
+  <tr>
+  <td>Артикул пост. :<%= @VendCode%></td>
+  </tr>
+  <tr>
+  <td>Цена в зак. :<%= @OrderPrice%></td>
+  <td>Заказанно :<%= @OrderedQty%></td>
+  </tr>
+  <tr>
+  <td>Полученно :</td>
+  <td><div class="itemValue" id="R_QTY"><%= @ReceivedQty%></div></td>
+  </tr>
+  </table> 
+    
+  <table border="0"> 
+  <tr>
+  <td>Принять:</td>
+  <td>
+    <input id="QTY" name="QTY" style="height:8pt; font-size: 10pt; width:60px; background: #FFFFFF; color: #000000;"  
+    class = "ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow ui-input-text ui-body-c ui-corner-all ui-shadow-insert ui-btn-hover-undefined"                              
+    value = "" <% 
+    @val = '' 
+    if ($po_cycle_check == '1') 
+      @val = 'type = "hidden"' 
+    else
+      @val = 'type = "text"'   
+    end%>
+    <%= @val %>          
+    />
+  </td>
+  <td>Цикл.</td>
+  <td>                
+      <input type="checkbox" id="PO_CH"  style="height:20px; width:20px"  name="PO_CH" onclick = "change_rejim();" <% 
+      @val = '' 
+      if ($po_cycle_check == '1') 
+        @val = 'checked' 
+      end%>
+      <%= @val %> 
+       />
+  </td>
+  </tr>      
+  </table>       
+
+  
+  <input type="button" value="Ввод" onclick = "button_click();"/>
+  
+</div>
+
+</div>

@@ -1,0 +1,55 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>New <%= @tsdinventpricetmp.title %></h1>
+    <a href="<%= url_for :action => :index %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :create %>">
+      <input type="hidden" name="id" value="<%= @tsdinventpricetmp.object %>"/>
+
+      
+          <div data-role="fieldcontain">
+            <label for="tsdinventpricetmp[InventLocationId]" class="fieldLabel">Inventlocationid</label>
+            <input type="text" id="tsdinventpricetmp[InventLocationId]" name="tsdinventpricetmp[InventLocationId]" <%= placeholder("Inventlocationid") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsdinventpricetmp[ItemId]" class="fieldLabel">Itemid</label>
+            <input type="text" id="tsdinventpricetmp[ItemId]" name="tsdinventpricetmp[ItemId]" <%= placeholder("Itemid") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsdinventpricetmp[InventSizeId]" class="fieldLabel">Inventsizeid</label>
+            <input type="text" id="tsdinventpricetmp[InventSizeId]" name="tsdinventpricetmp[InventSizeId]" <%= placeholder("Inventsizeid") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsdinventpricetmp[RetailPrice]" class="fieldLabel">Retailprice</label>
+            <input type="text" id="tsdinventpricetmp[RetailPrice]" name="tsdinventpricetmp[RetailPrice]" <%= placeholder("Retailprice") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsdinventpricetmp[SalesPrice]" class="fieldLabel">Salesprice</label>
+            <input type="text" id="tsdinventpricetmp[SalesPrice]" name="tsdinventpricetmp[SalesPrice]" <%= placeholder("Salesprice") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsdinventpricetmp[SalesDiscount]" class="fieldLabel">Salesdiscount</label>
+            <input type="text" id="tsdinventpricetmp[SalesDiscount]" name="tsdinventpricetmp[SalesDiscount]" <%= placeholder("Salesdiscount") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsdinventpricetmp[YellowLabel]" class="fieldLabel">Yellowlabel</label>
+            <input type="text" id="tsdinventpricetmp[YellowLabel]" name="tsdinventpricetmp[YellowLabel]" <%= placeholder("Yellowlabel") %> />
+          </div>
+      
+
+      <input type="submit" value="Create"/>
+    </form>
+  </div>
+
+</div>

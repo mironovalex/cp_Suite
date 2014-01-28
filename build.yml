@@ -1,0 +1,27 @@
+sdkversion: "3.5.0"
+name: "cp_Suite"
+version: "1.0"
+vendor: "rhomobile"
+build: "debug"
+bbver: "4.6"
+applog: "rholog.txt"
+iphone:
+  configuration: "Release"
+  sdk: "iphonesimulator5.0"
+  provisionprofile: 
+  codesignidentity: 
+  entitlements: 
+  BundleIdentifier: "com.rhomobile.cpsuite"
+  BundleURLScheme: "cpsuite"
+wp:
+  productid: "22053921-987a-0130-6da7-546d126c710a"
+symbian:
+  uid: "0xec637a6b"
+android:
+  version: "2.1"
+extensions:
+  - json
+  - another-extension
+  - tiny_tds
+app_type: "rhoelements"
+capabilities:

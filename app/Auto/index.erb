@@ -1,0 +1,18 @@
+<div data-role="page">
+
+      <script type="text/javascript">           
+         
+       function GoToInpLocation() {
+         $.ajax({
+         type: "GET",                               
+         url: "<%= url_for :controller => :Auto, :action => :inp_location %>",
+         data: {}
+         } );           
+       };
+            
+         
+      </script>   
+	
+
+
+</div>

@@ -1,0 +1,59 @@
+<div data-role="page" data-add-back-btn="false">
+
+  <div data-role="header" data-position="inline">
+    <h1><%= @tsd_receiptjour.JourId %></h1>
+    <a href="<%= url_for :action => :index %>" class="ui-btn-left" data-icon="arrow-l" data-direction="reverse">
+      Back
+    </a>
+    <a href="<%= url_for :action => :edit, :id => @tsd_receiptjour.object %>" class="ui-btn-right" data-icon="star">
+      Edit
+    </a>
+  </div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      
+          <li>
+            <div class="itemLabel">JourId</div>
+            <div class="itemValue"><%= @tsd_receiptjour.JourId %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">InventLocationId</div>
+            <div class="itemValue"><%= @tsd_receiptjour.InventLocationId %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">VendId</div>
+            <div class="itemValue"><%= @tsd_receiptjour.VendId %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">VendName</div>
+            <div class="itemValue"><%= @tsd_receiptjour.VendName %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">ShipDate</div>
+            <div class="itemValue"><%= @tsd_receiptjour.ShipDate %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">OverDelivery</div>
+            <div class="itemValue"><%= @tsd_receiptjour.OverDelivery %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">Deleted</div>
+            <div class="itemValue"><%= @tsd_receiptjour.Deleted %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">Imported</div>
+            <div class="itemValue"><%= @tsd_receiptjour.Imported %></div>
+          </li>
+      
+    </ul>
+  </div>
+
+</div>

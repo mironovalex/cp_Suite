@@ -1,0 +1,40 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>New <%= @tsd_inventtable.title %></h1>
+    <a href="<%= url_for :action => :index %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :create %>">
+      <input type="hidden" name="id" value="<%= @tsd_inventtable.object %>"/>
+
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_inventtable[ItemId]" class="fieldLabel">Itemid</label>
+            <input type="text" id="tsd_inventtable[ItemId]" name="tsd_inventtable[ItemId]" <%= placeholder("Itemid") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_inventtable[ItemName]" class="fieldLabel">Itemname</label>
+            <input type="text" id="tsd_inventtable[ItemName]" name="tsd_inventtable[ItemName]" <%= placeholder("Itemname") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_inventtable[VendId]" class="fieldLabel">Vendid</label>
+            <input type="text" id="tsd_inventtable[VendId]" name="tsd_inventtable[VendId]" <%= placeholder("Vendid") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_inventtable[VendName]" class="fieldLabel">Vendname</label>
+            <input type="text" id="tsd_inventtable[VendName]" name="tsd_inventtable[VendName]" <%= placeholder("Vendname") %> />
+          </div>
+      
+
+      <input type="submit" value="Create"/>
+    </form>
+  </div>
+
+</div>

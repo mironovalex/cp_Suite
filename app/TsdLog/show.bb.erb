@@ -1,0 +1,50 @@
+<div data-role="page" data-add-back-btn="true">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "Back", :action => :index %>
+    <h1><%= @tsd_log.UserId %></h1>
+    <%= link_to "Edit", :action => :edit, :id => @tsd_log.object %>
+  </div>
+
+  <div data-role="content">
+    <table>
+      
+      <tr>
+    	<td class="itemLabel">UserId</td>
+        <td class="itemValue"><%= @tsd_log.UserId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">InventLocationId</td>
+        <td class="itemValue"><%= @tsd_log.InventLocationId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">DeviceID</td>
+        <td class="itemValue"><%= @tsd_log.DeviceID%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Date</td>
+        <td class="itemValue"><%= @tsd_log.Date%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Time</td>
+        <td class="itemValue"><%= @tsd_log.Time%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Operation</td>
+        <td class="itemValue"><%= @tsd_log.Operation%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Comment</td>
+        <td class="itemValue"><%= @tsd_log.Comment%></td>
+      </tr>
+      
+    </table>
+  </div>
+
+</div>

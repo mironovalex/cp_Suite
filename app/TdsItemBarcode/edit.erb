@@ -1,0 +1,36 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>Edit <%= @tdsitembarcode.ItemId %></h1>
+    <a href="<%= url_for :action => :show, :id => @tdsitembarcode.object %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+    <a href="<%= url_for :action => :delete, :id => @tdsitembarcode.object %>" class="ui-btn-right" data-icon="delete" data-direction="reverse">
+      Delete
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @tdsitembarcode.object %>"/>
+      
+          <div data-role="fieldcontain">
+            <label for="tdsitembarcode[ItemId]" class="fieldLabel">Itemid</label>
+            <input type="text" id="tdsitembarcode[ItemId]" name="tdsitembarcode[ItemId]" value="<%= @tdsitembarcode.ItemId %>" <%= placeholder( "Itemid" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tdsitembarcode[InventSizeId]" class="fieldLabel">Inventsizeid</label>
+            <input type="text" id="tdsitembarcode[InventSizeId]" name="tdsitembarcode[InventSizeId]" value="<%= @tdsitembarcode.InventSizeId %>" <%= placeholder( "Inventsizeid" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tdsitembarcode[ItemBarCode]" class="fieldLabel">Itembarcode</label>
+            <input type="text" id="tdsitembarcode[ItemBarCode]" name="tdsitembarcode[ItemBarCode]" value="<%= @tdsitembarcode.ItemBarCode %>" <%= placeholder( "Itembarcode" ) %> />
+          </div>
+      
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>

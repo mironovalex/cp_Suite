@@ -1,0 +1,73 @@
+<div data-role="page" id="page" data-url="<%= Rho::RhoConfig.start_path %>/">
+
+  <div data-role="header" data-position="inline">
+    <h1>Дата заказов</h1>     
+    <a href="" onclick = "clk();" class="ui-btn-right" >Далее</a>    
+  </div>  
+
+    <link rel="stylesheet" href="/resources/demos/style.css" />  
+    <script src="/public/2.js"></script>
+    <script src="/public/3.js"></script> 
+    <link rel="stylesheet" href="/public/1.css" />
+  
+  <script type="text/javascript">      
+  
+    function clk() {
+      var element = document.getElementById('datepicker');     
+      
+      $.ajax({
+        type: "GET",                               
+        url: "<%= url_for :action => :recipt_menu_  %>",
+        data: {DAT : element.value}
+        } );
+      }; 
+    
+    $(document).keyup(function(event) {
+    if(event.keyCode==13){    
+      var element = document.getElementById('datepicker');
+           
+      $.ajax({
+      type: "GET",                               
+      url: "<%= url_for :action => :recipt_menu_  %>",
+      data: {DAT : element.value}
+      } ); 
+      }
+      
+      if(event.keyCode==27){  //alert('jo 3');                           
+        $.ajax({        
+        type: "GET",                               
+        url: "<%= url_for :action => :main_menu_2 %>",
+        data: {}
+        } );               
+      }         
+    });     
+       
+   
+    $(function() {
+      $( '#datepicker' ).datepicker();   
+    });
+    
+     //function ch_date() {
+     //$.get('/app/Receipt/DatePick', {});       
+     //}      
+
+    
+          
+     function set_time(val) {
+        var element = document.getElementById('datepicker');
+        element.value = val;
+      };            
+      
+</script>    
+  
+<div data-role="content">
+    <div data-role="fieldcontain"> 
+        
+      <label for="datepickere" class="itemLabel">Дата :</label>
+      <input type="text" id="datepicker" name="DAT" readonly onclick="$( '#datepicker' ).datepicker('show');" class="itemValue" value = <%= Time.now.strftime("%Y-%m-%d") %> />             
+    </div>
+                
+
+</div>
+
+</div>

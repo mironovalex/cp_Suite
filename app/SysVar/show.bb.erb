@@ -1,0 +1,25 @@
+<div data-role="page" data-add-back-btn="true">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "Back", :action => :index %>
+    <h1><%= @sys_var.Var %></h1>
+    <%= link_to "Edit", :action => :edit, :id => @sys_var.object %>
+  </div>
+
+  <div data-role="content">
+    <table>
+      
+      <tr>
+    	<td class="itemLabel">Var</td>
+        <td class="itemValue"><%= @sys_var.Var%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Val</td>
+        <td class="itemValue"><%= @sys_var.Val%></td>
+      </tr>
+      
+    </table>
+  </div>
+
+</div>

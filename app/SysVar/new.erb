@@ -1,0 +1,30 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>New <%= @sys_var.title %></h1>
+    <a href="<%= url_for :action => :index %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :create %>">
+      <input type="hidden" name="id" value="<%= @sys_var.object %>"/>
+
+      
+          <div data-role="fieldcontain">
+            <label for="sys_var[Var]" class="fieldLabel">Var</label>
+            <input type="text" id="sys_var[Var]" name="sys_var[Var]" <%= placeholder("Var") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="sys_var[Val]" class="fieldLabel">Val</label>
+            <input type="text" id="sys_var[Val]" name="sys_var[Val]" <%= placeholder("Val") %> />
+          </div>
+      
+
+      <input type="submit" value="Create"/>
+    </form>
+  </div>
+
+</div>

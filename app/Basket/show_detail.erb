@@ -1,0 +1,104 @@
+<div data-role="page" id = "BSD" data-url="<%= Rho::RhoConfig.start_path %>/">
+
+  <div data-role="header" data-position="inline">
+    <h1>Позиция</h1>     
+  </div>   
+  
+<script type="text/javascript">    
+        
+     $("#BSD").keyup(function(event) {  
+       if(event.keyCode==13){  
+         var element = document.getElementById('COUNT');          
+         $.get('/app/Basket/edit_basket_p_2', {COUNT : element.value});   
+       }
+       if(event.keyCode==27){ //alert('Jo 0');           
+         var element = document.getElementById('COUNT');          
+         $.get('/app/Basket/edit_basket_p_2', {COUNT : element.value});
+       }    
+       });  
+
+       //$('[data-role=page]').live('pageshow', function (event) {
+       //setTimeout(function() {   
+       //$("#BSD").focus();
+       //}, 1);   
+       //});       
+       
+     $('[data-role=page]').live('pageshow', function (event) {
+       $('input:not(:hidden):first').focus();
+     });     
+    
+</script>   
+  
+<div data-role="content">
+
+  <form method="GET" action="<%= url_for :action => :edit_basket_p %>">
+  
+<table border="0">
+<tr>
+<td  width = "70px" style="min-width:70px; max-width:70px">Код:
+  <NOBR><td id = "VendId" style="color: #FFCC00; min-width:90px; max-width:90px;" width = "90px"><%= @VendId%></td></NOBR>
+</td>
+<td  width = "70px" style="min-width:70px; max-width:70px" >Размер:
+  <NOBR><td id = "InventSizeId" style="color: #FFCC00; min-width:90px; max-width:90px;" width = "90px"><%= @InventSizeId%></td><NOBR>
+</td>
+</tr>
+<table>
+
+<table border="0">
+<tr>
+  <td width = "70px" style="min-width:70px; max-width:70px">Наим-ие:
+  <td id = "ItemName" style="color: #FFCC00;min-width:250px; max-width:250px; overflow:hidden;" width = "250px"><NOBR><%= @ItemName%></NOBR></td>
+</td>
+</tr> 
+</table> 
+
+<table border="0">
+<tr>
+<td  width = "160px" style="min-width:160px; max-width:160px">Поставщик:</td>
+<td  width = "160px" style="min-width:160px; max-width:160px">Артикулы поставщика:</td>
+</tr>
+<tr>
+<td id = "VendName_" style="color: #FFCC00;min-width:160px; max-width:160px; overflow:hidden;" width = "160px"><NOBR><%= @VendName%></NOBR></td>
+<td id = "VendCode" style="color: #FFCC00;min-width:160px; max-width:160px; overflow:hidden;"  width = "160px"><NOBR><%= @VendCode%></NOBR></td>
+</tr>
+</table> 
+
+<table border="0">           
+<tr>
+<td  width = "70px" style="min-width:70px; max-width:70px">Прайс:
+  <td id = "RetailPrice" style="color: #FFCC00;min-width:90px; max-width:90px"  width = "90px"><%= @RetailPrice%></td>
+</td>
+<td  width = "70px" style="min-width:70px; max-width:70px">Остаток:
+  <td id = "AvailableQty" style="color: #FFCC00;min-width:90px; max-width:90px"  width = "90px"><%= @AvailableQty%></td>
+</td>
+</tr>
+<tr>
+<td  width = "70px" style="min-width:70px; max-width:70px">Цена:
+  <td id = "SalesPrice" style="color: #FFCC00;min-width:90px; max-width:90px"  width = "90px"><%= @SalesPrice%></td>
+</td>
+<td  width = "70px" style="min-width:70px; max-width:70px">Заказано:
+  <td id = "OrderedQty" style="color: #FFCC00;min-width:90px; max-width:90px"  width = "90px"><%= @OrderedQty%></td>
+</td>           
+</tr>
+<tr>
+<td  width = "70px" style="min-width:70px; max-width:70px">Скидка:
+   <td id = "SalesDiscount" style="color: #FFCC00;min-width:90px; max-width:90px"  width = "90px"><%= @SalesDiscount%></td>
+</td>        
+</tr>
+<table>  
+
+<table border="0">
+<tr>
+<td>Кол-во:</td>
+<td><input type="text" id="COUNT" name="COUNT" style="height:8pt; font-size: 10pt; width:60px; background: #FFFFFF; color: #000000;"
+           value = <%=  @AWSBasketn.PrintCopies%> class = "ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow ui-input-text ui-body-c ui-corner-all ui-shadow-insert ui-btn-hover-undefined"/></td>
+</tr>
+</table>    
+    
+    
+    <input type="submit" value="Ввод"/>
+  </form>
+</div>
+
+
+</div>

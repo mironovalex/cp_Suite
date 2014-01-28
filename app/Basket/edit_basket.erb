@@ -1,0 +1,59 @@
+<div data-role="page" id = "EB">
+
+  <div data-role="header" data-position="inline">
+    <h1>Товары</h1>
+<a href="<%= url_for :action => :show_main_menu_basket_ %>" class="ui-btn-right" data-icon="back">Завершить</a> 
+  </div>
+
+  <script type="text/javascript">   
+  
+  $("#EB").keyup(function(event) {  
+  if(event.keyCode==27){ //alert('Jo');           
+    $.ajax({        
+    type: "GET",                               
+    url: "<%= url_for :action => :show_main_menu_basket_2 %>",
+    data: {}
+    } );    
+  }}); 
+  
+    $('[data-role=page]').live('pageshow', function (event) {
+      setTimeout(function() {   
+        $("#EB").focus();
+       }, 1);   
+    }); 
+  
+  </script>   
+  
+  <div data-role="content">
+    <ul data-role="listview">
+      <% 
+        @AWSBaskets = AWSBasket.find(:all,
+          :conditions => { 
+            {
+              :name => "InventLocationId", 
+              :op => "IN" 
+            } => @chk_loc                  
+        })         
+        
+        @AWSBaskets.each do |basket|
+          
+          @TsdInventtables = TsdInventtable.find(:first,
+            :conditions => { 
+            {
+            :name => "ItemId", 
+            :op => "IN" 
+            } =>  basket.ItemId                           
+            } ) 
+      %>
+       
+          <li>
+            <a href="<%= url_for :action => :show_detail, :id => basket.object %>">
+              <%= basket.ItemId + "; " + basket.InventSizeId + "; " + basket.PrintCopies + "шт; " + @TsdInventtables.ItemName.gsub(/["']/,"").to_s %>
+            </a>
+          </li>
+      
+      <% end %>
+    </ul>
+  </div>
+
+</div>

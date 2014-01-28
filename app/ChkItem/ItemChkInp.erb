@@ -1,0 +1,47 @@
+<div data-role="page" data-url="<%= Rho::RhoConfig.start_path %>/">
+
+  <div data-role="header" data-position="inline">
+    <h1>Введите товар</h1> 
+      <a href="<%=url_for :action => :go_bask %>" class="ui-btn-right" data-icon="star">Завершить</a>      
+  </div>  
+
+<script type="text/javascript">
+    function alarm(){var snd = new Audio("/public/Error.wav");   snd.play();}   
+
+  function form_focus() {
+    var element = document.getElementById('SH');
+    element.select();
+    element.focus();
+  }        
+
+  function null_val() {
+    var element1 = document.getElementById('SH');
+    element1.value = '';
+    var element2 = document.getElementById('CODE');
+    element2.value = '';
+  }   
+        
+     $('[data-role=page]').live('pageshow', function (event) {
+       $('input:not(:hidden):first').focus();
+     });
+    
+</script>    
+  
+<body onload="form_focus();">
+<div data-role="content">
+  <form method="GET" action="<%= url_for :action => :item_show %>">
+    <label style="color: #FF4500;  font-size: 20px; text-align: center;"><%=$msg%></label> 
+    <div data-role="fieldcontain">
+    
+      <label for="SH" class="itemLabel">ШК:</label>
+      <input type="text" id="SH" name="SH" class="itemValue"/>
+      <label for="CODE" class="itemLabel">Код ном.:</label>
+      <input type="text" id="CODE" name="CODE" class="itemValue"/>        
+      
+    </div>
+    <input type="submit" value="Ввод"/>
+  </form>
+</div>
+</body>
+
+</div>

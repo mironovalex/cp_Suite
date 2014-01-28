@@ -1,0 +1,60 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>New <%= @awsbasket.title %></h1>
+    <a href="<%= url_for :action => :index %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :create %>">
+      <input type="hidden" name="id" value="<%= @awsbasket.object %>"/>
+
+      
+          <div data-role="fieldcontain">
+            <label for="awsbasket[InventLocationId]" class="fieldLabel">Inventlocationid</label>
+            <input type="text" id="awsbasket[InventLocationId]" name="awsbasket[InventLocationId]" <%= placeholder("Inventlocationid") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="awsbasket[UserId]" class="fieldLabel">Userid</label>
+            <input type="text" id="awsbasket[UserId]" name="awsbasket[UserId]" <%= placeholder("Userid") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="awsbasket[ItemBarCode]" class="fieldLabel">Itembarcode</label>
+            <input type="text" id="awsbasket[ItemBarCode]" name="awsbasket[ItemBarCode]" <%= placeholder("Itembarcode") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="awsbasket[ItemId]" class="fieldLabel">Itemid</label>
+            <input type="text" id="awsbasket[ItemId]" name="awsbasket[ItemId]" <%= placeholder("Itemid") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="awsbasket[InventSizeId]" class="fieldLabel">Inventsizeid</label>
+            <input type="text" id="awsbasket[InventSizeId]" name="awsbasket[InventSizeId]" <%= placeholder("Inventsizeid") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="awsbasket[PrintCopies]" class="fieldLabel">Printcopies</label>
+            <input type="text" id="awsbasket[PrintCopies]" name="awsbasket[PrintCopies]" <%= placeholder("Printcopies") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="awsbasket[LineNum]" class="fieldLabel">Linenum</label>
+            <input type="text" id="awsbasket[LineNum]" name="awsbasket[LineNum]" <%= placeholder("Linenum") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="awsbasket[YellowLabel]" class="fieldLabel">Yellowlabel</label>
+            <input type="text" id="awsbasket[YellowLabel]" name="awsbasket[YellowLabel]" <%= placeholder("Yellowlabel") %> />
+          </div>
+      
+
+      <input type="submit" value="Create"/>
+    </form>
+  </div>
+
+</div>

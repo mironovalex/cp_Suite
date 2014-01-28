@@ -1,0 +1,43 @@
+<div data-role="page" data-url="<%= Rho::RhoConfig.start_path %>/">
+
+  <div data-role="header" data-position="inline">
+    <h1>Меню журналов</h1> 
+    <a href="<%= url_for :action => :main_menu_ %>" class="ui-btn-right" data-icon="back">Завершить</a>    
+  </div>                        
+   
+      <script type="text/javascript">             
+                              
+               function nulling() {              
+                 var element1 = document.getElementById('msg1');  
+
+                 element1.innerHTML = "";                                   
+                 var element2 = document.getElementById('msg2');  
+
+                 element2.innerHTML = "";                                   
+               };   
+                                               
+      </script>  
+        
+  <div data-role="content">
+  
+      <table border="0">
+      <tr>
+      <td><label id = "msg1" style="color: green;  font-size: 20px;"><%=$msg1%></label> </td>
+      </tr>
+     </table>
+      <table border="0">
+      <tr>
+      <td><label id = "msg2" style="color: red;  font-size: 20x;"><%=$msg2%></label> </td>
+      </tr>
+     </table>  
+      <br>
+        <label style="color: #FF4500;  font-size: 20px;"></label> 
+      </br>
+        
+    <ul data-role="listview">
+      <li><a href="<%= url_for :action => :load_Items_0 %>">Обновить журналы инв.</a></li>
+      <li><a href="<%= url_for :action => :show_invent_ %>">Журналы инв.</a></li>              
+    </ul>
+  </div>
+
+</div>

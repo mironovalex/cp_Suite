@@ -1,0 +1,59 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "Back", :action => :show, :id => @tsd_receiptjour.object %>
+    <h1>Edit <%= @tsd_receiptjour.JourId%></h1>
+    <%= link_to "Delete", :action => :delete, :id => @tsd_receiptjour.object %>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @tsd_receiptjour.object %>"/>
+      <table>
+          
+          <tr>
+              <td class="itemLabel">Jourid: </td>
+              <td class="itemValue"><input type="text" name="tsd_receiptjour[JourId]" value="<%= @tsd_receiptjour.JourId %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Inventlocationid: </td>
+              <td class="itemValue"><input type="text" name="tsd_receiptjour[InventLocationId]" value="<%= @tsd_receiptjour.InventLocationId %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Vendid: </td>
+              <td class="itemValue"><input type="text" name="tsd_receiptjour[VendId]" value="<%= @tsd_receiptjour.VendId %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Vendname: </td>
+              <td class="itemValue"><input type="text" name="tsd_receiptjour[VendName]" value="<%= @tsd_receiptjour.VendName %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Shipdate: </td>
+              <td class="itemValue"><input type="text" name="tsd_receiptjour[ShipDate]" value="<%= @tsd_receiptjour.ShipDate %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Overdelivery: </td>
+              <td class="itemValue"><input type="text" name="tsd_receiptjour[OverDelivery]" value="<%= @tsd_receiptjour.OverDelivery %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Deleted: </td>
+              <td class="itemValue"><input type="text" name="tsd_receiptjour[Deleted]" value="<%= @tsd_receiptjour.Deleted %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Imported: </td>
+              <td class="itemValue"><input type="text" name="tsd_receiptjour[Imported]" value="<%= @tsd_receiptjour.Imported %>"/></td>
+          </tr>
+          
+      </table>
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>

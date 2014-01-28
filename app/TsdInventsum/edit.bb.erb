@@ -1,0 +1,49 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "Back", :action => :show, :id => @tsd_inventsum.object %>
+    <h1>Edit <%= @tsd_inventsum.InventLocationId%></h1>
+    <%= link_to "Delete", :action => :delete, :id => @tsd_inventsum.object %>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @tsd_inventsum.object %>"/>
+      <table>
+          
+          <tr>
+              <td class="itemLabel">Inventlocationid: </td>
+              <td class="itemValue"><input type="text" name="tsd_inventsum[InventLocationId]" value="<%= @tsd_inventsum.InventLocationId %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Itemid: </td>
+              <td class="itemValue"><input type="text" name="tsd_inventsum[ItemId]" value="<%= @tsd_inventsum.ItemId %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Inventsizeid: </td>
+              <td class="itemValue"><input type="text" name="tsd_inventsum[InventSizeId]" value="<%= @tsd_inventsum.InventSizeId %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Vendcode: </td>
+              <td class="itemValue"><input type="text" name="tsd_inventsum[VendCode]" value="<%= @tsd_inventsum.VendCode %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Availableqty: </td>
+              <td class="itemValue"><input type="text" name="tsd_inventsum[AvailableQty]" value="<%= @tsd_inventsum.AvailableQty %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Orderedqty: </td>
+              <td class="itemValue"><input type="text" name="tsd_inventsum[OrderedQty]" value="<%= @tsd_inventsum.OrderedQty %>"/></td>
+          </tr>
+          
+      </table>
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>

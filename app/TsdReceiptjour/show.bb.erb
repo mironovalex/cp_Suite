@@ -1,0 +1,55 @@
+<div data-role="page" data-add-back-btn="true">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "Back", :action => :index %>
+    <h1><%= @tsd_receiptjour.JourId %></h1>
+    <%= link_to "Edit", :action => :edit, :id => @tsd_receiptjour.object %>
+  </div>
+
+  <div data-role="content">
+    <table>
+      
+      <tr>
+    	<td class="itemLabel">JourId</td>
+        <td class="itemValue"><%= @tsd_receiptjour.JourId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">InventLocationId</td>
+        <td class="itemValue"><%= @tsd_receiptjour.InventLocationId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">VendId</td>
+        <td class="itemValue"><%= @tsd_receiptjour.VendId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">VendName</td>
+        <td class="itemValue"><%= @tsd_receiptjour.VendName%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">ShipDate</td>
+        <td class="itemValue"><%= @tsd_receiptjour.ShipDate%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">OverDelivery</td>
+        <td class="itemValue"><%= @tsd_receiptjour.OverDelivery%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Deleted</td>
+        <td class="itemValue"><%= @tsd_receiptjour.Deleted%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">Imported</td>
+        <td class="itemValue"><%= @tsd_receiptjour.Imported%></td>
+      </tr>
+      
+    </table>
+  </div>
+
+</div>

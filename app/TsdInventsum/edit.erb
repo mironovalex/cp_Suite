@@ -1,0 +1,51 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>Edit <%= @tsd_inventsum.InventLocationId %></h1>
+    <a href="<%= url_for :action => :show, :id => @tsd_inventsum.object %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+    <a href="<%= url_for :action => :delete, :id => @tsd_inventsum.object %>" class="ui-btn-right" data-icon="delete" data-direction="reverse">
+      Delete
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @tsd_inventsum.object %>"/>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_inventsum[InventLocationId]" class="fieldLabel">Inventlocationid</label>
+            <input type="text" id="tsd_inventsum[InventLocationId]" name="tsd_inventsum[InventLocationId]" value="<%= @tsd_inventsum.InventLocationId %>" <%= placeholder( "Inventlocationid" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_inventsum[ItemId]" class="fieldLabel">Itemid</label>
+            <input type="text" id="tsd_inventsum[ItemId]" name="tsd_inventsum[ItemId]" value="<%= @tsd_inventsum.ItemId %>" <%= placeholder( "Itemid" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_inventsum[InventSizeId]" class="fieldLabel">Inventsizeid</label>
+            <input type="text" id="tsd_inventsum[InventSizeId]" name="tsd_inventsum[InventSizeId]" value="<%= @tsd_inventsum.InventSizeId %>" <%= placeholder( "Inventsizeid" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_inventsum[VendCode]" class="fieldLabel">Vendcode</label>
+            <input type="text" id="tsd_inventsum[VendCode]" name="tsd_inventsum[VendCode]" value="<%= @tsd_inventsum.VendCode %>" <%= placeholder( "Vendcode" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_inventsum[AvailableQty]" class="fieldLabel">Availableqty</label>
+            <input type="text" id="tsd_inventsum[AvailableQty]" name="tsd_inventsum[AvailableQty]" value="<%= @tsd_inventsum.AvailableQty %>" <%= placeholder( "Availableqty" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_inventsum[OrderedQty]" class="fieldLabel">Orderedqty</label>
+            <input type="text" id="tsd_inventsum[OrderedQty]" name="tsd_inventsum[OrderedQty]" value="<%= @tsd_inventsum.OrderedQty %>" <%= placeholder( "Orderedqty" ) %> />
+          </div>
+      
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>

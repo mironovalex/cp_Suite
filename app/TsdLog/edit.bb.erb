@@ -1,0 +1,54 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "Back", :action => :show, :id => @tsd_log.object %>
+    <h1>Edit <%= @tsd_log.UserId%></h1>
+    <%= link_to "Delete", :action => :delete, :id => @tsd_log.object %>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @tsd_log.object %>"/>
+      <table>
+          
+          <tr>
+              <td class="itemLabel">Userid: </td>
+              <td class="itemValue"><input type="text" name="tsd_log[UserId]" value="<%= @tsd_log.UserId %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Inventlocationid: </td>
+              <td class="itemValue"><input type="text" name="tsd_log[InventLocationId]" value="<%= @tsd_log.InventLocationId %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Deviceid: </td>
+              <td class="itemValue"><input type="text" name="tsd_log[DeviceID]" value="<%= @tsd_log.DeviceID %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Date: </td>
+              <td class="itemValue"><input type="text" name="tsd_log[Date]" value="<%= @tsd_log.Date %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Time: </td>
+              <td class="itemValue"><input type="text" name="tsd_log[Time]" value="<%= @tsd_log.Time %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Operation: </td>
+              <td class="itemValue"><input type="text" name="tsd_log[Operation]" value="<%= @tsd_log.Operation %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Comment: </td>
+              <td class="itemValue"><input type="text" name="tsd_log[Comment]" value="<%= @tsd_log.Comment %>"/></td>
+          </tr>
+          
+      </table>
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>

@@ -1,0 +1,41 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>Edit <%= @tsd_inventtable.ItemId %></h1>
+    <a href="<%= url_for :action => :show, :id => @tsd_inventtable.object %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+    <a href="<%= url_for :action => :delete, :id => @tsd_inventtable.object %>" class="ui-btn-right" data-icon="delete" data-direction="reverse">
+      Delete
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @tsd_inventtable.object %>"/>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_inventtable[ItemId]" class="fieldLabel">Itemid</label>
+            <input type="text" id="tsd_inventtable[ItemId]" name="tsd_inventtable[ItemId]" value="<%= @tsd_inventtable.ItemId %>" <%= placeholder( "Itemid" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_inventtable[ItemName]" class="fieldLabel">Itemname</label>
+            <input type="text" id="tsd_inventtable[ItemName]" name="tsd_inventtable[ItemName]" value="<%= @tsd_inventtable.ItemName %>" <%= placeholder( "Itemname" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_inventtable[VendId]" class="fieldLabel">Vendid</label>
+            <input type="text" id="tsd_inventtable[VendId]" name="tsd_inventtable[VendId]" value="<%= @tsd_inventtable.VendId %>" <%= placeholder( "Vendid" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_inventtable[VendName]" class="fieldLabel">Vendname</label>
+            <input type="text" id="tsd_inventtable[VendName]" name="tsd_inventtable[VendName]" value="<%= @tsd_inventtable.VendName %>" <%= placeholder( "Vendname" ) %> />
+          </div>
+      
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>

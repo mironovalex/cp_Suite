@@ -1,0 +1,54 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "Back", :action => :show, :id => @tsd_inventprice.object %>
+    <h1>Edit <%= @tsd_inventprice.InventLocationId%></h1>
+    <%= link_to "Delete", :action => :delete, :id => @tsd_inventprice.object %>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @tsd_inventprice.object %>"/>
+      <table>
+          
+          <tr>
+              <td class="itemLabel">Inventlocationid: </td>
+              <td class="itemValue"><input type="text" name="tsd_inventprice[InventLocationId]" value="<%= @tsd_inventprice.InventLocationId %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Itemid: </td>
+              <td class="itemValue"><input type="text" name="tsd_inventprice[ItemId]" value="<%= @tsd_inventprice.ItemId %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Inventsizeid: </td>
+              <td class="itemValue"><input type="text" name="tsd_inventprice[InventSizeId]" value="<%= @tsd_inventprice.InventSizeId %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Retailprice: </td>
+              <td class="itemValue"><input type="text" name="tsd_inventprice[RetailPrice]" value="<%= @tsd_inventprice.RetailPrice %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Salesprice: </td>
+              <td class="itemValue"><input type="text" name="tsd_inventprice[SalesPrice]" value="<%= @tsd_inventprice.SalesPrice %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Salesdiscount: </td>
+              <td class="itemValue"><input type="text" name="tsd_inventprice[SalesDiscount]" value="<%= @tsd_inventprice.SalesDiscount %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Yellowlabel: </td>
+              <td class="itemValue"><input type="text" name="tsd_inventprice[YellowLabel]" value="<%= @tsd_inventprice.YellowLabel %>"/></td>
+          </tr>
+          
+      </table>
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>

@@ -1,0 +1,452 @@
+<div data-role="page" id = "CI_UNI" data-url="<%= Rho::RhoConfig.start_path %>/">
+
+  <div data-role="header" data-position="inline">
+    <h1 id = "H">
+    <%  if ($mstatus == 'CI_I')  
+          @title = "Введите товар" 
+        end
+       if ($mstatus == 'CI_S')  
+         @title = "Введите размер" 
+      end  
+      if ($mstatus == 'CI_IS')  
+        @title = "Номенклатура" 
+      end  
+      if ($mstatus == 'CI_B')  
+        @title = "В корзину" 
+      end%>             
+  <%= @title%>
+</h1>     
+    
+    <a href="<%=url_for :action => :go_bask %>" class="ui-btn-right" data-icon="star">Меню</a>     
+  </div>  
+
+  <script type="text/javascript">
+  
+    function alarm(){    
+      var snd = new Audio("/public/Error.wav");  snd.play();
+
+#      $.ajax({
+#        type: "GET",                               
+#        url: "<%= url_for :action => :alert %>",
+#        data: {}
+#        } );          
+     };   
+
+      function alarm_(val){
+          generic.PlayWave(val, 1);      
+       };     
+     
+      function msg(val) {   
+        val = utf8(val);
+        
+        var element = document.getElementById('MSGR');           
+        element.innerHTML = val;                                        
+      };
+    
+      function utf8(utftext) {
+          var string = "";
+          var i = 0;
+          var c = c1 = c2 = 0;
+          while ( i < utftext.length ) {
+              c = utftext.charCodeAt(i);
+              if (c < 128) {
+                  string += String.fromCharCode(c);
+                  i++;
+              }
+              else if((c > 191) && (c < 224)) {
+                  c2 = utftext.charCodeAt(i+1);
+                  string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+                  i += 2;
+              }
+              else {
+                  c2 = utftext.charCodeAt(i+1);
+                  c3 = utftext.charCodeAt(i+2);
+                  string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+                  i += 3;
+              }
+          }
+          return string;
+      };    
+    
+  function TO_S() {
+    null_val();
+  
+    var element00 = document.getElementById('H');
+    element00.innerHTML = "Введите размер";  
+
+    var element01 = document.getElementById('B');
+    element01.style.visibility = 'hidden';
+    element01.style.display = 'none'; 
+          
+    var element0 = document.getElementById('I');
+    element0.style.visibility = 'hidden';
+    element0.style.display = 'none';   
+    
+    var element = document.getElementById('IS');
+    element.style.visibility = 'hidden';
+    element.style.display = 'none';     
+    
+    var element1 = document.getElementById('S');
+    element1.style.visibility = '';
+    element1.style.display = 'inline';  
+        
+    var element2 = document.getElementById('SIZE');
+    element2.select();
+    element2.focus();  
+  };
+   
+  function TO_IS() {  
+        null_val();
+      
+        var element01 = document.getElementById('B');
+        element01.style.visibility = 'hidden';
+        element01.style.display = 'none'; 
+            
+        var element00 = document.getElementById('H');
+        element00.innerHTML = "Позиция";  
+    
+        var element0 = document.getElementById('I');
+        element0.style.visibility = 'hidden';
+        element0.style.display = 'none';   
+        
+        var element = document.getElementById('S');
+        element.style.visibility = 'hidden';
+        element.style.display = 'none';     
+        
+        var element1 = document.getElementById('IS');
+        element1.style.visibility = '';
+        element1.style.display = 'inline';         
+  };  
+
+      function TO_I() {      
+            var element00 = document.getElementById('H');
+            element00.innerHTML = "Введите товар";          
+      
+            var element01 = document.getElementById('B');
+            element01.style.visibility = 'hidden';
+            element01.style.display = 'none'; 
+                    
+            var element0 = document.getElementById('S');
+            element0.style.visibility = 'hidden';
+            element0.style.display = 'none';   
+            
+            var element = document.getElementById('IS');
+            element.style.visibility = 'hidden';
+            element.style.display = 'none';     
+            
+            var element1 = document.getElementById('I');
+            element1.style.visibility = '';
+            element1.style.display = 'inline';  
+                
+            var element2 = document.getElementById('SH');
+            element2.select();
+            element2.focus();   
+      };   
+    
+            function TO_B() {      
+                  var element00 = document.getElementById('H');
+                  element00.innerHTML = "В корзину";          
+            
+                  var element01 = document.getElementById('I');
+                  element01.style.visibility = 'hidden';
+                  element01.style.display = 'none'; 
+                          
+                  var element0 = document.getElementById('I');
+                  element0.style.visibility = 'hidden';
+                  element0.style.display = 'none';   
+                  
+                  var element = document.getElementById('IS');
+                  element.style.visibility = 'hidden';
+                  element.style.display = 'none';     
+                  
+                  var element1 = document.getElementById('B');
+                  element1.style.visibility = '';
+                  element1.style.display = 'inline';  
+                      
+                  var element2 = document.getElementById('COUNT');
+                  element2.select();
+                  element2.focus();   
+                  element2.value = '1'
+            };  
+        
+  function form_focus() {
+    var element = document.getElementById('SH');
+    element.select();
+    element.focus();
+  }        
+
+  function null_val() {
+    var element1 = document.getElementById('SH');
+    element1.value = '';
+    var element2 = document.getElementById('CODE');
+    element2.value = '';
+    var element3 = document.getElementById('SIZE');
+    element3.value = '';  
+    var element4 = document.getElementById('MSG');
+    element4.innerHTML = '';    
+  }   
+        
+     
+  function inpitem() { 
+    var element1 = document.getElementById('SH');
+    var element2 = document.getElementById('CODE');  
+    var element3 = document.getElementById('SIZE');  
+      
+    $.ajax({
+      type: "GET",                               
+      url: "<%= url_for :action => :item_show %>",
+      data: {SH : element1.value, CODE : element2.value, SIZE : element3.value}
+      } );   
+     
+  }   
+
+        function inpsize() { 
+          var element = document.getElementById('SIZE');
+        
+          $.ajax({
+            type: "GET",                               
+            url: "<%= url_for :action => :input_size %>",
+            data: {SIZE : element.value}
+            } );   
+           
+        }  
+
+function inpcount() { 
+  var element = document.getElementById('COUNT');
+
+  $.ajax({
+    type: "GET",                               
+    url: "<%= url_for :action => :basketadd %>",
+    data: {COUNT : element.value}
+    } );   
+   
+}         
+            
+$('[data-role=page]').live('pageshow', function (event) {
+  setTimeout(function() {   
+    $('input:not(:hidden):first').focus();
+    $('input:not(:hidden):first').select();
+   }, 1);   
+});
+
+        function SH(val) {
+          var element = document.getElementById('SH');
+          element.value = utf8(val);
+          element.focus();
+          element.select();
+        }
+    
+        function ItemName(val) {
+          var element = document.getElementById('ItemName');
+          element.style.overflow = "hidden";
+          element.innerHTML = "<NOBR>" + utf8(val) + "</NOBR>";
+        }
+
+        function VendName_(val) {     
+          var element = document.getElementById('VendName_');
+          element.style.overflow = "hidden";
+          element.innerHTML = "<NOBR>" + utf8(val) + "</NOBR>";
+        }
+       
+        function RetailPrice(val) {
+          var element = document.getElementById('RetailPrice');
+          element.innerHTML = utf8(val);
+        }
+       
+        function VendCode(val) {
+          var element = document.getElementById('VendCode');
+          element.style.overflow = "hidden";
+          element.innerHTML = "<NOBR>" + utf8(val) + "</NOBR>";
+        }
+       
+        function ItemId(val) {
+          var element = document.getElementById('ItemId');
+          element.innerHTML = "<NOBR>" + utf8(val) + "</NOBR>";
+        }
+       
+        function InventSizeId(val) {
+          var element = document.getElementById('InventSizeId');
+          element.innerHTML = "<NOBR>" + utf8(val) + "</NOBR>";
+        }
+       
+        function VendId(val) {
+          var element = document.getElementById('VendId');
+          element.innerHTML = "<NOBR>" + utf8(val) + "</NOBR>";
+        }
+       
+        function SalesPrice(val) {
+          var element = document.getElementById('SalesPrice');
+          element.innerHTML = utf8(val);
+        }
+       
+        function SalesDiscount(val) {
+          var element = document.getElementById('SalesDiscount');
+          element.innerHTML = utf8(val) + "%";
+        }
+       
+        function AvailableQty(val) {
+          var element = document.getElementById('AvailableQty');
+          element.innerHTML = utf8(val);
+        }
+       
+        function OrderedQty(val) {
+          var element = document.getElementById('OrderedQty');
+          element.innerHTML = utf8(val);
+        }
+       
+      $("#CI_UNI").keyup(function(event) {  
+        if(event.keyCode==13){            
+          //var element = document.getElementById('I');        
+          //if (element.style.visibility == '') {inpitem(); return false;};    
+          //element = document.getElementById('S');                        
+          //if (element.style.visibility == '') {inpsize(); return false;};  
+          var element = document.getElementById('IS');                        
+          if (element.style.visibility == '') {inpitem(); return false;};  
+          element = document.getElementById('B');                        
+          if (element.style.visibility == '') {inpcount(); return false;};   
+        } 
+        
+          if(event.keyCode==27){ //alert('Jo');           
+            $.ajax({        
+            type: "GET",                               
+            url: "<%= url_for :action => :go_bask_2 %>",
+            data: {}
+            } );    
+          }                 
+         
+       });  
+        
+        function cancel() {  
+          $.get('/app/ChkItem/cancel', {});        
+        };
+                
+</script>    
+
+
+<!-- Форма выбора товара -->  
+
+
+       
+ <!-- Форма выбора размера -->  
+
+
+ 
+<!-- Информация о товаре -->  
+ 
+<div id = "IS" data-role="content">
+
+           <table border="0">
+           <tr>
+           <td>
+           <div class="itemValue" id="MSGR" style="color: #FF4500;  font-size: 20px; text-align: center;"></div>
+           </td>
+           </tr> 
+           </table>
+
+           <table border="0" height = "40px">
+           <tr>
+           <td  width = "300px" style="min-width:300px; max-width:300px">     
+              
+             <table border="0"  height = "20px">
+             <tr height = "20px">   
+               <td width = "80px" height = "20px" style="min-width:80px; max-width:80px">Штрих-код:</td>
+               <td width = "220px" height = "20px" style="min-width:220px; max-width:220px"><input type="text" id="SH" name="SH" 
+                 class = "ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow ui-input-text ui-body-c ui-corner-all ui-shadow-insert ui-btn-hover-undefined" 
+                 style="line-height:0px; height:10pt; font-size: 9pt; width:220px; background: #FFFFFF; color: #000000; margin-left:0px; padding:0px; margin:0px;"></td>              
+             </tr> 
+             </table>
+                              
+             <table border="0"  height = "20px">
+             <tr height = "20px">
+               <td width = "80px" height = "20px" style="min-width:80px; max-width:80px">Артикул(Р):</td>               
+               <td width = "150px" height = "20px" style="min-width:150px; max-width:150px"><input type="text" id="CODE" name="CODE" 
+                 class = "ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow ui-input-text ui-body-c ui-corner-all ui-shadow-insert ui-btn-hover-undefined" 
+                 style="line-height:0px; height:10pt; font-size: 9pt; width:150px; background: #FFFFFF; color: #000000; margin-left:0px; padding:0px; margin:0px;"></td>
+               <td width = "70px" height = "20px" style="min-width:70px; max-width:70px"><input type="text" id="SIZE" name="SIZE" 
+                 class = "ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow ui-input-text ui-body-c ui-corner-all ui-shadow-insert ui-btn-hover-undefined" 
+                 style="line-height:0px; height:10pt; font-size: 9pt; width:70px; background: #FFFFFF; color: #000000; margin-left:0px; padding:0px; margin:0px;"></td>                                                                 
+             </tr> 
+             </table>    
+            </td>
+            </tr> 
+            </table> 
+
+
+
+           
+           <table border="0">
+           <tr>
+           <td  width = "70px" style="min-width:70px; max-width:70px">Код:
+             <NOBR><td id = "VendId" style="color: #FFCC00; min-width:90px; max-width:90px;" width = "90px"><%= $VendId%></td></NOBR>
+           </td>
+           <td  width = "70px" style="min-width:70px; max-width:70px" >Размер:
+             <NOBR><td id = "InventSizeId" style="color: #FFCC00; min-width:90px; max-width:90px;" width = "90px"><%= $InventSizeId%></td><NOBR>
+           </td>
+           </tr>
+           <table>
+
+           <table border="0">
+           <tr>
+             <td width = "70px" style="min-width:70px; max-width:70px">Наим-ие:
+             <NOBR><td id = "ItemName" style="color: #FFCC00;min-width:250px; max-width:250px;" width = "250px"><%= $ItemName%></td></NOBR>
+           </td>
+           </tr> 
+           </table> 
+           
+           <table border="0">
+           <tr>
+           <td  width = "160px" style="min-width:160px; max-width:160px">Поставщик:</td>
+           <td  width = "160px" style="min-width:160px; max-width:160px">Артикулы поставщика:</td>
+           </tr>
+           <tr>
+           <NOBR><td id = "VendName_" style="color: #FFCC00;min-width:160px; max-width:160px" width = "160px"><%= $VendName%></td></NOBR>
+           <NOBR><td id = "VendCode" style="color: #FFCC00;min-width:160px; max-width:160px"  width = "160px"><%= $VendCode%></td></NOBR>
+           </tr>
+           </table> 
+           
+           <table border="0">           
+           <tr>
+           <td  width = "70px" style="min-width:70px; max-width:70px">Прайс:
+             <td id = "RetailPrice" style="color: #FFCC00;min-width:90px; max-width:90px"  width = "90px"><%= $RetailPrice%></td>
+           </td>
+           <td  width = "70px" style="min-width:70px; max-width:70px">Остаток:
+             <td id = "AvailableQty" style="color: #FFCC00;min-width:90px; max-width:90px"  width = "90px"><%= $AvailableQty%></td>
+           </td>
+           </tr>
+           <tr>
+           <td  width = "70px" style="min-width:70px; max-width:70px">Цена:
+             <td id = "SalesPrice" style="color: #FFCC00;min-width:90px; max-width:90px"  width = "90px"><%= $SalesPrice%></td>
+           </td>
+           <td  width = "70px" style="min-width:70px; max-width:70px">Заказано:
+             <td id = "OrderedQty" style="color: #FFCC00;min-width:90px; max-width:90px"  width = "90px"><%= $OrderedQty%></td>
+           </td>           
+           </tr>
+           <tr>
+           <td  width = "70px" style="min-width:70px; max-width:70px">Скидка:
+              <td id = "SalesDiscount" style="color: #FFCC00;min-width:90px; max-width:90px"  width = "90px"><%= $SalesDiscount%></td>
+           </td>        
+           </tr>
+           <table>  
+                                                      
+           <table border="0">
+           <tr>
+           <td  width = "160px" style="min-width:160px; max-width:160px"><input type="button" value="Далее..." onclick="TO_I()"/></td>
+           <td  width = "160px" style="min-width:160px; max-width:160px"><input type="button" value="В корзину" onclick="TO_B()"/></td>
+           </tr>
+           </table>      
+           
+   </div> 
+
+           <div id = "B"  style="visibility: hidden; display: none;" data-role="content">
+               <div data-role="fieldcontain">
+               
+                 <label for="COUNT" class="itemLabel">Кол-во:</label>
+                 <input type="text" id="COUNT" name="COUNT" value = "1" class="itemValue"/>      
+                 
+               </div>
+               <input type="button" value="Ввод" onclick="inpcount()"/>
+               <input type="button" value="Отмена" onclick="TO_IS()"/>
+           </div>   
+   
+
+</div>

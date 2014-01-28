@@ -1,0 +1,51 @@
+<div data-role="page" id="SMB" data-url="<%= Rho::RhoConfig.start_path %>/">
+
+  <div data-role="header" data-position="inline">
+    <h1>Корзина</h1> 
+    <a href="<%= url_for :controller => :MainMenu ,:action => :main_menu %>" class="ui-btn-right" data-icon="back">Завершить</a>   
+  </div>
+       
+      <script type="text/javascript">   
+      
+      $("#SMB").keyup(function(event) {  
+       if(event.keyCode==27){ //alert('Jo');           
+         $.ajax({        
+         type: "GET",                               
+         url: "<%= url_for :action => :main_menu_2 %>",
+         data: {}
+         } );    
+       }});       
+      
+        $('[data-role=page]').live('pageshow', function (event) {
+          setTimeout(function() {   
+            $("#SMB").focus();
+           }, 1);   
+        });
+               
+      </script>    
+   
+  <div data-role="content">
+  
+      <table border="0">
+      <tr>
+      <td><label style="color: green;  font-size: 20px;"><%=$msg1%></label> </td>
+      </tr>
+     </table>
+      <table border="0">
+      <tr>
+      <td><label style="color: red;  font-size: 20x;"><%=$msg2%></label> </td>
+      </tr>
+     </table>  
+      <br>
+        <label style="color: #FF4500;  font-size: 20px;"></label> 
+      </br>
+      
+    <ul data-role="listview">
+      <li><a href="<%= url_for :action => :basketfill %>">Очистка корзины</a></li>
+      <li><a href="<%= url_for :controller => ChkItem, :action => :CI_UNI %>">Добавить товар</a></li>    
+      <li><a href="<%= url_for :action => :edit_basket %>">Изменить</a></li>   
+      <li><a href="<%= url_for :action => :basket_upload %>">Выгрузить данные</a></li>         
+    </ul>
+  </div>
+
+</div>

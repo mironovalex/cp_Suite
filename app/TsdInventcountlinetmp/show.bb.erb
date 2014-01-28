@@ -1,0 +1,40 @@
+<div data-role="page" data-add-back-btn="true">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "Back", :action => :index %>
+    <h1><%= @tsd_inventcountlinetmp.JourId %></h1>
+    <%= link_to "Edit", :action => :edit, :id => @tsd_inventcountlinetmp.object %>
+  </div>
+
+  <div data-role="content">
+    <table>
+      
+      <tr>
+    	<td class="itemLabel">JourId</td>
+        <td class="itemValue"><%= @tsd_inventcountlinetmp.JourId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">ItemBarCode</td>
+        <td class="itemValue"><%= @tsd_inventcountlinetmp.ItemBarCode%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">ItemId</td>
+        <td class="itemValue"><%= @tsd_inventcountlinetmp.ItemId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">InventSizeId</td>
+        <td class="itemValue"><%= @tsd_inventcountlinetmp.InventSizeId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">CountedQty</td>
+        <td class="itemValue"><%= @tsd_inventcountlinetmp.CountedQty%></td>
+      </tr>
+      
+    </table>
+  </div>
+
+</div>

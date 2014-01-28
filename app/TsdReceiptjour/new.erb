@@ -1,0 +1,60 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>New <%= @tsd_receiptjour.title %></h1>
+    <a href="<%= url_for :action => :index %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :create %>">
+      <input type="hidden" name="id" value="<%= @tsd_receiptjour.object %>"/>
+
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_receiptjour[JourId]" class="fieldLabel">Jourid</label>
+            <input type="text" id="tsd_receiptjour[JourId]" name="tsd_receiptjour[JourId]" <%= placeholder("Jourid") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_receiptjour[InventLocationId]" class="fieldLabel">Inventlocationid</label>
+            <input type="text" id="tsd_receiptjour[InventLocationId]" name="tsd_receiptjour[InventLocationId]" <%= placeholder("Inventlocationid") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_receiptjour[VendId]" class="fieldLabel">Vendid</label>
+            <input type="text" id="tsd_receiptjour[VendId]" name="tsd_receiptjour[VendId]" <%= placeholder("Vendid") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_receiptjour[VendName]" class="fieldLabel">Vendname</label>
+            <input type="text" id="tsd_receiptjour[VendName]" name="tsd_receiptjour[VendName]" <%= placeholder("Vendname") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_receiptjour[ShipDate]" class="fieldLabel">Shipdate</label>
+            <input type="text" id="tsd_receiptjour[ShipDate]" name="tsd_receiptjour[ShipDate]" <%= placeholder("Shipdate") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_receiptjour[OverDelivery]" class="fieldLabel">Overdelivery</label>
+            <input type="text" id="tsd_receiptjour[OverDelivery]" name="tsd_receiptjour[OverDelivery]" <%= placeholder("Overdelivery") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_receiptjour[Deleted]" class="fieldLabel">Deleted</label>
+            <input type="text" id="tsd_receiptjour[Deleted]" name="tsd_receiptjour[Deleted]" <%= placeholder("Deleted") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_receiptjour[Imported]" class="fieldLabel">Imported</label>
+            <input type="text" id="tsd_receiptjour[Imported]" name="tsd_receiptjour[Imported]" <%= placeholder("Imported") %> />
+          </div>
+      
+
+      <input type="submit" value="Create"/>
+    </form>
+  </div>
+
+</div>

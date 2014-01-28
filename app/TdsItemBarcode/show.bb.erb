@@ -1,0 +1,30 @@
+<div data-role="page" data-add-back-btn="true">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "Back", :action => :index %>
+    <h1><%= @tdsitembarcode.ItemId %></h1>
+    <%= link_to "Edit", :action => :edit, :id => @tdsitembarcode.object %>
+  </div>
+
+  <div data-role="content">
+    <table>
+      
+      <tr>
+    	<td class="itemLabel">ItemId</td>
+        <td class="itemValue"><%= @tdsitembarcode.ItemId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">InventSizeId</td>
+        <td class="itemValue"><%= @tdsitembarcode.InventSizeId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">ItemBarCode</td>
+        <td class="itemValue"><%= @tdsitembarcode.ItemBarCode%></td>
+      </tr>
+      
+    </table>
+  </div>
+
+</div>

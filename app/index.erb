@@ -1,0 +1,76 @@
+<div data-role="page" id="page" data-url="<%= Rho::RhoConfig.start_path %>/">
+
+  <div data-role="header" data-position="inline">
+    <h1>Регистрация</h1>
+    <a href="<%= url_for :controller => :Settings ,:action => :exit %>" class="ui-btn-right" data-icon="star">Выход</a>     
+  </div>   
+      
+      <script type="text/javascript">                
+      
+      
+      $(document).keyup(function(event) {
+        if(event.keyCode==13){ //alert('Jo');       
+          $.ajax({
+          type: "GET",                               
+          url: "<%= url_for :controller => :Auto, :action => :sync_one %>",
+          data: {}
+          } ); }
+        }); 
+     
+       function GoToInpLocation() {
+         $.ajax({
+         type: "GET",                               
+         url: "<%= url_for :controller => :Auto, :action => :inp_location %>",
+         data: {}
+         } );           
+       };
+     
+       function sync(){ 
+                $.ajax({
+                type: "GET",                               
+                url: "<%= url_for :controller => :Auto, :action => :Sync_ %>",
+                data: {}
+                } );         
+         };
+
+       function resetdb(){ 
+                $.ajax({
+                type: "GET",                               
+                url: "<%= url_for :controller => :Auto, :action => :resetdb %>",
+                data: {}
+                } );         
+         };         
+                                
+         $('[data-role=page]').live('pageshow', function (event) {           
+           var element = document.getElementById('BTN'); 
+           element.select();    
+           element.focus();                        
+         });                                   
+         
+       function onEnter(){ 
+                $.ajax({
+                type: "GET",                               
+                url: "<%= url_for :controller => :Auto, :action => :sync_one %>",
+                data: {}
+                } );         
+         };         
+         
+       function alarm(){var snd = new Audio("/public/Error.wav");   snd.play();}               
+         
+      </script>   
+  
+<div data-role="content">
+  <form method="GET" action="<%= url_for :controller => :Auto, :action => :sync_one %>">  
+    <div data-role="fieldcontain">
+    
+      <label for="PIN" class="itemLabel">Приветствуем Вас в cистеме</label>
+    </div>
+    <input type="submit" button type="submit" id="BTN" value="Далее"/>
+  </form>
+
+        <input type="submit" button type="submit" id="BTN" onclick="resetdb();" value="Очистить БД"/>    
+
+</div>
+
+
+</div>

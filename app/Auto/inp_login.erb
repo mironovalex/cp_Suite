@@ -1,0 +1,66 @@
+<div data-role="page" data-url="<%= Rho::RhoConfig.start_path %>/">
+
+  <div data-role="header" data-position="inline">    
+    <h1>Пользователь</h1>  
+    <label style="color: #FFFFFF;  font-size: 16px; text-align: center;"><%=$chk_loc_name%></label> 
+  </div>    
+    
+<script type="text/javascript">     
+    
+    //$(document).keyup(function(event) {
+    //if(event.keyCode==13){ //alert('Jo');       
+    //  $.ajax({        
+    //  type: "GET",                               
+    //  url: "<%= url_for :action => :user_check_ %>",
+    //  data: {}
+    //  } ); }
+    //}); 
+
+    $('[data-role=page]').live('pageshow', function (event) {
+      $('input:not(:hidden):first').focus();
+    });  
+    
+    function get_chk_value() {
+      var element1 = document.getElementById('USER1');
+      var element2 = document.getElementById('USER2');
+      $.get('/app/Auto/chech_user', {chk_val1: element1.value, chk_val2: element2.value});       
+    }  
+
+</script>    
+  
+<div data-role="content">
+  <form method="GET" action="<%= url_for :action => :user_check %>">
+  
+    <label style="color: #FF4500;  font-size: 20px; text-align: center;"><%=$msg%></label> 
+    <div data-role="fieldcontain">
+    
+      <label for="USER1" class="itemLabel">Имя:</label>
+      <select size="1" name="USER1" id="USER1">   
+     
+        <%  @TsdUserinfos = TsdUserinfo.find(:all,
+          :conditions => { 
+          {
+          :name => "InventLocationId", 
+          :op => "IN" 
+          } => @chk_location
+         } )   
+
+        @TsdUserinfos.each do |user| %>
+  
+        <option style="background: #FF4500"  value="<%= user.UserName %>" ><%= user.UserName %></option>
+  
+        <%end%>
+    
+        </select>    
+    
+      <label for="USER2" class="itemLabel">Ручной ввод:</label>
+      <input type="text" id="USER2" name="USER2" class="itemValue"/>
+        
+    </div>
+    
+    
+    <input type="submit" value="Ввод"/>
+  </form>
+</div>
+
+</div>

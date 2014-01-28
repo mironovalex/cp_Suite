@@ -1,0 +1,50 @@
+<div data-role="page" data-add-back-btn="true">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "Back", :action => :index %>
+    <h1><%= @tsd_inventprice.InventLocationId %></h1>
+    <%= link_to "Edit", :action => :edit, :id => @tsd_inventprice.object %>
+  </div>
+
+  <div data-role="content">
+    <table>
+      
+      <tr>
+    	<td class="itemLabel">InventLocationId</td>
+        <td class="itemValue"><%= @tsd_inventprice.InventLocationId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">ItemId</td>
+        <td class="itemValue"><%= @tsd_inventprice.ItemId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">InventSizeId</td>
+        <td class="itemValue"><%= @tsd_inventprice.InventSizeId%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">RetailPrice</td>
+        <td class="itemValue"><%= @tsd_inventprice.RetailPrice%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">SalesPrice</td>
+        <td class="itemValue"><%= @tsd_inventprice.SalesPrice%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">SalesDiscount</td>
+        <td class="itemValue"><%= @tsd_inventprice.SalesDiscount%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">YellowLabel</td>
+        <td class="itemValue"><%= @tsd_inventprice.YellowLabel%></td>
+      </tr>
+      
+    </table>
+  </div>
+
+</div>

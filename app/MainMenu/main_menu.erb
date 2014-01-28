@@ -1,0 +1,61 @@
+<div data-role="page" id = "mainpage" data-url="<%= Rho::RhoConfig.start_path %>/">
+
+  <div data-role="header" data-position="inline">
+    <h1>Главное меню</h1> 
+    <a href="<%= url_for :action => :unlogin %>" class="ui-btn-right" data-icon="star">Выход</a>  
+  </div>      
+       
+      <script type="text/javascript">           
+
+       function item_load(){ 
+                $.ajax({
+                type: "GET",                               
+                url: "<%= url_for :controller => :MainMenu, :action => :item_sync %>",
+                data: {}
+                } );         
+         };
+                             
+            $("#mainpage").keyup(function(event) {      
+              if(event.keyCode==27){  //alert('jooo');                           
+                $.ajax({        
+                type: "GET",                               
+                url: "<%= url_for :action => :unlogin %>",
+                data: {}
+                } );               
+              }                  
+              });           
+             
+              $('[data-role=page]').live('pageshow', function (event) {
+                setTimeout(function() {   
+                  $("#mainpage").focus();
+                 }, 1);   
+              });                  
+                   
+      </script>  
+      
+        
+  <div data-role="content">
+      <table border="0">
+      <tr>
+      <td><label style="color: green;  font-size: 20px;"><%=$msg1%></label> </td>
+      </tr>
+     </table>
+      <table border="0">
+      <tr>
+      <td><label style="color: red;  font-size: 20x;"><%=$msg2%></label> </td>
+      </tr>
+     </table>  
+      <br>
+        <label style="color: #FF4500;  font-size: 20px;"></label> 
+      </br>
+      
+    <ul data-role="listview">
+      <li><a href="<%= url_for :action => :chk_item_work %>">Проверка товара</a></li>
+      <li><a href="<%= url_for :action => :basket_work %>">Корзина</a></li>   
+      <li><a href="<%= url_for :action => :receipt %>">Приемка</a></li>    
+      <li><a href="<%= url_for :action => :invent %>">Инвентаризация</a></li>         
+      <li><a href="<%= url_for :action => :item_sync %>">Обновить справочник товаров</a></li>        
+    </ul>
+  </div>
+
+</div>

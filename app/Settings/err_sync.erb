@@ -1,0 +1,12 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>Ошибка синхр.</h1>
+    <a href="<%= Rho::RhoConfig.start_path %>" class="ui-btn-right" data-icon="star">Назад</a>  
+  </div>
+
+  <div data-role="content">
+        <div class="error-message"><%= @params['msg'] %></div>
+  </div>
+
+</div>

@@ -1,0 +1,54 @@
+<div data-role="page" data-add-back-btn="false">
+
+  <div data-role="header" data-position="inline">
+    <h1><%= @tsd_log.UserId %></h1>
+    <a href="<%= url_for :action => :index %>" class="ui-btn-left" data-icon="arrow-l" data-direction="reverse">
+      Back
+    </a>
+    <a href="<%= url_for :action => :edit, :id => @tsd_log.object %>" class="ui-btn-right" data-icon="star">
+      Edit
+    </a>
+  </div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      
+          <li>
+            <div class="itemLabel">UserId</div>
+            <div class="itemValue"><%= @tsd_log.UserId %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">InventLocationId</div>
+            <div class="itemValue"><%= @tsd_log.InventLocationId %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">DeviceID</div>
+            <div class="itemValue"><%= @tsd_log.DeviceID %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">Date</div>
+            <div class="itemValue"><%= @tsd_log.Date %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">Time</div>
+            <div class="itemValue"><%= @tsd_log.Time %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">Operation</div>
+            <div class="itemValue"><%= @tsd_log.Operation %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">Comment</div>
+            <div class="itemValue"><%= @tsd_log.Comment %></div>
+          </li>
+      
+    </ul>
+  </div>
+
+</div>

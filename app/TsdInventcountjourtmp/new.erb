@@ -1,0 +1,50 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>New <%= @tsd_inventcountjourtmp.title %></h1>
+    <a href="<%= url_for :action => :index %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :create %>">
+      <input type="hidden" name="id" value="<%= @tsd_inventcountjourtmp.object %>"/>
+
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_inventcountjourtmp[JourId]" class="fieldLabel">Jourid</label>
+            <input type="text" id="tsd_inventcountjourtmp[JourId]" name="tsd_inventcountjourtmp[JourId]" <%= placeholder("Jourid") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_inventcountjourtmp[InventLocationId]" class="fieldLabel">Inventlocationid</label>
+            <input type="text" id="tsd_inventcountjourtmp[InventLocationId]" name="tsd_inventcountjourtmp[InventLocationId]" <%= placeholder("Inventlocationid") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_inventcountjourtmp[JourDescription]" class="fieldLabel">Jourdescription</label>
+            <input type="text" id="tsd_inventcountjourtmp[JourDescription]" name="tsd_inventcountjourtmp[JourDescription]" <%= placeholder("Jourdescription") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_inventcountjourtmp[JourDate]" class="fieldLabel">Jourdate</label>
+            <input type="text" id="tsd_inventcountjourtmp[JourDate]" name="tsd_inventcountjourtmp[JourDate]" <%= placeholder("Jourdate") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_inventcountjourtmp[Deleted]" class="fieldLabel">Deleted</label>
+            <input type="text" id="tsd_inventcountjourtmp[Deleted]" name="tsd_inventcountjourtmp[Deleted]" <%= placeholder("Deleted") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="tsd_inventcountjourtmp[Imported]" class="fieldLabel">Imported</label>
+            <input type="text" id="tsd_inventcountjourtmp[Imported]" name="tsd_inventcountjourtmp[Imported]" <%= placeholder("Imported") %> />
+          </div>
+      
+
+      <input type="submit" value="Create"/>
+    </form>
+  </div>
+
+</div>
