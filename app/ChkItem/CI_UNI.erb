@@ -25,11 +25,11 @@
     function alarm(){    
       var snd = new Audio("/public/Error.wav");  snd.play();
 
-#      $.ajax({
-#        type: "GET",                               
-#        url: "<%= url_for :action => :alert %>",
-#        data: {}
-#        } );          
+//      $.ajax({
+//        type: "GET",                               
+//        url: "<%= url_for :action => :alert %>",
+//        data: {}
+//        } );          
      };   
 
       function alarm_(val){
@@ -105,13 +105,13 @@
         var element00 = document.getElementById('H');
         element00.innerHTML = "Позиция";  
     
-        var element0 = document.getElementById('I');
-        element0.style.visibility = 'hidden';
-        element0.style.display = 'none';   
+        //var element0 = document.getElementById('I');
+        //element0.style.visibility = 'hidden';
+        //element0.style.display = 'none';   
         
-        var element = document.getElementById('S');
-        element.style.visibility = 'hidden';
-        element.style.display = 'none';     
+        //var element = document.getElementById('S');
+        //element.style.visibility = 'hidden';
+        //element.style.display = 'none';     
         
         var element1 = document.getElementById('IS');
         element1.style.visibility = '';
@@ -147,13 +147,13 @@
                   var element00 = document.getElementById('H');
                   element00.innerHTML = "В корзину";          
             
-                  var element01 = document.getElementById('I');
-                  element01.style.visibility = 'hidden';
-                  element01.style.display = 'none'; 
+                  //var element01 = document.getElementById('I');
+                  //element01.style.visibility = 'hidden';
+                  //element01.style.display = 'none'; 
                           
-                  var element0 = document.getElementById('I');
-                  element0.style.visibility = 'hidden';
-                  element0.style.display = 'none';   
+                  //var element0 = document.getElementById('I');
+                  //element0.style.visibility = 'hidden';
+                  //element0.style.display = 'none';   
                   
                   var element = document.getElementById('IS');
                   element.style.visibility = 'hidden';
@@ -182,7 +182,7 @@
     element2.value = '';
     var element3 = document.getElementById('SIZE');
     element3.value = '';  
-    var element4 = document.getElementById('MSG');
+    var element4 = document.getElementById('MSGR');
     element4.innerHTML = '';    
   }   
         

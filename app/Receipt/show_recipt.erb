@@ -1,7 +1,7 @@
 <div data-role="page" id="SR">
 
   <div data-role="header" data-position="inline">
-    <h1>З-зы <%=$DateOrder%></h1>
+    <h1>З-зы <%=$DateOrder[8..9].to_s() + "." + $DateOrder[5..6].to_s() + "." + $DateOrder[0..3].to_s()%></h1>
       <a href="<%= url_for :action => :main_menu_ %>" class="ui-btn-right">Назад</a> 
       <a href="<%= url_for :action => :load_Items_0 %>" class="ui-btn-left">Обновить</a> 
           

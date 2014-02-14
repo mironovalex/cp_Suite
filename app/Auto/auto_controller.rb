@@ -51,7 +51,7 @@ end
   # Открытие формы
   def inp_location                 
     #SyncEngine.enable_status_popup(true)
-    SyncEngine.set_pagesize(10000)
+    SyncEngine.set_pagesize(5000)
     
     $sync_control = ""
     $sync_err = "0"

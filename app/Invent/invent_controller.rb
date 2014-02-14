@@ -834,9 +834,9 @@ end
        })        
       	
 	count = "0"
-#	@TsdInventcountlineselects.each do |row|
-#	  count = count.to_i + row.CountedQty.to_i
-#	end 
+	@TsdInventcountlineselects.each do |row|
+	  count = count.to_i + row.CountedQty.to_i
+	end 
 	
 	
 #         Alert.show_popup(
@@ -845,9 +845,9 @@ end
 #             :buttons => ["Ok"]
 #          ) 	
       
-	if (@TsdInventcountjourselects.Imported == "1")
-	  count = "1"
-	end
+#	if (@TsdInventcountjourselects.Imported == "1")
+#	  count = "1"
+#	end
 	
 	# ранее выгружен
 	if (count.to_i > 0)
@@ -1027,6 +1027,9 @@ end
     $msg = ""
     $msg1 = ""
     $msg2 = ""
+    
+    $po_cycle_check = "0"
+    $in_cycle_check = "0"  
     
     WebView.execute_js("nulling();") 
     

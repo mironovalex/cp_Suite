@@ -836,9 +836,9 @@ end
       ) 		  
 	   
 	count = "0"
-#	@TsdReceiptlineselects.each do |row|
-#	  count = count.to_i + row.ReceivedQty.to_i
-#	end  	
+	@TsdReceiptlineselects.each do |row|
+	  count = count.to_i + row.ReceivedQty.to_i
+	end  	
 	
 #    Alert.show_popup(
 #        :message=>  @TsdReceiptjourselects,
@@ -846,9 +846,9 @@ end
 #        :buttons => ["Ok"]
 #     )  	
 	
-	if (@TsdReceiptjourselects.Imported == "1")
-	  count = "1"
-	end
+#	if (@TsdReceiptjourselects.Imported == "1")
+#	  count = "1"
+#	end
 	  
 	
 	# ранее выгружен
@@ -1052,6 +1052,9 @@ end
     $msg = ""
     $msg1 = ""
     $msg2 = ""
+    
+    $po_cycle_check = "0"
+    $in_cycle_check = "0"  
     
     WebView.execute_js("nulling();") 
     ##WebView.navigate(url_for(:action => :inp_item)) 
