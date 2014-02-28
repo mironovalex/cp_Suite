@@ -1,3 +1,5 @@
+# coding: utf-8
+
 class TsdReceiptjourselect < SourceAdapter
   def initialize(source) 
     f = File.new(Dir.pwd + "/settings/config.txt")
@@ -78,6 +80,23 @@ class TsdReceiptjourselect < SourceAdapter
 #    end      
 
     if (params['param2'] == nil)
+      
+      par = params['param1'].to_s
+      
+      puts "***********************************"
+      puts params['param1'].to_s.size
+      puts params['param1'][0..1].to_s  
+      puts  params['param1'][0..1].codepoints.to_a.to_s  
+      puts "SELECT [JourId]
+        ,[InventLocationId]
+        ,[VendId]
+        ,[VendName]
+        ,CONVERT(char(10), [ShipDate],126) as [ShipDate]
+        ,CAST([OverDelivery] AS INT) AS OverDelivery 
+        ,CAST([Deleted] AS INT) AS Deleted 
+        ,CAST(ISNULL([Imported],0) AS INT) AS Imported 
+      FROM [TSD_ReceiptJour] WHERE [JourId] like '%" + par.to_s + "'"
+        
       res = @client.execute("SELECT [JourId]
       ,[InventLocationId]
       ,[VendId]
@@ -86,7 +105,8 @@ class TsdReceiptjourselect < SourceAdapter
       ,CAST([OverDelivery] AS INT) AS OverDelivery 
       ,CAST([Deleted] AS INT) AS Deleted 
       ,CAST(ISNULL([Imported],0) AS INT) AS Imported 
-    FROM [TSD_ReceiptJour] WHERE [JourId] = '" + params['param1'].to_s + "'")
+    FROM [TSD_ReceiptJour] WHERE [JourId] like '%" + par.to_s + "'")     
+      
     else 
       res = @client.execute("SELECT [JourId]
       ,[InventLocationId]

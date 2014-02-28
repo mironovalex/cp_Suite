@@ -316,7 +316,8 @@ class SettingsController < Rho::RhoController
 
       if rho_error.unknown_client?( @params['error_message'] )
         Rhom::Rhom.database_client_reset
-        SyncEngine.dosync               
+        @msg = "Перезагрузите программу."
+#        SyncEngine.dosync               
 #      elsif err_code == Rho::RhoError::ERR_UNATHORIZED
 #        WebView.navigate( 
 #          url_for :action => :login, 

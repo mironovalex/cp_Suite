@@ -81,28 +81,28 @@ class ChkItemController < Rho::RhoController
   # Добавление в корзину
   def basketadd
     # Поиск записи в справочнике ШК
-    @TSDItembarcodes = TsdItembarcode.find(:first,
-             :conditions => { 
-             {
-             :name => "ItemId", 
-             :op => "IN" 
-             } => @@ItemId,   
-             {
-             :name => "InventSizeId", 
-             :op => "IN" 
-             } => @@InventSizeId                     
-            } )       
-                
-        
-    if (@@InventSizeId == "")
-      @TSDItembarcodes = TsdItembarcode.find(:first,
-               :conditions => { 
-               {
-               :name => "ItemId", 
-               :op => "IN" 
-               } => @@ItemId                  
-              } )       
-    end        
+#    @TSDItembarcodes = TsdItembarcode.find(:first,
+#             :conditions => { 
+#             {
+#             :name => "ItemId", 
+#             :op => "IN" 
+#             } => @@ItemId,   
+#             {
+#             :name => "InventSizeId", 
+#             :op => "IN" 
+#             } => @@InventSizeId                     
+#            } )       
+#                
+#        
+#    if (@@InventSizeId == "")
+#      @TSDItembarcodes = TsdItembarcode.find(:first,
+#               :conditions => { 
+#               {
+#               :name => "ItemId", 
+#               :op => "IN" 
+#               } => @@ItemId                  
+#              } )       
+#    end        
                 
     @AWSBaskets = AWSBasket.find(:all)   
     
@@ -150,29 +150,59 @@ class ChkItemController < Rho::RhoController
     end                                          
     
 #    Alert.show_popup(
-#        :message=> $chk_loc.to_s +  $chk_userid.to_s + @@ItemId.to_s + @TSDItembarcodes.ItemBarCode.to_s,# +  @params['COUNT'].to_s + count.to_s + @YellowLabel.to_s,
+#        :message=> @@Itembarcode,
 #        :title=>"Ошибка",
 #        :buttons => ["Ok"]
 #     )    
     
+    
+    @AWSBaskets = AWSBasket.find(:first,
+    :conditions => { 
+    {
+    :name => "ItemId", 
+    :op => "IN" 
+    } =>  @@ItemId,
+    {
+      :name => "InventSizeId", 
+      :op => "IN" 
+    } =>  @@InventSizeId,
+    {
+      :name => "InventLocationId", 
+      :op => "IN" 
+    } =>  $chk_loc,
+      {
+        :name => "UserId", 
+        :op => "IN" 
+      } =>  $chk_userid, 
+      {
+        :name => "ItemBarCode", 
+        :op => "IN" 
+      } =>  @@Itembarcode                                                                                  
+      }
+      )  
+    
+    if (@AWSBaskets)
+      @AWSBaskets.update_attributes({"PrintCopies" => @params['COUNT'].to_i + @AWSBaskets.PrintCopies.to_i})       
+    else  
     # Запись в корзину        
     AWSBasket.create("InventLocationId" => $chk_loc, 
       "UserId" => $chk_userid,  
       "ItemId" => @@ItemId, 
-      "ItemBarCode" => @TSDItembarcodes.ItemBarCode, 
+      #"ItemBarCode" => @TSDItembarcodes.ItemBarCode,
+      "ItemBarCode" => @@Itembarcode, 
       "InventSizeId"  => @@InventSizeId, 
       "PrintCopies"   => @params['COUNT'],
       "LineNum"    => count.to_s,
       "YellowLabel"   => @YellowLabel      
       )
-    
+    end
 #    Alert.show_popup(
 #        :message=> @@InventSizeId,
 #        :title=>"Ошибка",
 #        :buttons => ["Ok"]
 #     )        
       
-    WebView.execute_js("TO_IS();") 
+    WebView.execute_js("TO_IS2();") 
     ##redirect :action => :ItemChkInp
   end
   
@@ -188,6 +218,7 @@ class ChkItemController < Rho::RhoController
     
   # обработчик сканирования
   def decode
+    @@Itembarcode = ""
     @@ItemId =  ""
     @@InventSizeId = ""
    
@@ -356,6 +387,8 @@ class ChkItemController < Rho::RhoController
        WebView.execute_js("AvailableQty('" + @@AvailableQty.to_s + "');")                               
        WebView.execute_js("OrderedQty('" + @@OrderedQty.to_s + "');")                                  
        
+       @@Itembarcode = @params["data"].to_s
+       
        WebView.execute_js("msg('" + '' + "');")  
        WebView.execute_js("SH('" + @params["data"].to_s + "');")  
        #WebView.execute_js("TO_IS();") 
@@ -372,6 +405,7 @@ class ChkItemController < Rho::RhoController
   def item_show
     @@ItemId =  ""
     @@InventSizeId = ""
+    @@Itembarcode = ""
    
     @@ItemName = "" 
     @@VendId   = ""
@@ -412,7 +446,7 @@ class ChkItemController < Rho::RhoController
          $msg = ""         
          @@ItemId =  @TSDItembarcodes.ItemId
          @@InventSizeId = @TSDItembarcodes.InventSizeId
-        
+         
          @@ItemName = "" 
          @@VendId   = ""
          @@VendName = ""   
@@ -538,10 +572,12 @@ class ChkItemController < Rho::RhoController
          WebView.execute_js("SalesDiscount('" + sprintf("%20.2f", @@SalesDiscount).to_s + "');")                           
          WebView.execute_js("VendCode('" + @@VendCode.to_s + "');")                               
          WebView.execute_js("AvailableQty('" + @@AvailableQty.to_s + "');")                               
-         WebView.execute_js("OrderedQty('" + @@OrderedQty.to_s + "');")    
-                
-         WebView.execute_js("msg('" + '' + "');")    
-         WebView.execute_js("SH('" + @params["SH"].to_s + "');")   
+         WebView.execute_js("OrderedQty('" + @@OrderedQty.to_s + "');")                   
+         
+         WebView.execute_js("msg('" + '' + "');")   
+         @@Itembarcode = @params["SH"].to_s          
+            
+         #WebView.execute_js("SH('" + @params["SH"].to_s + "');")   
          #WebView.execute_js("TO_IS();")                                  
        end
     #Ввели код номенклатуры вместо ШК              
@@ -714,9 +750,17 @@ class ChkItemController < Rho::RhoController
             
            WebView.execute_js("msg('" + '' + "');")      
            
-           WebView.execute_js("SH('" + @TSDItembarcodes.ItemBarCode.to_s + "');") 
+           @@Itembarcode = @TSDItembarcodes.ItemBarCode.to_s
+           
+#                               Alert.show_popup(
+#                                   :message=>  @@Itembarcode.to_s,
+#                                   :title=>"Ошибка",
+#                                   :buttons => ["Ok"]
+#                                )             
+           
+#           WebView.execute_js("SH('" + @TSDItembarcodes.ItemBarCode.to_s + "');") 
 #                    Alert.show_popup(
-#                        :message=>  @@VendName.to_s,
+#                        :message=>  'J0',
 #                        :title=>"Ошибка",
 #                        :buttons => ["Ok"]
 #                     )              
@@ -900,6 +944,8 @@ class ChkItemController < Rho::RhoController
        WebView.execute_js("VendCode('" + @@VendCode.to_s + "');")                               
        WebView.execute_js("AvailableQty('" + @@AvailableQty.to_s + "');")                               
        WebView.execute_js("OrderedQty('" + @@OrderedQty.to_s + "');")                                      
+       
+       #@@Itembarcode = @TSDItembarcodes.ItemBarCode.to_s
        
        WebView.execute_js("TO_IS();") 
        ##redirect :action => :show_item                                 

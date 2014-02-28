@@ -118,6 +118,31 @@
         element1.style.display = 'inline';         
   };  
 
+            function TO_IS2() {                 
+                  var element01 = document.getElementById('B');
+                  element01.style.visibility = 'hidden';
+                  element01.style.display = 'none'; 
+                      
+                  var element00 = document.getElementById('H');
+                  element00.innerHTML = "Позиция";  
+              
+                  //var element0 = document.getElementById('I');
+                  //element0.style.visibility = 'hidden';
+                  //element0.style.display = 'none';   
+                  
+                  //var element = document.getElementById('S');
+                  //element.style.visibility = 'hidden';
+                  //element.style.display = 'none';     
+                  
+                  var element1 = document.getElementById('IS');
+                  element1.style.visibility = '';
+                  element1.style.display = 'inline';  
+                  
+              element1 = document.getElementById('SH');
+              element1.select();
+              element1.focus();     
+            }; 
+  
       function TO_I() {      
             var element00 = document.getElementById('H');
             element00.innerHTML = "Введите товар";          
@@ -164,9 +189,9 @@
                   element1.style.display = 'inline';  
                       
                   var element2 = document.getElementById('COUNT');
+                  element2.value = '1'
                   element2.select();
                   element2.focus();   
-                  element2.value = '1'
             };  
         
   function form_focus() {
@@ -343,33 +368,36 @@ $('[data-role=page]').live('pageshow', function (event) {
            </tr> 
            </table>
 
-           <table border="0" height = "40px">
-           <tr>
-           <td  width = "300px" style="min-width:300px; max-width:300px">     
-              
-             <table border="0"  height = "20px">
-             <tr height = "20px">   
-               <td width = "80px" height = "20px" style="min-width:80px; max-width:80px">Штрих-код:</td>
-               <td width = "220px" height = "20px" style="min-width:220px; max-width:220px"><input type="text" id="SH" name="SH" 
-                 class = "ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow ui-input-text ui-body-c ui-corner-all ui-shadow-insert ui-btn-hover-undefined" 
-                 style="line-height:0px; height:10pt; font-size: 9pt; width:220px; background: #FFFFFF; color: #000000; margin-left:0px; padding:0px; margin:0px;"></td>              
-             </tr> 
-             </table>
-                              
-             <table border="0"  height = "20px">
-             <tr height = "20px">
-               <td width = "80px" height = "20px" style="min-width:80px; max-width:80px">Артикул(Р):</td>               
-               <td width = "150px" height = "20px" style="min-width:150px; max-width:150px"><input type="text" id="CODE" name="CODE" 
-                 class = "ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow ui-input-text ui-body-c ui-corner-all ui-shadow-insert ui-btn-hover-undefined" 
-                 style="line-height:0px; height:10pt; font-size: 9pt; width:150px; background: #FFFFFF; color: #000000; margin-left:0px; padding:0px; margin:0px;"></td>
-               <td width = "70px" height = "20px" style="min-width:70px; max-width:70px"><input type="text" id="SIZE" name="SIZE" 
-                 class = "ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow ui-input-text ui-body-c ui-corner-all ui-shadow-insert ui-btn-hover-undefined" 
-                 style="line-height:0px; height:10pt; font-size: 9pt; width:70px; background: #FFFFFF; color: #000000; margin-left:0px; padding:0px; margin:0px;"></td>                                                                 
-             </tr> 
-             </table>    
-            </td>
-            </tr> 
-            </table> 
+<table border="0" height = "40px">
+<tr>
+<td  width = "250px" style="min-width:250px; max-width:250px">     
+   
+  <table border="0"  height = "20px">
+  <tr height = "20px">   
+    <td width = "70px" height = "20px" style="min-width:80px; max-width:80px">Штрих-код:</td>
+    <td width = "170px" height = "20px" style="min-width:170px; max-width:170px"><input type="text" id="SH" name="SH" 
+      class = "ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow ui-input-text ui-body-c ui-corner-all ui-shadow-insert ui-btn-hover-undefined" 
+      style="line-height:0px; height:10pt; font-size: 9pt; width:165px; background: #FFFFFF; color: #000000; margin-left:0px; padding:0px; margin:0px;"></td>              
+  </tr> 
+  </table>
+                   
+  <table border="0"  height = "20px">
+  <tr height = "20px">
+    <td width = "70px" height = "20px" style="min-width:80px; max-width:80px">Артикул(Р):</td>               
+    <td width = "120px" height = "20px" style="min-width:120px; max-width:120px"><input type="text" id="CODE" name="CODE" 
+      class = "ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow ui-input-text ui-body-c ui-corner-all ui-shadow-insert ui-btn-hover-undefined" 
+      style="line-height:0px; height:10pt; font-size: 9pt; width:120px; background: #FFFFFF; color: #000000; margin-left:0px; padding:0px; margin:0px;"></td>
+    <td width = "50px" height = "20px" style="min-width:50px; max-width:50px"><input type="text" id="SIZE" name="SIZE" 
+      class = "ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow ui-input-text ui-body-c ui-corner-all ui-shadow-insert ui-btn-hover-undefined" 
+      style="line-height:0px; height:10pt; font-size: 9pt; width:40px; background: #FFFFFF; color: #000000; margin-left:0px; padding:0px; margin:0px;"></td>                                                                 
+  </tr> 
+  </table>    
+ </td>
+ <td width = "50px" height = "20px" style="min-width:50px; max-width:50px">
+  <input type="button" onclick="inpitem()"value=">"/> 
+ </td>
+ </tr> 
+ </table>   
 
 
 
@@ -430,8 +458,7 @@ $('[data-role=page]').live('pageshow', function (event) {
                                                       
            <table border="0">
            <tr>
-           <td  width = "160px" style="min-width:160px; max-width:160px"><input type="button" value="Далее..." onclick="TO_I()"/></td>
-           <td  width = "160px" style="min-width:160px; max-width:160px"><input type="button" value="В корзину" onclick="TO_B()"/></td>
+           <td  width = "300px" style="min-width:300px; max-width:300px"><input type="button" value="В корзину" onclick="TO_B()"/></td>
            </tr>
            </table>      
            
@@ -445,7 +472,7 @@ $('[data-role=page]').live('pageshow', function (event) {
                  
                </div>
                <input type="button" value="Ввод" onclick="inpcount()"/>
-               <input type="button" value="Отмена" onclick="TO_IS()"/>
+               <input type="button" value="Отмена" onclick="TO_IS2()"/>
            </div>   
    
 

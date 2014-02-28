@@ -1,3 +1,4 @@
+
 require 'rho/rhocontroller'
 require 'helpers/browser_helper'
 
@@ -791,6 +792,116 @@ end
     
   end  
   
+  def code_str (str)
+    ret = str
+      
+    
+ #   ret = ret.gsub("\u0140","@");
+         
+      
+    i=0
+    while i < str.size
+    
+      Alert.show_popup(
+          :message=> str[i..i.to_i+1].to_s,
+          :title=>"Ошибка",
+          :buttons => ["Ok"]
+       )          
+#      
+#    a = ""  
+#        
+#    if (str[i..i].to_s == "А")
+#      a = "01"  end
+#      
+#      
+#      ret = ret.to_s + a.to_s
+      i = i.to_i + 2
+    end    
+      
+    #ret = "1";
+    
+#    a = ret.codepoints.to_a
+#    b = a.map {|c| c.chr("utf-8")}.inject(:+)
+#    
+
+
+      
+       
+#    Alert.show_popup(
+#        :message=> ret,
+#        :title=>"Ошибка",
+#        :buttons => ["Ok"]
+#     )     
+            
+#    ret = ret.gsub("Б","BB");
+#    ret = ret.gsub("В","CC");
+#    ret = ret.gsub("Г","DD");
+#    ret = ret.gsub("Д","EE");
+#    ret = ret.gsub("Е","%F");
+#    ret = ret.gsub("Ё","%J");
+#    ret = ret.gsub("Ж","%H");
+#    ret = ret.gsub("З","%I");
+#    ret = ret.gsub("И","%J");
+#    ret = ret.gsub("К","%K");
+#    ret = ret.gsub("Л","%L");
+#    ret = ret.gsub("М","%M");
+#    ret = ret.gsub("Н","%N");
+#    ret = ret.gsub("О","%O");   
+#    ret = ret.gsub("П","%P");
+#    ret = ret.gsub("Р","%Q");
+#    ret = ret.gsub("С","%R");
+#    ret = ret.gsub("Т","%S");    
+#    ret = ret.gsub("У","%T");
+#    ret = ret.gsub("Ф","%U");
+#    ret = ret.gsub("Х","%V");
+#    ret = ret.gsub("Т","%X");
+#    ret = ret.gsub("Ц","%`");
+#    ret = ret.gsub("Ч","%~");
+#    ret = ret.gsub("Ш","%!");
+#    ret = ret.gsub("Щ","%@");
+#    ret = ret.gsub("ь","%#");
+#    ret = ret.gsub("Ъ","%№");
+#    ret = ret.gsub("Э","%$");
+#    ret = ret.gsub("Ю","%;");
+#    ret = ret.gsub("Я","%:");
+#
+#    ret = ret.gsub("а","[A");
+#    ret = ret.gsub("б","[B");
+#    ret = ret.gsub("в","[C");
+#    ret = ret.gsub("г","[D");
+#    ret = ret.gsub("д","[E");
+#    ret = ret.gsub("е","[F");
+#    ret = ret.gsub("ё","[J");
+#    ret = ret.gsub("ж","[H");
+#    ret = ret.gsub("з","[I");
+#    ret = ret.gsub("и","[J");
+#    ret = ret.gsub("к","[K");
+#    ret = ret.gsub("л","[L");
+#    ret = ret.gsub("м","[M");
+#    ret = ret.gsub("н","[N");
+#    ret = ret.gsub("о","[O");   
+#    ret = ret.gsub("п","[P");
+#    ret = ret.gsub("р","[Q");
+#    ret = ret.gsub("с","[R");
+#    ret = ret.gsub("т","[S");    
+#    ret = ret.gsub("у","[T");
+#    ret = ret.gsub("ф","[U");
+#    ret = ret.gsub("х","[V");
+#    ret = ret.gsub("т","[X");
+#    ret = ret.gsub("ц","[`");
+#    ret = ret.gsub("ч","[~");
+#    ret = ret.gsub("ш","[!");
+#    ret = ret.gsub("щ","[@");
+#    ret = ret.gsub("ь","[#");
+#    ret = ret.gsub("ъ","[№");
+#    ret = ret.gsub("э","[$");
+#    ret = ret.gsub("ю","[;");
+#    ret = ret.gsub("я","[:");    
+          
+    
+    return ret
+  end
+  
   #-----------------------------------------------------------------------------------------------
 
    def upload_receipt_2
@@ -836,19 +947,20 @@ end
       ) 		  
 	   
 	count = "0"
-	@TsdReceiptlineselects.each do |row|
-	  count = count.to_i + row.ReceivedQty.to_i
-	end  	
+#	@TsdReceiptlineselects.each do |row|
+#	  count = count.to_i + row.ReceivedQty.to_i
+#	end  	
+	 	
 	
-#    Alert.show_popup(
-#        :message=>  @TsdReceiptjourselects,
-#        :title=>"Ошибка",
-#        :buttons => ["Ok"]
-#     )  	
+	if (@TsdReceiptjourselects.Imported == "1")
+	  count = "1"
+	end
 	
-#	if (@TsdReceiptjourselects.Imported == "1")
-#	  count = "1"
-#	end
+    Alert.show_popup(
+        :message=> @TsdReceiptjourselects,
+        :title=>"Ошибка",
+        :buttons => ["Ok"]
+     ) 	
 	  
 	
 	# ранее выгружен
@@ -1039,7 +1151,7 @@ end
       SyncEngine.login("1", "1", (url_for :action => :login_callback) )
     end
     $sync_control = "11"
-    SyncEngine.dosync_source( TsdReceiptjourselect, show_sync_status = true, "query[param1]=" + $JourId.to_s )
+    SyncEngine.dosync_source( TsdReceiptjourselect, show_sync_status = true, "query[param1]=" + $chk_loc.to_s + "&query[param2]=" + $DateOrder.to_s )
 	
 #	render :action => :show_detail, :id => $TsdReceiptjourObj
     #WebView.navigate(url_for(:action => :show_detail, :id => $TsdReceiptjourObj))      

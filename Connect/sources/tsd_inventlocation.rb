@@ -3,6 +3,7 @@ require 'rest_client'
 require 'tiny_tds'
 
 class TsdInventlocation < SourceAdapter
+  
   def initialize(source) 
     f = File.new(Dir.pwd + "/settings/config.txt")
     i = 0

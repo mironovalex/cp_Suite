@@ -805,6 +805,79 @@ end
 	 #render :action => :show_detail, :id => $TsdInventcountjourObj
 	end 
   
+	def code_str (str)
+	  ret = str
+	  
+	  ret = ret.gsub("А","%A");
+    ret = ret.gsub("Б","%B");
+    ret = ret.gsub("В","%C");
+    ret = ret.gsub("Г","%D");
+    ret = ret.gsub("Д","%E");
+    ret = ret.gsub("Е","%F");
+    ret = ret.gsub("Ё","%J");
+    ret = ret.gsub("Ж","%H");
+    ret = ret.gsub("З","%I");
+    ret = ret.gsub("И","%J");
+    ret = ret.gsub("К","%K");
+    ret = ret.gsub("Л","%L");
+    ret = ret.gsub("М","%M");
+    ret = ret.gsub("Н","%N");
+    ret = ret.gsub("О","%O");   
+    ret = ret.gsub("П","%P");
+    ret = ret.gsub("Р","%Q");
+    ret = ret.gsub("С","%R");
+    ret = ret.gsub("Т","%S");    
+    ret = ret.gsub("У","%T");
+    ret = ret.gsub("Ф","%U");
+    ret = ret.gsub("Х","%V");
+    ret = ret.gsub("Т","%X");
+    ret = ret.gsub("Ц","%`");
+    ret = ret.gsub("Ч","%~");
+    ret = ret.gsub("Ш","%!");
+    ret = ret.gsub("Щ","%@");
+    ret = ret.gsub("ь","%#");
+    ret = ret.gsub("Ъ","%№");
+    ret = ret.gsub("Э","%$");
+    ret = ret.gsub("Ю","%;");
+    ret = ret.gsub("Я","%:");
+
+    ret = ret.gsub("а","[A");
+    ret = ret.gsub("б","[B");
+    ret = ret.gsub("в","[C");
+    ret = ret.gsub("г","[D");
+    ret = ret.gsub("д","[E");
+    ret = ret.gsub("е","[F");
+    ret = ret.gsub("ё","[J");
+    ret = ret.gsub("ж","[H");
+    ret = ret.gsub("з","[I");
+    ret = ret.gsub("и","[J");
+    ret = ret.gsub("к","[K");
+    ret = ret.gsub("л","[L");
+    ret = ret.gsub("м","[M");
+    ret = ret.gsub("н","[N");
+    ret = ret.gsub("о","[O");   
+    ret = ret.gsub("п","[P");
+    ret = ret.gsub("р","[Q");
+    ret = ret.gsub("с","[R");
+    ret = ret.gsub("т","[S");    
+    ret = ret.gsub("у","[T");
+    ret = ret.gsub("ф","[U");
+    ret = ret.gsub("х","[V");
+    ret = ret.gsub("т","[X");
+    ret = ret.gsub("ц","[`");
+    ret = ret.gsub("ч","[~");
+    ret = ret.gsub("ш","[!");
+    ret = ret.gsub("щ","[@");
+    ret = ret.gsub("ь","[#");
+    ret = ret.gsub("ъ","[№");
+    ret = ret.gsub("э","[$");
+    ret = ret.gsub("ю","[;");
+    ret = ret.gsub("я","[:");    
+    	  
+	  return ret
+	end
+	
+	
    def upload_invent_3 
      $sync_msg = "Выгрузка: Инв." 
      redirect :controller => :Settings, :action => :wait
@@ -834,20 +907,20 @@ end
        })        
       	
 	count = "0"
-	@TsdInventcountlineselects.each do |row|
-	  count = count.to_i + row.CountedQty.to_i
-	end 
+#	@TsdInventcountlineselects.each do |row|
+#	  count = count.to_i + row.CountedQty.to_i
+#	end 
 	
-	
+#	
 #         Alert.show_popup(
-#             :message=> @TsdInventcountjourselects,
+#             :message=> code_str("АБВабвВПЖ123"),
 #             :title=>"Сообщение",
 #             :buttons => ["Ok"]
 #          ) 	
       
-#	if (@TsdInventcountjourselects.Imported == "1")
-#	  count = "1"
-#	end
+	if (@TsdInventcountjourselects.Imported == "1")
+	  count = "1"
+	end
 	
 	# ранее выгружен
 	if (count.to_i > 0)
@@ -992,9 +1065,34 @@ end
     $msg1 = ""
     $msg2 = ""
    
+    @TsdInventcountjours = TsdInventcountjour.find( $TsdInventcountjourObj) 
+    @TsdInventcountlines = TsdInventcountline.find( :all,
+    :conditions => { 
+    {
+    :name => "JourId", 
+    :op => "IN" 
+    } => @TsdInventcountjours.JourId         
+   }  
+   )
+   
+   i = 0
+   
+   @TsdInventcountlines.each do |rec|
+    i = i.to_i + rec.CountedQty.to_i
+   end         
+   
+   if (i == 0) 
+     Alert.show_popup(
+         :message=> i,
+         :title=>"Сообщение",
+         :buttons => ["Ok"]
+      )  
+     $msg = "Инвентаризация пустая!"
+     WebView.execute_js("alarm();")  
+     WebView.execute_js("msg2('" + $msg.to_s + "');") 
+   else     
     $sync_msg = "Выгрузка: Запрос Инв." 
-    WebView.navigate( url_for( :controller => :Settings, :action => :wait ) )
-    @TsdInventcountjours = TsdInventcountjour.find( $TsdInventcountjourObj)   
+    WebView.navigate( url_for( :controller => :Settings, :action => :wait ) )           
     @TsdInventcountjours.update_attributes({"Imported" => "1"})  
     @TsdInventcountjours.update_attributes({"Importeds" => "1"})    
 
@@ -1007,8 +1105,9 @@ end
       SyncEngine.login("1", "1", (url_for :action => :login_callback) )
     end
     $sync_control = "17"
-    SyncEngine.dosync_source( TsdInventcountjourselect, show_sync_status = true, "query[param1]=" + $JourId.to_s )
-	
+    SyncEngine.dosync_source( TsdInventcountjourselect, show_sync_status = true, "query[param1]=" + $chk_loc.to_s + "&query[param2]=" + $DateOrder.to_s  )
+   end
+   
 #    Alert.show_popup(
 #        :message=> "Jo",
 #        :title=>"Сообщение",

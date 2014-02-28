@@ -112,12 +112,16 @@
        
              
      function button_click() {      
-       var element = document.getElementById('QTY');       
-       $.ajax({
-         type: "GET",                               
-         url: "<%= url_for :action => :rec_button %>",
-         data: {val : element.value}
-         } );       
+       var element = document.getElementById('QTY');    
+       var elem = document.getElementById('ItemId');
+       if (elem.innerHTML != "")
+         {  
+           $.ajax({
+           type: "GET",                               
+           url: "<%= url_for :action => :rec_button %>",
+           data: {val : element.value}
+           } );
+         };       
        };           
       
       
@@ -136,7 +140,17 @@
         val = utf8(val);
         
         var element = document.getElementById('MSGR');  
-        element.innerHTML = val;                                        
+        element.innerHTML = val; 
+        
+        if (val != ""){
+        ItemName("");
+        ItemId("");
+        InventSizeId("");
+        VendCode("");
+        RetailPrice("");
+        CountedQty("");
+        R_QTY("");     
+        }                                  
       };      
           
       function utf8(utftext) {
@@ -341,6 +355,7 @@ function inpcount() {
          element.value = '';                     
        }   
         
+       
        function InventSizeId(val) {
           var element = document.getElementById('InventSizeId');
          element.innerHTML = utf8(val);

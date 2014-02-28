@@ -1,3 +1,5 @@
+# coding: utf-8
+
 class TsdReceiptlineselect < SourceAdapter
   def initialize(source) 
     f = File.new(Dir.pwd + "/settings/config.txt")
@@ -53,6 +55,8 @@ class TsdReceiptlineselect < SourceAdapter
 #    FROM [TSD_ReceiptLine] WHERE [JourId] = '" + params['param1'].to_s + "'")
 #    end  
     
+    par = params['param1'].to_s
+    
     if (params['param2'] == nil)
       res = @client.execute("SELECT [JourId]
       ,[ItemId]
@@ -60,7 +64,7 @@ class TsdReceiptlineselect < SourceAdapter
       ,CAST([OrderPrice] AS varchar(28)) AS OrderPrice
       ,CAST([OrderedQty] AS INT) AS OrderedQty 
       ,CAST([ReceivedQty] AS INT) AS ReceivedQty 
-    FROM [TSD_ReceiptLine] WHERE [JourId] = '" + params['param1'].to_s + "'")
+    FROM [TSD_ReceiptLine] WHERE [JourId] like '%" + par.to_s + "'")
     else
       res = @client.execute("SELECT [JourId]
       ,[ItemId]

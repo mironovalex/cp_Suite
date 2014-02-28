@@ -98,11 +98,15 @@
              
      function button_click() {      
        var element = document.getElementById('QTY');       
-       $.ajax({
-         type: "GET",                               
-         url: "<%= url_for :action => :rec_button %>",
-         data: {val : element.value}
-         } );       
+       var elem = document.getElementById('ItemId');
+       if (elem.innerHTML != "")
+         {  
+           $.ajax({
+           type: "GET",                               
+           url: "<%= url_for :action => :rec_button %>",
+           data: {val : element.value}
+           } );
+         };      
        };           
       
       
@@ -121,7 +125,17 @@
         val = utf8(val);
         
         var element = document.getElementById('MSGR');  
-        element.innerHTML = val;                                        
+        element.innerHTML = val;  
+        
+        if (val != ""){
+        ItemName("");
+        ItemId("");
+        InventSizeId("");
+        VendCode("");
+        OrderPrice("");
+        OrderedQty("");
+        R_QTY("");
+        }                              
       };      
           
       function utf8(utftext) {
@@ -263,8 +277,8 @@
   function inpitem() { 
     var element1 = document.getElementById('SH');
     var element2 = document.getElementById('CODE');  
-    var element3 = document.getElementById('SIZE');  
-      
+    var element3 = document.getElementById('SIZE');   
+    
     $.ajax({
       type: "GET",                               
       url: "<%= url_for :action => :line_edit %>",
@@ -311,6 +325,7 @@ function inpcount() {
       }, 1);   
    });
     
+   
         function ItemName(val) {
           var element = document.getElementById('ItemName');
           element.innerHTML = "<NOBR>" + utf8(val) + "</NOBR>";
@@ -377,6 +392,8 @@ function inpcount() {
           var element = document.getElementById('SH');
           var el      = document.getElementById('QTY');          
           
+
+          
           if (elem.value == 'on') 
             { 
               $.ajax({
@@ -389,7 +406,7 @@ function inpcount() {
               element.select();
             } 
           else 
-            {                
+            {                     
               el.focus();
               el.select();                
             };  

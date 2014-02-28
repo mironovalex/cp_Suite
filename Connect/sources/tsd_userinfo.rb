@@ -21,7 +21,7 @@ class TsdUserinfo < SourceAdapter
         @database = line.chop
       end
       if (i.to_i == 4) 
-        @port 
+        @port = line.chop 
       end  
       i = i.to_i + 1
     end 

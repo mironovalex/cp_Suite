@@ -42,6 +42,8 @@
         element.innerHTML = val;                                                                    
       };  
       
+        function alarm(){var snd = new Audio("/public/Error.wav");   snd.play();};   
+      
       function null_invent() {
       $.get('/app/Invent/null_invent', {});       
       };                
@@ -65,7 +67,7 @@
      </table>
       <table border="0">
       <tr>
-      <td><label id = "msg2" style="color: red;  font-size: 20x;"><%=$msg2%></label> </td>
+      <td><label id = "msg2" style="color: red;  font-size: 20px;"><%=$msg2%></label> </td>
       </tr>
      </table> 
      
