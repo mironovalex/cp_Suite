@@ -95,6 +95,7 @@ class SettingsController < Rho::RhoController
 #    end
     
     $sync_status = "0"
+    $error_status = "0"
     
 #    Alert.show_popup(
 #        :message=>  @params['status'] + "|" + $sync_control.to_s,
@@ -108,6 +109,7 @@ class SettingsController < Rho::RhoController
      
     if (@params['status'] == "error")
       $sync_status = "1"
+      $error_status = "1"
       $msg = "Ошибка синхронизации!"
     end
          
@@ -135,6 +137,9 @@ class SettingsController < Rho::RhoController
 			WebView.navigate( url_for :controller => :Auto, :action => :inp_location)
 		end
 
+      if ($sync_control == "333")      
+          WebView.navigate( url_for :controller => :MainMenu, :action => :load_Items_00)
+      end		
 		
 		if ($sync_control == "3") 
 			WebView.navigate( url_for :controller => :MainMenu, :action => :load_Items_2)

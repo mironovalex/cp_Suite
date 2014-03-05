@@ -395,11 +395,29 @@ end
              :op => "IN" 
              } => $chk_loc          
             } )  
-            
+           
+      @TsdUserinfos2 = TsdUserinfo.find(:first,
+             :conditions => { 
+             {
+             :name => "UserName", 
+             :op => "IN" 
+             } => $chk_user,
+             {
+             :name => "InventLocationId", 
+             :op => "IN" 
+             } => ""          
+            } )       
+             
       if (!@TsdUserinfos)            
         #WebView.navigate(url_for(:action => :inp_password)) 
         if (@@USER2 != "")
-          redirect :action => :inp_password
+          if (@TsdUserinfos2)          
+            redirect :action => :inp_password
+          else
+            WebView.execute_js("alarm();") 
+            $msg = "Пользователь не из магазина!"
+            redirect :action => :inp_login               
+          end
         else
           WebView.execute_js("alarm();") 
           $msg = "Не введен пользователь!"
@@ -449,8 +467,19 @@ end
                  
           if (@TsdUserinfosss.SetPassword == "1" or @TsdUserinfosss.Password == "")
             redirect :action => :inp_password_conf
-          else            
-            redirect :action => :inp_password  
+          else   
+            if (@TsdUserinfosss.InventLocationId == "")
+              redirect :action => :inp_password  
+            else
+              if (@TsdUserinfosss.InventLocationId == $chk_loc)
+                redirect :action => :inp_password  
+              else
+                WebView.execute_js("alarm();") 
+                $msg = "Пользователь не из магазина!"
+                redirect :action => :inp_login                    
+              end  
+            end         
+            
           end
         else
           WebView.execute_js("alarm();") 

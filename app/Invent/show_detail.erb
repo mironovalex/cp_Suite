@@ -7,13 +7,38 @@
   
 <script type="text/javascript">   
 
+      function utf8(utftext) {
+          var string = "";
+          var i = 0;
+          var c = c1 = c2 = 0;
+          while ( i < utftext.length ) {
+              c = utftext.charCodeAt(i);
+              if (c < 128) {
+                  string += String.fromCharCode(c);
+                  i++;
+              }
+              else if((c > 191) && (c < 224)) {
+                  c2 = utftext.charCodeAt(i+1);
+                  string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+                  i += 2;
+              }
+              else {
+                  c2 = utftext.charCodeAt(i+1);
+                  c3 = utftext.charCodeAt(i+2);
+                  string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+                  i += 3;
+              }
+          }
+          return string;
+      };  
+
       function nulling() {              
         var element1 = document.getElementById('msg1');  
 
         element1.innerHTML = "";                                   
         var element2 = document.getElementById('msg2');  
 
-        element2.innerHTML = "";                                   
+        element2.innerHTML = "";                              
       }; 
 
       $("#SDI").keyup(function(event) {      
@@ -39,7 +64,11 @@
 
       function msg2(val) {              
         var element = document.getElementById('msg2');  
-        element.innerHTML = val;                                                                    
+        //element.innerHTML = val; 
+        //element.value = val; 
+        //alert(element.innerHTML);  
+        element = document.getElementById('MSGR');  
+        element.innerHTML = utf8(val);                                                                 
       };  
       
         function alarm(){var snd = new Audio("/public/Error.wav");   snd.play();};   
@@ -62,12 +91,20 @@
 
       <table border="0">
       <tr>
-      <td><label id = "msg1" style="color: green;  font-size: 20px;"><%=$msg1%></label> </td>
+      <td>
+      <div class="itemValue" id="MSGR" style="color: #FF4500;  font-size: 20px; text-align: center;"></div>
+      </td>
+      </tr> 
+      </table>
+
+      <table border="0">
+      <tr>
+      <td><label id = "msg1" style="color: green;  font-size: 20px;"></label> </td>
       </tr>
      </table>
       <table border="0">
       <tr>
-      <td><label id = "msg2" style="color: red;  font-size: 20px;"><%=$msg2%></label> </td>
+      <td><label id = "msg2" style="color: red;  font-size: 20px;"></label> </td>
       </tr>
      </table> 
      

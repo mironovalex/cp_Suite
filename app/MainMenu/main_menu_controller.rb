@@ -91,7 +91,11 @@ class MainMenuController < Rho::RhoController
         
         @accts = TsdItembarcode.find_by_sql("INSERT INTO TsdItembarcode( ItemId, InventSizeId, ItemBarCode ) select ItemId, InventSizeId, ItemBarCode from TsdItembarcodetemp")                  
         
-        load_Items_1      
+        if ($error_status == "1")
+           load_Items_error_end
+        else
+           load_Items_1  
+        end         
       else             
         if !(SyncEngine::logged_in > 0)
           SyncEngine.login("1", "1", (url_for :action => :login_callback) )       
@@ -172,7 +176,53 @@ end
       end  
            
   end
-  
+
+  def load_Items_error_end
+  if ($msg == "")        
+    $msg1 = "Синхронизация выполненна"
+    $msg2 = ""   
+    status = "0"
+  else
+    $msg1 = "" 
+    $msg2 = $msg  
+    status = "1"                 
+  end
+
+  $sync_msg = ""  
+
+  t = Time.now
+
+  @TsdUserinfos = TsdUserinfo.find(:first,
+         :conditions => { 
+         {
+         :name => "UserName", 
+         :op => "IN" 
+         } => $chk_user       
+        } )   
+
+        count0 = TsdItembarcode.find(:count)        
+        count1 = TsdInventtable.find(:count)   
+        count2 = TsdInventsum.find(:count)  
+        count3 = TsdInventprice.find(:count) 
+                                
+        # Запись в лог    
+        TsdLog.create("UserId" => @TsdUserinfos.UserId, 
+              "InventLocationId" => $chk_loc,
+              "DeviceID" => $device_id,
+              "Date" => t.strftime("%Y-%m-%d"),
+              "Time" => t.strftime("%S").to_i + t.strftime("%M").to_i*60 + t.strftime("%H").to_i*3600,
+              "Operation" => "5",
+              "Status" => status,                  
+              "Comment" => "Barcode: " + count0.to_s + " строк | " +
+                           "Item: " + count1.to_s + " строк | " +
+                           "Sum: " + count2.to_s + " строк | " +
+                           "Price: " + count3.to_s + " строк"
+              )            
+
+
+              WebView.navigate( url_for :controller => :MainMenu, :action => :main_menu )   
+  end
+    
   def load_Items_5
       redirect :controller => :Settings, :action => :wait
       @TsdInventpricetmps = TsdInventpricetmp.find(:first) 
@@ -188,7 +238,7 @@ end
 #              :buttons => ["Ok"]
 #           ) 
            
-          if ($msg = "")        
+          if ($msg == "")        
             $msg1 = "Синхронизация выполненна"
             $msg2 = ""   
             status = "0"
@@ -349,26 +399,57 @@ end
   
   # Загрузка товаров и справочников
   def load_Items   
-    $Inventtable_synccount = 0
-    $Itembarcode_synccount = 0   
-    $Inventprice_synccount = 0  
-    $Inventsum_synccount = 0 
-         
-    @accts = TsdInventtable.find_by_sql("DELETE FROM TsdInventtable")   
-    @accts = TsdItembarcode.find_by_sql("DELETE FROM TsdItembarcode")      
-    @accts = TsdItembarcode2.find_by_sql("DELETE FROM TsdItembarcode2")      
-    @accts = TsdInventprice.find_by_sql("DELETE FROM TsdInventprice")  
-    @accts = TsdInventsum.find_by_sql("DELETE FROM TsdInventsum")         
+#    $Inventtable_synccount = 0
+#    $Itembarcode_synccount = 0   
+#    $Inventprice_synccount = 0  
+#    $Inventsum_synccount = 0 
+#         
+#    @accts = TsdInventtable.find_by_sql("DELETE FROM TsdInventtable")   
+#    @accts = TsdItembarcode.find_by_sql("DELETE FROM TsdItembarcode")      
+#    @accts = TsdItembarcode2.find_by_sql("DELETE FROM TsdItembarcode2")      
+#    @accts = TsdInventprice.find_by_sql("DELETE FROM TsdInventprice")  
+#    @accts = TsdInventsum.find_by_sql("DELETE FROM TsdInventsum")         
  
 #    TsdItembarcodetemp.set_notification(url_for(:controller => :MainMenu, :action => :sync_notific), "")         
 #    TsdInventtabletmp.set_notification(url_for(:controller => :MainMenu, :action => :sync_notific), "") 
 #    TsdInventpricetmp.set_notification(url_for(:controller => :MainMenu, :action => :sync_notific), "")           
 #    TsdInventsumtmp.set_notification(url_for(:controller => :MainMenu, :action => :sync_notific), "")  
         
-    load_Items_1                             
+    load_Items_0                            
   end
 
-  def load_Items_1    
+  def load_Items_0
+    if !(SyncEngine::logged_in > 0)
+      SyncEngine.login("1", "1", (url_for :action => :login_callback) )       
+    end 
+      
+    $sync_control = "333"
+     
+    $sync_msg = "Проверка связи.."   
+    SyncEngine.dosync_source(TsdInventlocation, false)    
+  end
+  
+  def load_Items_00
+    if ($error_status == "1")
+       load_Items_error_end
+    else
+          $Inventtable_synccount = 0
+          $Itembarcode_synccount = 0   
+          $Inventprice_synccount = 0  
+          $Inventsum_synccount = 0 
+               
+          @accts = TsdInventtable.find_by_sql("DELETE FROM TsdInventtable")   
+          @accts = TsdItembarcode.find_by_sql("DELETE FROM TsdItembarcode")      
+          @accts = TsdItembarcode2.find_by_sql("DELETE FROM TsdItembarcode2")      
+          @accts = TsdInventprice.find_by_sql("DELETE FROM TsdInventprice")  
+          @accts = TsdInventsum.find_by_sql("DELETE FROM TsdInventsum")  
+            
+      load_Items_1
+    end    
+  end
+  
+  def load_Items_1   
+    redirect :controller => :Settings, :action => :wait
     if !(SyncEngine::logged_in > 0)
       SyncEngine.login("1", "1", (url_for :action => :login_callback) )       
     end 
@@ -383,10 +464,10 @@ end
 
     $sync_msg = "ШК: первые "  + $Itembarcode_synccount.to_s + " записей"           
     #WebView.execute_js("sync_msg('" + $sync_msg.to_s + "');")  
-           
+        
+    #redirect :controller => :Settings, :action => :wait   
     SyncEngine.dosync_source(TsdItembarcodetemp, true, 
-      "query[param]=" + $chk_loc.to_s + "&query[param2]=" + $Itembarcode_synccount.to_s + "&query[param3]=0" )
-   
+      "query[param]=" + $chk_loc.to_s + "&query[param2]=" + $Itembarcode_synccount.to_s + "&query[param3]=0" )   
   end
     
   # Загрузка товаров и справочников

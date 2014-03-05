@@ -254,6 +254,18 @@ class ChkItemController < Rho::RhoController
        WebView.execute_js("alarm();")  
        WebView.execute_js("msg('" + $msg.to_s + "');")  
        WebView.execute_js("SH('" + @params["data"].to_s + "');")  
+         
+       WebView.execute_js("ItemName('');")                  
+       WebView.execute_js("ItemId('');")  
+       WebView.execute_js("InventSizeId('');")  
+       WebView.execute_js("VendId('');")                               
+       WebView.execute_js("VendName_('');")                            
+       WebView.execute_js("RetailPrice('');")                               
+       WebView.execute_js("SalesPrice('');")                               
+       WebView.execute_js("SalesDiscount('');")                           
+       WebView.execute_js("VendCode('');")                               
+       WebView.execute_js("AvailableQty('');")                               
+       WebView.execute_js("OrderedQty('');")    
        #WebView.execute_js("TO_I();")     
        #render :action => :ItemChkInp
      else
@@ -292,6 +304,18 @@ class ChkItemController < Rho::RhoController
           WebView.execute_js("alarm();")  
           WebView.execute_js("msg('" + $msg.to_s + "');")  
           WebView.execute_js("SH('" + @params["data"].to_s + "');")  
+            
+          WebView.execute_js("ItemName('');")                  
+          WebView.execute_js("ItemId('');")  
+          WebView.execute_js("InventSizeId('');")  
+          WebView.execute_js("VendId('');")                               
+          WebView.execute_js("VendName_('');")                            
+          WebView.execute_js("RetailPrice('');")                               
+          WebView.execute_js("SalesPrice('');")                               
+          WebView.execute_js("SalesDiscount('');")                           
+          WebView.execute_js("VendCode('');")                               
+          WebView.execute_js("AvailableQty('');")                               
+          WebView.execute_js("OrderedQty('');")    
           #WebView.execute_js("TO_I();")          
        else
          $msg = ""           
@@ -441,6 +465,19 @@ class ChkItemController < Rho::RhoController
           WebView.execute_js("alarm();")  
           WebView.execute_js("msg('" + $msg.to_s + "');")  
           WebView.execute_js("SH('" + @params["SH"].to_s + "');") 
+            
+         WebView.execute_js("ItemName('');")                  
+         WebView.execute_js("ItemId('');")  
+         WebView.execute_js("InventSizeId('');")  
+         WebView.execute_js("VendId('');")                               
+         WebView.execute_js("VendName_('');")                            
+         WebView.execute_js("RetailPrice('');")                               
+         WebView.execute_js("SalesPrice('');")                               
+         WebView.execute_js("SalesDiscount('');")                           
+         WebView.execute_js("VendCode('');")                               
+         WebView.execute_js("AvailableQty('');")                               
+         WebView.execute_js("OrderedQty('');")              
+                      
           ##render :action => :ItemChkInp
        else
          $msg = ""         
@@ -477,7 +514,19 @@ class ChkItemController < Rho::RhoController
            $msg = "ШК нет в справочнике!" 
            WebView.execute_js("alarm();") 
            WebView.execute_js("msg('" + $msg.to_s + "');")    
-           WebView.execute_js("SH('" + @params["SH"].to_s + "');")        
+           WebView.execute_js("SH('" + @params["SH"].to_s + "');") 
+             
+           WebView.execute_js("ItemName('');")                  
+           WebView.execute_js("ItemId('');")  
+           WebView.execute_js("InventSizeId('');")  
+           WebView.execute_js("VendId('');")                               
+           WebView.execute_js("VendName_('');")                            
+           WebView.execute_js("RetailPrice('');")                               
+           WebView.execute_js("SalesPrice('');")                               
+           WebView.execute_js("SalesDiscount('');")                           
+           WebView.execute_js("VendCode('');")                               
+           WebView.execute_js("AvailableQty('');")                               
+           WebView.execute_js("OrderedQty('');")           
          else
            $msg = ""
            @@ItemName = @TsdInventtables.ItemName 
@@ -614,7 +663,19 @@ class ChkItemController < Rho::RhoController
           $msg = "Номенклатуры нет в справочнике!"
           WebView.execute_js("alarm();")  
           WebView.execute_js("msg('" + $msg.to_s + "');") 
-          WebView.execute_js("SH('" + '' + "');")  
+          WebView.execute_js("SH('" + '' + "');") 
+          
+         WebView.execute_js("ItemName('');")                  
+         WebView.execute_js("ItemId('');")  
+         WebView.execute_js("InventSizeId('');")  
+         WebView.execute_js("VendId('');")                               
+         WebView.execute_js("VendName_('');")                            
+         WebView.execute_js("RetailPrice('');")                               
+         WebView.execute_js("SalesPrice('');")                               
+         WebView.execute_js("SalesDiscount('');")                           
+         WebView.execute_js("VendCode('');")                               
+         WebView.execute_js("AvailableQty('');")                               
+         WebView.execute_js("OrderedQty('');")   
           #render :action => :ItemChkInp
        else
          $msg = ""
@@ -651,7 +712,19 @@ class ChkItemController < Rho::RhoController
             $msg = "Товара нет в справочнике!"   
            WebView.execute_js("alarm();") 
            WebView.execute_js("msg('" + $msg.to_s + "');")  
-           WebView.execute_js("SH('" + '' + "');")         
+           WebView.execute_js("SH('" + '' + "');")  
+           
+           WebView.execute_js("ItemName('');")                  
+           WebView.execute_js("ItemId('');")  
+           WebView.execute_js("InventSizeId('');")  
+           WebView.execute_js("VendId('');")                               
+           WebView.execute_js("VendName_('');")                            
+           WebView.execute_js("RetailPrice('');")                               
+           WebView.execute_js("SalesPrice('');")                               
+           WebView.execute_js("SalesDiscount('');")                           
+           WebView.execute_js("VendCode('');")                               
+           WebView.execute_js("AvailableQty('');")                               
+           WebView.execute_js("OrderedQty('');")         
          else
            $msg = ""
            @@ItemName = @TsdInventtables.ItemName 

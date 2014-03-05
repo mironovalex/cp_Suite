@@ -956,11 +956,11 @@ end
 	  count = "1"
 	end
 	
-    Alert.show_popup(
-        :message=> @TsdReceiptjourselects,
-        :title=>"Ошибка",
-        :buttons => ["Ok"]
-     ) 	
+#    Alert.show_popup(
+#        :message=> @TsdReceiptjourselects,
+#        :title=>"Ошибка",
+#        :buttons => ["Ok"]
+#     ) 	
 	  
 	
 	# ранее выгружен
@@ -973,7 +973,10 @@ end
            ) 
 	else
 	####################################################################################
-	
+  @TsdReceiptjours = TsdReceiptjour.find( $TsdReceiptjourObj)   
+  @TsdReceiptjours.update_attributes({"Imported" => "1"})   
+  @TsdReceiptjours.update_attributes({"Importeds" => "1"})  
+	  
 	# Перезапись
 	TsdReceiptjourtmp.delete_all();
 	TsdReceiptlinetmp.delete_all();
@@ -1089,6 +1092,9 @@ end
       upload_receipt_5
 	  #WebView.navigate( url_for :controller => :Receipt, :action => :show_detail, :id => $TsdReceiptjourObj)
     else 
+    @TsdReceiptjours = TsdReceiptjour.find( $TsdReceiptjourObj)   
+    @TsdReceiptjours.update_attributes({"Imported" => "1"})   
+    @TsdReceiptjours.update_attributes({"Importeds" => "1"})    
 	# Перезапись
 	TsdReceiptjourtmp.delete_all();
 	TsdReceiptlinetmp.delete_all();
@@ -1140,8 +1146,8 @@ end
     WebView.navigate( url_for( :controller => :Settings, :action => :wait ) )
     
     @TsdReceiptjours = TsdReceiptjour.find( $TsdReceiptjourObj)   
-    @TsdReceiptjours.update_attributes({"Imported" => "1"})   
-    @TsdReceiptjours.update_attributes({"Importeds" => "1"})         
+    #@TsdReceiptjours.update_attributes({"Imported" => "1"})   
+    #@TsdReceiptjours.update_attributes({"Importeds" => "1"})         
   	$JourId = @TsdReceiptjours.JourId
 	
 	TsdReceiptjourselect.delete_all();
@@ -1740,7 +1746,7 @@ end
  end
  
  def listern_po_checker
-   $po_cycle_check = @params['aj_po_ch'] 
+   $in_cycle_check = @params['aj_po_ch'] 
  end
  
   def decode_line_2
@@ -1755,7 +1761,7 @@ end
     @OverDelivery = @TsdReceipjours.OverDelivery           
     
     # Циклический режим приема заказа    
-      if ( $po_cycle_check == "1")
+      if ( $in_cycle_check == "1")
       # Поиск записи в справочнике ШК
       @TSDItembarcodes = TsdItembarcode.find(:first,
                :conditions => { 
@@ -1833,7 +1839,7 @@ end
    @OverDelivery = @TsdReceipjours.OverDelivery           
    
    # Циклический режим приема заказа    
-     if ( $po_cycle_check == "1")
+     if ( $in_cycle_check == "1")
      # Поиск записи в справочнике ШК
      @TSDItembarcodes = TsdItembarcode.find(:first,
               :conditions => { 
@@ -1909,7 +1915,7 @@ end
  def get_po_checker
    $msg = ""
    #cycle_input = @params['aj_po_ch']       
-   cycle_input = $po_cycle_check  
+   cycle_input = $in_cycle_check  
      
    # Поиск признака разрешена ли перепоставка
    @TsdReceipjours = TsdReceiptjour.find($TsdReceiptjourObj) 
@@ -2022,7 +2028,7 @@ end
   
  # смена режима приемки
  def change_rejim
-   $po_cycle_check = @params["val"]     
+   $in_cycle_check = @params["val"]     
  end
  
  # Обработчик нажатия кнопки

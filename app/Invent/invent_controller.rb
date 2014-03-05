@@ -911,9 +911,9 @@ end
 #	  count = count.to_i + row.CountedQty.to_i
 #	end 
 	
-#	
+	
 #         Alert.show_popup(
-#             :message=> code_str("АБВабвВПЖ123"),
+#             :message=> @TsdInventcountjourselects,
 #             :title=>"Сообщение",
 #             :buttons => ["Ok"]
 #          ) 	
@@ -931,6 +931,10 @@ end
            :callback => url_for(:action => :upload_invent_6)
            ) 
 	else
+    @TsdInventcountjours = TsdInventcountjour.find( $TsdInventcountjourObj)         
+    @TsdInventcountjours.update_attributes({"Imported" => "1"})  
+    @TsdInventcountjours.update_attributes({"Importeds" => "1"})    
+	  
 	# Перезапись
 	TsdInventcountjourtmp.delete_all();
 	TsdInventcountlinetmp.delete_all();
@@ -1027,6 +1031,10 @@ end
       upload_invent_5
 	    #WebView.navigate( url_for :controller => :Invent, :action => :show_detail, :id => $TsdInventcountjourObj)
     else 
+      @TsdInventcountjours = TsdInventcountjour.find( $TsdInventcountjourObj)         
+      @TsdInventcountjours.update_attributes({"Imported" => "1"})  
+      @TsdInventcountjours.update_attributes({"Importeds" => "1"})  
+            
 	# Перезапись
 	TsdInventcountjourtmp.delete_all();
 	TsdInventcountlinetmp.delete_all();
@@ -1082,19 +1090,20 @@ end
    end         
    
    if (i == 0) 
-     Alert.show_popup(
-         :message=> i,
-         :title=>"Сообщение",
-         :buttons => ["Ok"]
-      )  
      $msg = "Инвентаризация пустая!"
      WebView.execute_js("alarm();")  
      WebView.execute_js("msg2('" + $msg.to_s + "');") 
+#     Alert.show_popup(
+#         :message=> "Инвентаризация пустая!",
+#         :title=>"Сообщение",
+#         :buttons => ["Ok"]
+#      )  
    else     
     $sync_msg = "Выгрузка: Запрос Инв." 
-    WebView.navigate( url_for( :controller => :Settings, :action => :wait ) )           
-    @TsdInventcountjours.update_attributes({"Imported" => "1"})  
-    @TsdInventcountjours.update_attributes({"Importeds" => "1"})    
+    WebView.navigate( url_for( :controller => :Settings, :action => :wait ) )   
+#    @TsdInventcountjours = TsdInventcountjour.find( $TsdInventcountjourObj)         
+#    @TsdInventcountjours.update_attributes({"Imported" => "1"})  
+#    @TsdInventcountjours.update_attributes({"Importeds" => "1"})    
 
 	$JourId = @TsdInventcountjours.JourId
 	
@@ -1282,6 +1291,10 @@ end
                  :op => "IN" 
                  } => @params["CODE"]               
                 } ) 
+                
+         if (@TSDItembarcodes.InventSizeId != "")
+           @TSDItembarcodes = nil
+         end       
       else
         @TSDItembarcodes = TsdItembarcode.find(:first,
                  :conditions => { 
@@ -1294,8 +1307,8 @@ end
                    :op => "IN" 
                  } =>  @params["SIZE"]                
                 } ) 
-      end                        
-
+      end                            
+      
       if (!@TSDItembarcodes)
         if (@params["SIZE"] == "")
           @TSDItembarcodes = TsdInventcountline.find(:first,
@@ -1326,8 +1339,14 @@ end
                    } =>  @params["SIZE"]                               
                   } )             
         end
-      end
-                                   
+      end  
+      
+#      Alert.show_popup(
+#          :message=>  @TSDItembarcodes,
+#          :title=>"Ошибка",
+#          :buttons => ["Ok"]
+#       )  
+                             
        if (!@TSDItembarcodes)
 #         Alert.show_popup(
 #             :message=> "Номенклатуры нет в справочнике!",
@@ -1359,7 +1378,8 @@ end
                     
          flag = "0"  
          i = "0"
-             
+                   
+         
          if (@TsdInventcountlines)
            flag = "1"
          else
@@ -1392,8 +1412,8 @@ end
          
          if (flag == "1") 
            # Перейти на страницу приемки товара
-           _do_invent
-                   
+           _do_invent                          
+                
            WebView.execute_js("ItemName('" + @ItemName.gsub(/["']/,"").to_s + "');")                 
            WebView.execute_js("ItemId('" + @ItemId.to_s + "');")  
            WebView.execute_js("InventSizeId('" + @InventSizeId.to_s + "');")  
@@ -1438,10 +1458,11 @@ end
              #WebView.execute_js("TO_R();")  
              WebView.execute_js("ENT_PR();")                            
            end            
-         end                                  
-                        
+         end                                                          
        end                    
-    end           
+    end
+    
+               
   end
   
   # Ввод размера
@@ -1600,7 +1621,14 @@ end
          $msg = "ШК нет в справочнике!"
          WebView.execute_js("alarm();") 
          WebView.execute_js("msg('" + $msg.to_s + "');") 
-        WebView.execute_js("SH('" + @params["data"].to_s + "');")  
+         WebView.execute_js("SH('" + @params["data"].to_s + "');")  
+          
+        WebView.execute_js("ItemName('');")                 
+        WebView.execute_js("ItemId('');")  
+        WebView.execute_js("InventSizeId('');")  
+        WebView.execute_js("VendCode('');")                                                                                                                                                    
+        WebView.execute_js("RetailPrice('');")                               
+        WebView.execute_js("CountedQty('');")  
          ##WebView.navigate(url_for(:action => :inp_item)) 
       else
         @@ItemId =  @TSDItembarcodes.ItemId
@@ -1673,7 +1701,7 @@ end
    @VendCode = ""
 
    # Поиск строки в заказе
-   if (@@InventSizeId != '')
+   if (@@InventSizeId != '') 
      @TsdInventcountlines = TsdInventcountline.find(:first,
               :conditions => { 
               {
@@ -1689,6 +1717,12 @@ end
               :op => "IN" 
               } => @@JourId                                                                    
               } ) 
+              
+#        Alert.show_popup(
+#            :message=>  @@ItemId.to_s + "|" + @@InventSizeId.to_s + "|" + @@JourId.to_s,
+#            :title=>"Ошибка",
+#            :buttons => ["Ok"]
+#         )  
    else
      @TsdInventcountlines = TsdInventcountline.find(:first,
               :conditions => { 
@@ -1702,7 +1736,13 @@ end
               } => @@JourId                                                                    
               } )            
    end 
-               
+       
+#   Alert.show_popup(
+#       :message=>  @TsdInventcountlines,
+#       :title=>"Ошибка",
+#       :buttons => ["Ok"]
+#    )  
+           
    @RetailPrice = ""
    @CountedQty = @TsdInventcountlines.CountedQty            
    
@@ -1826,7 +1866,7 @@ end
  end
  
  def listern_po_checker
-   $po_cycle_check = @params['aj_po_ch'] 
+   $in_cycle_check = @params['aj_po_ch'] 
  end
  
  # Обработчик скана позиции в строке
@@ -1836,8 +1876,14 @@ end
    @@ItemBarCode = $scan_code
    #WebView.execute_js("read_po_checker();")                
    
+#           Alert.show_popup(
+#               :message=> $in_cycle_check,
+#               :title=>"Ошибка",
+#               :buttons => ["Ok"]
+#            )    
+   
    # Циклический режим приема заказа    
-     if ( @@ItemBarCode != "0")
+     if ($in_cycle_check != "0")
      # Поиск записи в справочнике ШК
      @TSDItembarcodes = TsdItembarcode.find(:first,
               :conditions => { 
